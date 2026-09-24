@@ -63,6 +63,39 @@ When a connector isn't available or doesn't cover what you need, fall back to th
 (`vercel`, `railway`, `supabase`, `neonctl`, `gh`) run via a shell tool. Say explicitly which
 one you used, since the person may not have every connector configured.
 
+## Containers & Builds (Railway)
+
+Short, concrete rules for the build side of a Railway service — separate
+from the deploy sequence in Mode 1 below:
+
+- **Dockerfile vs. Railpack/Nixpacks:** let Railway's builder (Railpack, or
+  Nixpacks on older services) auto-detect and build when the app is a
+  standard framework with no unusual system dependencies — less to
+  maintain. Reach for an explicit `Dockerfile` once the build needs
+  something the auto-builder can't express: a specific base image, native
+  system packages, a multi-stage build to keep the shipped image small, or
+  a non-Node/Python runtime combination. Don't maintain both — a
+  `Dockerfile` at the service root always wins and the auto-builder is
+  skipped, which silently changes build behavior if left there by
+  accident.
+- **Healthchecks:** set a Railway healthcheck path (`/health` or
+  equivalent) that actually exercises a dependency (DB ping), not just
+  `return 200` — a healthcheck that always passes lets Railway route
+  traffic to an instance that can't reach its database.
+- **Graceful shutdown:** the process must handle `SIGTERM` — stop accepting
+  new connections, finish in-flight requests, exit — within Railway's kill
+  timeout, or deploys and restarts drop requests. See the `backend-standards`
+  skill's `references/node.md` Docker section for the Node-specific
+  mechanics (PID 1, no `npm start` wrapper).
+- **Image size:** a multi-stage build that ships only the production
+  dependencies and build output (not the build toolchain or dev
+  dependencies) deploys faster and shrinks the attack surface — check this
+  before assuming a slow deploy is a Railway problem.
+- **Env parity:** the same variables that exist in production should exist
+  (with safe/throwaway values) in preview/staging — a preview deploy that
+  silently no-ops a feature because a var is missing masks a bug until
+  production.
+
 ## Mode 1: Pre-Deploy Checklist
 
 Read [references/pre-deploy-checklist.md](references/pre-deploy-checklist.md) and run it in

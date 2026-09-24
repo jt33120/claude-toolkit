@@ -26,13 +26,34 @@ effort: high
 
 **Violating the letter of this process is violating the spirit of debugging.**
 
+## Fast Path — Root Cause Already Obvious
+
+Skip straight to a fix, no phases, only when **both** are true:
+
+- The error message alone identifies the root cause with no ambiguity — a
+  typo, a wrong import, a value that's obviously `null`/`undefined` at the
+  exact line the stack trace names, a swapped argument. You can point at
+  the line and state what's wrong without investigating anything.
+- The fix is a handful of lines, touching only that root cause — not a
+  design change, not spreading across more than the one obvious spot.
+
+Then: fix it, add a regression test (or run the existing one that should
+have caught this) proving the bug is gone, and stop.
+
+**If either condition is doubtful — more than one plausible cause, the fix
+touches code you don't already understand, or you're reaching for a second
+file to figure out why — that is not the fast path.** Fall through to
+Phase 1. The fast path exists for cases where investigation would produce
+zero new information, not as a shortcut for "feels obvious."
+
 ## The Iron Law
 
 ```
 NO FIXES WITHOUT ROOT CAUSE INVESTIGATION FIRST
 ```
 
-If you haven't completed Phase 1, you cannot propose fixes.
+Outside the fast path above, you cannot propose fixes until Phase 1 is
+complete.
 
 ## When to Use
 

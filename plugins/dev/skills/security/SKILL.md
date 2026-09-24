@@ -182,4 +182,29 @@ redondantes. Une fois le code corrigé, faire vérifier le correctif par
 
 ---
 
+## 7. Répartition des rôles avec les autres outils sécurité
+
+Plusieurs outils touchent à la sécurité dans cet écosystème — ne pas les confondre :
+
+- **Plugin Anthropic `security-guidance`** — garde-fou en temps réel *pendant*
+  l'écriture du code (suggestions inline au fil de l'eau). Continu, pas une
+  revue déclenchée à la demande.
+- **`/security-review` (intégré à Claude Code)** — revue du diff/de la PR en
+  cours, ponctuelle, au moment de committer ou proposer une PR.
+- **Cette skill (`security`)** — le niveau au-dessus : plan d'architecture
+  sécurisé pour un *nouveau* projet, ou audit complet de la stack existante
+  (FastAPI + RLS Supabase + Vercel + prompt injection LLM) via
+  `scripts/audit.py`. Pas un linter continu, pas limité au diff courant —
+  une revue de fond, déclenchée explicitement.
+- **Skill vendor `supabase`** — référence pour le détail d'implémentation des
+  policies RLS elles-mêmes (syntaxe, patterns, pièges). Cette skill vérifie
+  *que* l'isolation tenant est appliquée par RLS, pas *comment* écrire chaque
+  policy — déléguer ce dernier point au skill Supabase.
+
+En résumé : `security-guidance` pendant que ça s'écrit, `/security-review`
+avant de merger, cette skill pour l'architecture/l'audit complet, `supabase`
+pour le détail RLS.
+
+---
+
 *Base : formation cyber + OWASP/AI Act/NIS2/RGPD — itéré 2026.*

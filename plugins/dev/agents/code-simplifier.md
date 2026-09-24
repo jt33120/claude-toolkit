@@ -1,6 +1,6 @@
 ---
 name: code-simplifier
-description: Use this agent when code has been written or modified and needs to be simplified for clarity, consistency, and maintainability while preserving all functionality. This agent should be triggered automatically after completing a coding task or writing a logical chunk of code. It simplifies code by following project best practices while retaining all functionality. The agent focuses only on recently modified code unless instructed otherwise.
+description: 'Use this agent on explicit request, or from a review workflow, to simplify code that has been written or modified — clarity, consistency, and maintainability while preserving all functionality, following project best practices. Focuses on recently modified code unless instructed otherwise. English triggers: "simplify this code", "clean this up", "make this more readable". French triggers: "simplifie ce code", "nettoie ce code", "rends ce code plus lisible".'
 model: claude-opus-5-5
 effort: medium
 ---

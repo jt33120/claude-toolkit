@@ -1,6 +1,6 @@
 ---
 name: code-reviewer
-description: Use this agent when you need to review code for adherence to project guidelines, style guides, and best practices. This agent should be used proactively after writing or modifying code, especially before committing changes or creating pull requests. It will check for style violations, potential issues, and ensure code follows the established patterns in CLAUDE.md. Also the agent needs to know which files to focus on for the review. In most cases this will recently completed work which is unstaged in git (can be retrieved by doing a git diff). However there can be cases where this is different, make sure to specify this as the agent input when calling the agent.
+description: 'Use this agent on explicit request, or from a review workflow (e.g. bmad-code-review, a pre-merge review step), to review code for adherence to project guidelines, style guides, and best practices — style violations, potential issues, and CLAUDE.md pattern compliance. Needs to know which files to focus on: defaults to recently completed work unstaged in git (git diff), or specify a different scope as agent input when calling it. English triggers: "review this code", "code review", "check this against our guidelines". French triggers: "relis ce code", "revue de code", "verifie ce code par rapport a nos standards".'
 model: claude-opus-5-5
 effort: high
 ---

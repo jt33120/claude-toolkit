@@ -1,6 +1,6 @@
 ---
 name: silent-failure-hunter
-description: Use this agent when reviewing code changes in a pull request to identify silent failures, inadequate error handling, and inappropriate fallback behavior. This agent should be invoked proactively after completing a logical chunk of work that involves error handling, catch blocks, fallback logic, or any code that could potentially suppress errors.
+description: 'Use this agent on explicit request, or from a review workflow (e.g. bmad-code-review, a pre-merge review), when reviewing a pull request or code changes to identify silent failures, inadequate error handling, and inappropriate fallback behavior — catch blocks, fallback logic, or anything that could suppress an error. English triggers: "find silent failures", "audit error handling", "check for swallowed errors". French triggers: "cherche les erreurs silencieuses", "audite la gestion des erreurs", "verifie que les erreurs ne sont pas avalees".'
 model: claude-opus-5-5
 effort: high
 ---

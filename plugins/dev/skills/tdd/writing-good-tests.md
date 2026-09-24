@@ -25,8 +25,7 @@ earns its place by catching a wrong branch, missing side effect, wrong
 argument, boundary case, or broken contract.
 
 **Derive expectations independently.** Use literals and hand-checked
-fixtures; table-driven tests with literal `want` values are the preferred
-shape. An expectation computed by the code under test — or its helpers —
+fixtures. An expectation computed by the code under test — or its helpers —
 passes no matter what that code does:
 
 ```typescript
@@ -44,23 +43,19 @@ on redesign and sleeps through bugs. Test the behavior that depends on
 the decision: not `expect(MAX_RETRIES).toBe(5)` but "a failing call is
 retried 5 times and the 6th attempt never happens."
 
-**Behavior, not text.** Asserting that a script, skill, or config
-contains an exact line proves only that the source is the source. Run
-scripts against controlled inputs and assert outputs, side effects, or
-exit codes. Prose written for humans — a README, a skill's narrative
-sections — earns no test at all; a skill's *scripts* are tested the same
-way any other script is, by running them.
+**Behavior, not text.** Asserting that a script or config contains an
+exact line proves only that the source is the source. Run scripts against
+controlled inputs and assert outputs, side effects, or exit codes. Prose
+written for humans (a README, a skill's narrative) earns no test.
 
-**Your code, not the framework.** Test the contract your code makes at
-its boundaries — the route you register, the query you emit, the payload
-you produce. Upstream mechanics are their maintainers' tests to write
-(the classic: asserting your router invokes a registered handler — that
-is the framework's test, not yours). When upstream behavior genuinely
-surprised you, write one narrow characterization test naming the
-assumption. The same boundary applies inside your code: constructors,
-getters, constants, and trivial forwarding earn tests only when they
-validate, normalize, default, derive, enforce, or cause side effects —
-otherwise assert the first consumer-visible result that depends on them.
+**Your code, not the framework.** Test the contract your code makes at its
+boundaries — the route you register, the query you emit, the payload you
+produce. Upstream mechanics are their maintainers' tests (the classic:
+asserting your router invokes a registered handler is the framework's
+test, not yours). Constructors, getters, constants, and trivial forwarding
+earn tests only when they validate, normalize, default, derive, enforce, or
+cause side effects — otherwise assert the first consumer-visible result
+that depends on them.
 
 ### Gate Function
 
@@ -114,23 +109,19 @@ vi.mock('MCPServerManager');
 **Make doubles specific.** When arguments, call counts, or ordering are
 part of the contract, assert them — a fake that accepts anything verifies
 nothing. Give each branch (success, error, malformed) its own fixture or
-spy, so the wrong branch cannot satisfy the expectation.
+spy.
 
 **Mirror real data completely.** Mock the complete structure as it exists
-in reality — all documented fields — not just the ones your test reads.
-Partial mocks fail silently when downstream code reads an omitted field:
-the test passes while integration breaks.
+in reality — all documented fields, not just the ones your test reads.
+Partial mocks fail silently when downstream code reads an omitted field.
 
 **Production classes carry production methods only.** Cleanup that only
 tests need lives in test utilities, never as a `destroy()` on the
-production class. Ask: is this method called only from tests? Does this
-class own this resource's lifecycle? Wrong answers → test utility.
+production class.
 
-**Prefer real components over complex mocks.** When mock setup outgrows
-the test logic, mocks miss methods the real components have, or tests
-break when the mock changes, switch to an integration test with real
-components. **your human partner's question:** "Do we need to be using a
-mock here?"
+**Prefer real components over complex mocks.** When mock setup outgrows the
+test logic, or breaks whenever the mock changes, switch to an integration
+test with real components.
 
 ### Gate Function
 
@@ -186,13 +177,8 @@ test as tautological.
 ## Warning Signs
 
 - Setup and assertion share the same object, guaranteeing equality
-- The test can fail only through a panic, crash, or missing selector
 - The test fails on every intentional change, never on accidental breakage
-- Expected values are hidden behind loops, builders, or helpers
 - The test greps source text, or asserts a removed symbol stays removed
-- The test would still matter if only the framework remained
 - The test exists for coverage, checking no side effect or outcome
 - An assertion checks a `*-mock` test ID, or fails if you remove the mock
-- A method is called only from test files
-- Mock setup is more than half the test, or you can't explain why the mock is needed
-- Mocking "just to be safe"
+- Mock setup is more than half the test, or you can't explain why it's needed

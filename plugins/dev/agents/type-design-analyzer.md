@@ -1,6 +1,6 @@
 ---
 name: type-design-analyzer
-description: 'Use this agent when you need expert analysis of type design in your codebase. Specifically use it: (1) when introducing a new type to ensure it follows best practices for encapsulation and invariant expression, (2) during pull request creation to review all types being added, (3) when refactoring existing types to improve their design quality. The agent will provide both qualitative feedback and quantitative ratings on encapsulation, invariant expression, usefulness, and enforcement.'
+description: 'Use this agent on explicit request, or from a review workflow, for expert analysis of type design: the encapsulation and invariant expression of a new type, all types added in a pull request, or the type design quality of a refactor. Provides qualitative feedback and quantitative ratings on encapsulation, invariant expression, usefulness, and enforcement. English triggers: "review this type design", "analyze these types", "check type safety". French triggers: "analyse les types", "revue de la conception des types", "verifie la robustesse des types".'
 model: claude-opus-5-5
 effort: medium
 ---

@@ -109,6 +109,38 @@ with sync_playwright() as p:
   - `static_html_automation.py` - Using file:// URLs for local HTML
   - `console_logging.py` - Capturing console logs during automation
 
+## Durable Tests: Playwright Test (TS) vs. Ad-Hoc Scripts Here
+
+The Python scripts in this skill (`scripts/with_server.py`, the
+`examples/`) are for **ad-hoc, throwaway checks** — reproducing a bug,
+confirming a page renders, one-off reconnaissance. They aren't meant to
+become the project's regression suite.
+
+**If the project uses TypeScript, or already has `@playwright/test`
+installed**, write any test meant to survive past this session as a
+**Playwright Test spec** instead of a Python script:
+- Location: `tests/e2e/*.spec.ts`
+- Run with: `npx playwright test`
+- Use Playwright Test's own fixtures (`test`, `expect`, `page`) and its
+  config (`playwright.config.ts`) rather than hand-rolling
+  `sync_playwright()` — parallelization, retries, trace/video capture, and
+  CI reporting come for free, and the suite lives next to the app's other
+  tests instead of as a one-off script nobody re-runs.
+- An e2e spec proving a bug fix or a shipped feature follows the `tdd`
+  skill's STRICT discipline like any other test — written to fail first
+  where practical.
+
+**Keep using the Python scripts here when:** the project has no Playwright
+Test setup, the check is genuinely one-off (a screenshot to eyeball, a
+console-log capture while debugging), or you're doing reconnaissance before
+writing the durable spec.
+
+**For a quick visual/manual check** — "does this look right," a one-time
+click-through, eyeballing a rendered page — Claude in Chrome can drive the
+user's actual browser session instead of spinning up a headless Playwright
+run; reach for it when the goal is a human-style look, not a repeatable
+check.
+
 ## Where This Fits
 
 Once a feature passes here (renders correctly, behaves correctly in the browser), that's

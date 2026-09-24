@@ -1,17 +1,22 @@
 ---
 name: tdd
 description: >
-  Enforces test-driven development — write one failing test before any implementation
-  code, watch it fail for the right reason, then write minimal code to pass. Use before
-  implementing any feature, bugfix, or refactor, or whenever behavior is about to change
-  without a test that already fails for it. English triggers: "implement this feature",
-  "write the code for", "add a function that", "fix this bug" (before the fix), "TDD",
-  "test-driven development", "red-green-refactor", "write the test first". French
+  Runs test-driven development in two modes: STRICT (business logic, API endpoints, bug
+  fixes, anything that ships to production — write one failing test first, watch it fail
+  for the right reason, then minimal code to pass) and LIGHT (a POC, spike, UI/visual, or
+  exploratory task — tests after, covering the main path plus the one known risky edge,
+  with the spike marked throwaway or given STRICT tests before it merges to main). Default
+  is STRICT for anything ship-bound. Use before implementing any feature, bugfix, or
+  refactor, or whenever behavior is about to change without a test that already fails for
+  it. English triggers: "implement this feature", "write the code for", "add a function
+  that", "fix this bug" (before the fix), "TDD", "test-driven development",
+  "red-green-refactor", "write the test first", "quick prototype", "spike this". French
   triggers: "implémente cette fonctionnalité", "écris le code pour", "ajoute une fonction
   qui", "corrige ce bug" (avant le correctif), "TDD", "développement piloté par les
-  tests", "écris le test d'abord". Not for choosing a debugging strategy once something
-  is already broken (use systematic-debugging) or for the final evidence pass before
-  claiming work complete (use verification-before-completion).
+  tests", "écris le test d'abord", "fais un prototype rapide", "explore vite fait". Not
+  for choosing a debugging strategy once something is already broken (use
+  systematic-debugging) or for the final evidence pass before claiming work complete (use
+  verification-before-completion).
 model: claude-opus-5-5
 effort: medium
 ---
@@ -22,70 +27,55 @@ effort: medium
 
 ## Overview
 
-Write the test first. Watch it fail. Write minimal code to pass.
+Two modes. Both end with tests that actually prove the code works — they
+differ in *when* the test is written and how much rigor is mandatory.
 
-**Core principle:** If you didn't watch the test fail, you don't know if it tests the right thing.
+| | STRICT | LIGHT |
+|---|---|---|
+| When | Business logic, API endpoints, bug fixes — anything that ships to production | POC, spike, UI/visual work, exploratory code |
+| Test written | Before the code, one behavior at a time | After, covering the main path + the one known risky edge |
+| Core discipline | Watch the test fail for the right reason before making it pass | Main path + the risky edge are covered before the spike is trusted |
+| Default | **This is the default.** Unsure or ship-bound → STRICT. | Only when explicitly chosen |
 
-**Violating the letter of the rules is violating the spirit of the rules.**
+**Core principle (STRICT):** if you didn't watch the test fail, you don't know if it tests the right thing.
 
-## When to Use
+## Choosing the Mode
 
-**Always:**
-- New features
-- Bug fixes
-- Refactoring
-- Behavior changes
+Ask: **will this code, or code derived from it, run in production?**
 
-**Exceptions (ask your human partner):**
-- Throwaway prototypes
-- Generated code
-- Configuration files
+- Yes, or unsure → **STRICT**. This is the default; don't reach for LIGHT
+  because a STRICT task merely feels slow.
+- No — a genuine throwaway spike to answer a question ("does this API
+  return what we need", "does this UI pattern feel right") → **LIGHT** is
+  allowed, on one condition: **mark the spike as throwaway** (a comment, a
+  branch name, a task note) **or** give it the STRICT tests-first treatment
+  before it merges to `main`. A spike that quietly becomes the production
+  implementation without ever getting that treatment is exactly the failure
+  mode this split exists to prevent.
 
-Thinking "skip TDD just this once"? Stop. That's rationalization.
+## STRICT Mode
 
-## The Iron Law
+### The Iron Law
 
 ```
 NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST
 ```
 
-Write code before the test? Delete it. Start over.
+Write code before the test? Delete it. Start over. Don't keep it "as
+reference" — you'll adapt it while writing tests, which is testing after
+with extra steps. Delete means delete.
 
-**No exceptions:**
-- Don't keep it as "reference"
-- Don't "adapt" it while writing tests
-- Don't look at it
-- Delete means delete
+### Red-Green-Refactor
 
-Implement fresh from tests. Period.
-
-## Red-Green-Refactor
-
-```dot
-digraph tdd_cycle {
-    rankdir=LR;
-    red [label="RED\nWrite failing test", shape=box, style=filled, fillcolor="#ffcccc"];
-    verify_red [label="Verify fails\ncorrectly", shape=diamond];
-    green [label="GREEN\nMinimal code", shape=box, style=filled, fillcolor="#ccffcc"];
-    verify_green [label="Verify passes\nAll green", shape=diamond];
-    refactor [label="REFACTOR\nClean up", shape=box, style=filled, fillcolor="#ccccff"];
-    next [label="Next", shape=ellipse];
-
-    red -> verify_red;
-    verify_red -> green [label="yes"];
-    verify_red -> red [label="wrong\nfailure"];
-    green -> verify_green;
-    verify_green -> refactor [label="yes"];
-    verify_green -> green [label="no"];
-    refactor -> verify_green [label="stay\ngreen"];
-    verify_green -> next;
-    next -> red;
-}
 ```
+RED (write failing test) → verify it fails for the right reason
+  → GREEN (minimal code) → verify the whole suite passes
+  → REFACTOR (clean up, stay green) → next behavior, back to RED
+```
+A test that fails for the wrong reason sends you back to RED, not forward.
 
-### RED - Write Failing Test
-
-Write one minimal test showing what should happen.
+**RED.** One minimal test, one behavior, clear name, real code (mock only if
+unavoidable):
 
 <Good>
 ```typescript
@@ -96,254 +86,146 @@ test('retries failed operations 3 times', async () => {
     if (attempts < 3) throw new Error('fail');
     return 'success';
   };
-
   const result = await retryOperation(operation);
-
   expect(result).toBe('success');
   expect(attempts).toBe(3);
 });
 ```
-Clear name, tests real behavior, one thing
 </Good>
-
 <Bad>
 ```typescript
 test('retry works', async () => {
-  const mock = jest.fn()
-    .mockRejectedValueOnce(new Error())
-    .mockRejectedValueOnce(new Error())
-    .mockResolvedValueOnce('success');
+  const mock = jest.fn().mockRejectedValueOnce(new Error())
+    .mockRejectedValueOnce(new Error()).mockResolvedValueOnce('success');
   await retryOperation(mock);
-  expect(mock).toHaveBeenCalledTimes(3);
+  expect(mock).toHaveBeenCalledTimes(3); // tests the mock, not the code
 });
 ```
-Vague name, tests mock not code
 </Bad>
 
-**Requirements:**
-- One behavior
-- Clear name
-- Real code (no mocks unless unavoidable)
+**Verify RED — mandatory, never skip.** It must fail (not error), with the
+expected message, because the feature is missing — not a typo. Passes
+immediately? You're testing existing behavior; fix the test. Errors
+instead of failing cleanly? Fix the error, re-run until it fails correctly.
 
-### Verify RED - Watch It Fail
-
-**MANDATORY. Never skip.**
-
-```bash
-npm test path/to/test.test.ts
-```
-
-Confirm:
-- Test fails (not errors)
-- Failure message is expected
-- Fails because feature missing (not typos)
-
-**Test passes?** You're testing existing behavior. Fix test.
-
-**Test errors?** Fix error, re-run until it fails correctly.
-
-### GREEN - Minimal Code
-
-Write simplest code to pass the test.
+**GREEN.** Simplest code that passes — no added options, no "while I'm here"
+features:
 
 <Good>
 ```typescript
 async function retryOperation<T>(fn: () => Promise<T>): Promise<T> {
   for (let i = 0; i < 3; i++) {
-    try {
-      return await fn();
-    } catch (e) {
-      if (i === 2) throw e;
-    }
+    try { return await fn(); } catch (e) { if (i === 2) throw e; }
   }
   throw new Error('unreachable');
 }
 ```
-Just enough to pass
 </Good>
-
 <Bad>
-```typescript
-async function retryOperation<T>(
-  fn: () => Promise<T>,
-  options?: {
-    maxRetries?: number;
-    backoff?: 'linear' | 'exponential';
-    onRetry?: (attempt: number) => void;
-  }
-): Promise<T> {
-  // YAGNI
-}
-```
-Over-engineered
+An `options?: { maxRetries?, backoff?, onRetry? }` param nobody asked for — YAGNI.
 </Bad>
 
-Don't add features, refactor other code, or "improve" beyond the test.
+**Verify GREEN — mandatory.** Pristine output, and — critically — **the
+project's suite**, not just the file you touched, is green (run
+`pytest`/`npm test`/`cargo test` even when the task named one file). Any
+failure that run shows, including one you didn't cause, goes in your report
+by name — a red test you scrolled past and didn't mention is a report
+falsified by omission.
 
-### Verify GREEN - Watch It Pass
+**REFACTOR.** After green only: remove duplication, improve names, extract
+helpers. Keep tests green. Don't add behavior. Then repeat for the next
+behavior.
 
-**MANDATORY.**
+### Good Tests
 
-```bash
-npm test path/to/test.test.ts
-```
+Read [writing-good-tests.md](writing-good-tests.md) whenever writing or
+changing a test: name the production change that would make it fail before
+writing it, assert on real behavior never mock behavior, keep test-only
+code in test utilities, understand a dependency's side effects before
+mocking it.
 
-Confirm:
-- Test passes
-- Other tests still pass
-- Output pristine (no errors, warnings)
-
-**Test fails?** Fix code, not test.
-
-**Other tests fail?** Fix now.
-
-**"Other tests" means the project's suite, not just your file.** A
-green run of the test you wrote is not a green suite. Before you call
-the change done, run the project's test command (bare `pytest`,
-`npm test`, `cargo test` — whatever the repo uses) even when your task
-named only one test file. A scope statement in your task bounds the
-deliverable, not your verification. Any failure that run shows —
-including one you didn't cause — goes in your report by name; a red
-test you watched scroll past and didn't mention is a report falsified
-by omission.
-
-### REFACTOR - Clean Up
-
-After green only:
-- Remove duplication
-- Improve names
-- Extract helpers
-
-Keep tests green. Don't add behavior.
-
-### Repeat
-
-Next failing test for next feature.
-
-## Good Tests
-
-| Quality | Good | Bad |
-|---------|------|-----|
-| **Minimal** | One thing. "and" in name? Split it. | `test('validates email and domain and whitespace')` |
-| **Clear** | Name describes behavior | `test('test1')` |
-| **Shows intent** | Demonstrates desired API | Obscures what code should do |
-
-When writing or changing any test, read [writing-good-tests.md](writing-good-tests.md) for the rules that keep tests honest:
-- Name the production change that would make the test fail — before writing it
-- Assert on real behavior, never on mock behavior
-- Keep test-only code in test utilities, out of production classes
-- Understand a dependency's side effects before mocking it
-
-## Common Rationalizations
+### Common Rationalizations
 
 | Excuse | Reality |
 |--------|---------|
 | "Too simple to test" | Simple code breaks. Test takes 30 seconds. |
-| "I'll test after" | Tests written after pass immediately — which proves nothing. They may test the wrong thing, test the implementation instead of the behavior, or miss the edge case you forgot. You never watched it fail, so you never proved it can catch the bug. Test-first forces that failure. |
-| "Tests after achieve same goals (spirit not ritual)" | Tests-after answer "what does this do?"; tests-first answer "what should this do?" Tests written after are biased by the code you already wrote — you verify the cases you remembered, not the ones you'd have discovered. Coverage without proof the tests work. |
-| "Already manually tested" | Manual testing is ad-hoc: no record of what you covered, no way to re-run it when the code changes, easy to forget cases under pressure. "Worked when I tried it" ≠ comprehensive. Automated tests run the same way every time. |
-| "Deleting X hours is wasteful" | Sunk cost fallacy — that time is already spent either way. The real choice: rewrite with TDD (high confidence) vs. keep it and bolt tests on after (low confidence, likely bugs). Keeping code you can't trust is the waste. |
-| "Keep as reference, write tests first" | You'll adapt it. That's testing after. Delete means delete. |
-| "Need to explore first" | Fine. Throw away exploration, start with TDD. |
-| "Test hard = design unclear" | Listen to test. Hard to test = hard to use. |
-| "TDD will slow me down" | TDD IS the pragmatic path: catches bugs before commit, prevents regressions, lets you refactor without fear. "Pragmatic" shortcuts mean debugging in production — slower, not faster. |
-| "Manual test faster" | Manual doesn't prove edge cases. You'll re-test every change. |
-| "Existing code has no tests" | You're improving it. Add tests for existing code. |
+| "I'll test after" | Tests written after pass immediately — proves nothing. You never watched it fail, so you never proved it can catch the bug. |
+| "Already manually tested" | Ad hoc: no record, doesn't survive the next change, easy to forget cases under pressure. |
+| "This is basically a spike" | Then say so and use LIGHT mode explicitly — don't quietly skip tests under STRICT. |
+| "3+ fixes failed, one more try" | That's `systematic-debugging`'s architecture-question signal, not a license to skip tests. |
+| "TDD will slow me down" | Debugging in production is slower. Test-first catches it before commit. |
 
-## Red Flags - STOP and Start Over
+### Red Flags — Stop and Start Over
 
-- Code before test
-- Test after implementation
-- Test passes immediately
-- Can't explain why test failed
-- Tests added "later"
-- Rationalizing "just this once"
-- "I already manually tested it"
-- "Tests after achieve the same purpose"
-- "It's about spirit not ritual"
-- "Keep as reference" or "adapt existing code"
-- "Already spent X hours, deleting is wasteful"
-- "TDD is dogmatic, I'm being pragmatic"
-- "This is different because..."
+Code before test · test written after implementation · test passes
+immediately · can't explain why it failed · "keep as reference" · "just this
+once" · "spirit not ritual" · any variant of the rationalizations above.
 
-**All of these mean: Delete code. Start over with TDD.**
+**All of these mean: delete the code, start over with TDD.**
 
-## Example: Bug Fix
-
-**Bug:** Empty email accepted
-
-**RED**
-```typescript
-test('rejects empty email', async () => {
-  const result = await submitForm({ email: '' });
-  expect(result.error).toBe('Email required');
-});
-```
-
-**Verify RED**
-```bash
-$ npm test
-FAIL: expected 'Email required', got undefined
-```
-
-**GREEN**
-```typescript
-function submitForm(data: FormData) {
-  if (!data.email?.trim()) {
-    return { error: 'Email required' };
-  }
-  // ...
-}
-```
-
-**Verify GREEN**
-```bash
-$ npm test
-PASS
-```
-
-**REFACTOR**
-Extract validation for multiple fields if needed.
-
-## Verification Checklist
-
-Before marking work complete:
+### Verification Checklist (STRICT)
 
 - [ ] Every new function/method has a test
-- [ ] Watched each test fail before implementing
-- [ ] Each test failed for expected reason (feature missing, not typo)
+- [ ] Watched each test fail before implementing, for the right reason
 - [ ] Wrote minimal code to pass each test
-- [ ] All tests pass
-- [ ] Output pristine (no errors, warnings)
+- [ ] All tests pass, project suite is green, output pristine
 - [ ] Tests use real code (mocks only if unavoidable)
 - [ ] Edge cases and errors covered
 
-Can't check all boxes? You skipped TDD. Start over.
+Can't check every box? You skipped TDD. Start over.
 
-## When Stuck
+## LIGHT Mode
 
-| Problem | Solution |
-|---------|----------|
-| Don't know how to test | Write wished-for API. Write assertion first. Ask your human partner. |
-| Test too complicated | Design too complicated. Simplify interface. |
-| Must mock everything | Code too coupled. Use dependency injection. |
-| Test setup huge | Extract helpers. Still complex? Simplify design. |
+For a genuine POC, spike, UI/visual change, or exploratory task — not yet
+shipping. "Tests after" here still means all three:
+
+1. **Main path** — what the spike is meant to prove — has one test
+   exercising it for real (not a mock of the thing you're validating).
+2. **The one known risky edge** — the case you'd feel bad about if it
+   silently broke (empty input, a UI boundary, the API's documented error
+   response) — is covered too.
+3. **Explicit exit**: marked throwaway (comment/branch/task note), **or**,
+   before merging to `main`, given STRICT treatment retroactively — the
+   tests you'd have written first, now written and green.
+
+LIGHT is deferred-and-minimal, not "no tests":
+
+```typescript
+// SPIKE — throwaway, do not merge without STRICT tests
+test('vendor API returns the fields we need for the main case', async () => {
+  const result = await fetchVendorQuote(KNOWN_TEST_SKU);
+  expect(result.price).toBeGreaterThan(0);
+});
+
+test('vendor API — the risky edge: SKU not found', async () => {
+  const result = await fetchVendorQuote('does-not-exist');
+  expect(result).toBeNull(); // confirms it doesn't throw
+});
+```
+Written after the exploratory call worked, covering the case that matters
+and the one that could silently break the feature. If this becomes the real
+implementation, it gets STRICT tests-first treatment before merge — not a
+grandfather pass.
 
 ## Debugging Integration
 
-Bug found? Write failing test reproducing it. Follow the `systematic-debugging` skill's process to find the root cause, then apply the TDD cycle here to fix it. Test proves fix and prevents regression.
-
-Never fix bugs without a test.
+Bug found? Write the failing test reproducing it — a bug fix is STRICT by
+definition (it ships to production). Follow the `systematic-debugging`
+skill's process to find the root cause, then apply the STRICT cycle here to
+fix it. Never fix a bug without a regression test.
 
 ## Before Calling It Done
 
-Run the `verification-before-completion` skill's gate before claiming the feature works or the bug is fixed — passing tests are evidence only once you've actually run them fresh.
+Run the `verification-before-completion` skill's gate before claiming the
+feature works or the bug is fixed — passing tests are evidence only once
+you've actually run them fresh.
 
 ## Final Rule
 
 ```
-Production code → test exists and failed first
-Otherwise → not TDD
+Ships to production, or unsure  → STRICT: test exists and failed first
+Throwaway spike, marked as such → LIGHT: main path + risky edge, tested before merge
 ```
 
-No exceptions without your human partner's permission.
+No silent third option, and no exceptions to STRICT's default without your
+human partner's permission.
