@@ -22,7 +22,7 @@ Actions stack.
 
 ### Deploy
 - [ ] Deploy to a Vercel preview / Railway staging environment and verify
-- [ ] Run smoke tests (see `webapp-testing` for a browser-level check)
+- [ ] Run smoke tests (see `frontend-qa` for a browser-level check)
 - [ ] Deploy to production (Vercel promotes the build; Railway redeploys the service)
 - [ ] Monitor error rates and latency for 15 min (Vercel/Railway logs and metrics, or
       Sentry/monitoring if connected)
@@ -89,12 +89,12 @@ Decide and write down, before deploying, not during an incident:
 
 - Deploy to preview/staging first (Vercel preview deployment, Railway staging environment)
   and verify there before touching production.
-- Run smoke tests — for anything user-facing, the `webapp-testing` skill covers driving a
+- Run smoke tests — for anything user-facing, the `frontend-qa` skill covers driving a
   real browser against the preview URL.
 - Promote to production. Watch error rates and latency for at least 15 minutes using
   whichever of Vercel/Railway logs, metrics, or a connected monitoring tool (e.g. Sentry) is
   available.
-- Verify the key user flows the release touches, by hand or via `webapp-testing`.
+- Verify the key user flows the release touches, by hand or via `frontend-qa`.
 
 ### 7. Post-deploy
 

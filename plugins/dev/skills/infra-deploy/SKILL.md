@@ -11,7 +11,7 @@ description: >
   "checklist de déploiement", "on livre cette release", "on a un incident", "la prod est
   down", "rollback", "écris un post-mortem". Not for the root-cause investigation itself
   once things are stable (systematic-debugging), for unit/e2e test verification before
-  shipping (tdd, webapp-testing, verification-before-completion), or for infrastructure
+  shipping (tdd, frontend-qa, verification-before-completion), or for infrastructure
   security hardening and audits (security).
 model: claude-opus-5-5
 effort: medium

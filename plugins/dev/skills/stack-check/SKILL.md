@@ -61,6 +61,7 @@ Then, in order:
    - FastAPI backend: `npx skills add fastapi/fastapi --skill fastapi -a claude-code -y`
      (the skill lives at `fastapi/.agents/skills/fastapi/SKILL.md` inside the
      `fastapi/fastapi` repo — confirmed to exist, frontmatter `name: fastapi`)
+   - Frontend / mobile (web, iOS, Android, Expo/React Native): follow `references/frontend-mobile.md` — free/open-source tools only.
    Skip any line whose stack wasn't declared.
 
 3. **Init Graft:**
