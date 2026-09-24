@@ -1,7 +1,9 @@
 {
   "name": "business",
-  "version": "0.1.0",
-  "description": "Produit, sales, marketing, rédaction, audit de viabilité, contrats. Pour les agents de gestion.",
-  "author": { "name": "jt33120" },
+  "version": "1.0.0",
+  "description": "Gestion d'entreprise et croissance SaaS : stratégie, vente, delivery client, marketing, juridique, finance SASU, RH, support. 22 skills, Opus 5.5.",
+  "author": {
+    "name": "jt33120"
+  },
   "repository": "https://github.com/jt33120/claude-toolkit"
 }

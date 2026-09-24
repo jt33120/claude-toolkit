@@ -17,7 +17,7 @@
     {
       "name": "business",
       "source": "./plugins/business",
-      "description": "Produit, sales, marketing, rédaction, audit de viabilité, contrats. Pour les agents de gestion."
+      "description": "Gestion d'entreprise et croissance SaaS : stratégie, vente, delivery client, marketing, juridique, finance SASU, RH, support. Pour Cowork et les agents de gestion."
     }
   ]
 }

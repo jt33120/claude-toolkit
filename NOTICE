@@ -21,3 +21,8 @@ l'indique dans un commentaire de provenance. Textes de licence : dossier license
 - ui-vocabulary : définitions originales ; noms et concepts issus de component.gallery,
   Open UI, Material 3, Apple Human Interface Guidelines, shadcn/ui, Radix, React Aria
   (cités dans la skill, aucun texte copié).
+
+- anthropics/knowledge-work-plugins — Apache License 2.0, Copyright Anthropic, PBC
+  → business : toutes les skills sauf viability-audit (base originale du propriétaire du repo),
+  fusionnées et adaptées au contexte français (sources listées en tête de chaque skill).
+  Licence : licenses/APACHE-2.0.txt
