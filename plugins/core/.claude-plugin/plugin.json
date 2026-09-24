@@ -1,7 +1,9 @@
 {
   "name": "core",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Skills transverses (maintenance du toolkit). À installer partout.",
-  "author": { "name": "jt33120" },
+  "author": {
+    "name": "jt33120"
+  },
   "repository": "https://github.com/jt33120/claude-toolkit"
 }

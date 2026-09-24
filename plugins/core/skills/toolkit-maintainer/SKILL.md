@@ -1,6 +1,8 @@
 ---
 name: toolkit-maintainer
-description: Use whenever the user asks to create, write, modify, improve, rename, merge, move or delete a Claude skill, or to add a skill to a plugin (FR : « crée une skill », « modifie la skill », « ajoute au plugin », « fusionne ces skills », « supprime la skill »). Makes the change in the claude-toolkit repo (github.com/jt33120/claude-toolkit) instead of creating a standalone skill anywhere else.
+description: 'Use whenever the user asks to create, write, modify, improve, rename, merge, move or delete a Claude skill, or to add a skill to a plugin (FR : « crée une skill », « modifie la skill », « ajoute au plugin », « fusionne ces skills », « supprime la skill »). Makes the change in the claude-toolkit repo (github.com/jt33120/claude-toolkit) instead of creating a standalone skill anywhere else.'
+model: claude-opus-5-5
+effort: low
 ---
 
 # Toolkit maintainer
