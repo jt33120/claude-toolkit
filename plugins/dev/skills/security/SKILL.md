@@ -16,8 +16,7 @@ model: claude-opus-5-5
 effort: high
 ---
 
-<!-- Original skill by the repo owner (julian.talou33@gmail.com) — migrated from a local
-     Claude skill into jt33120/claude-toolkit. -->
+<!-- Original skill by the repo owner, migrated from a personal Claude skill into jt33120/claude-toolkit. -->
 
 # Security
 

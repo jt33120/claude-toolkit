@@ -1,7 +1,7 @@
 {
   "name": "dev",
-  "version": "0.1.0",
-  "description": "Dev, design, review, sécurité, infra, data. Pour les sessions de code.",
+  "version": "0.2.0",
+  "description": "Spec-driven dev avec BMAD : exécution de stories par sous-agents Opus 5.5, standards backend, TDD, debug, tests E2E, revue, sécurité, déploiement.",
   "author": { "name": "jt33120" },
   "repository": "https://github.com/jt33120/claude-toolkit"
 }

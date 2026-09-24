@@ -1,16 +1,18 @@
 {
   "name": "claude-toolkit",
-  "owner": { "name": "jt33120" },
+  "owner": {
+    "name": "jt33120"
+  },
   "plugins": [
     {
       "name": "core",
       "source": "./plugins/core",
-      "description": "Politique de fonctionnement transverse (coût, contexte, outils, amélioration continue). À installer partout."
+      "description": "Skills transverses (maintenance du toolkit). À installer partout."
     },
     {
       "name": "dev",
       "source": "./plugins/dev",
-      "description": "Dev, design, review, sécurité, infra, data. Pour les sessions de code."
+      "description": "Spec-driven dev avec BMAD : exécution de stories par sous-agents Opus 5.5, standards backend, TDD, debug, tests E2E, revue, sécurité, déploiement. Pour les sessions de code."
     },
     {
       "name": "business",

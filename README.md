@@ -12,27 +12,34 @@ Marketplace personnelle de plugins Claude, utilisable dans **Claude Code** (CLI,
 
 ## Installation
 
-**Claude Code**
+**Claude Code** (une fois par machine)
 
 ```bash
 /plugin marketplace add jt33120/claude-toolkit
 /plugin install core@claude-toolkit
-/plugin install dev@claude-toolkit        # dans un repo de code
-/plugin install business@claude-toolkit   # dans un agent de gestion
+/plugin install dev@claude-toolkit
 ```
 
-Pour activer un plugin automatiquement dans un repo, ajouter dans `.claude/settings.json` :
+Puis, dans chaque repo de code : `/setup-repo`. Il écrit et commite `.claude/settings.json` pour que toute session (locale ou cloud) retrouve le même outillage :
 
 ```json
 {
   "extraKnownMarketplaces": {
-    "claude-toolkit": { "source": { "source": "github", "repo": "jt33120/claude-toolkit" } }
+    "claude-toolkit": { "source": { "source": "github", "repo": "jt33120/claude-toolkit" } },
+    "bmad": { "source": { "source": "github", "repo": "bmad-code-org/bmad-plugins" } },
+    "claude-code-plugins": { "source": { "source": "github", "repo": "anthropics/claude-code" } }
   },
-  "enabledPlugins": { "core@claude-toolkit": true, "dev@claude-toolkit": true }
+  "enabledPlugins": {
+    "core@claude-toolkit": true,
+    "dev@claude-toolkit": true,
+    "bmad-method@bmad": true,
+    "bmad-toolbox@bmad": true,
+    "security-guidance@claude-code-plugins": true
+  }
 }
 ```
 
-**Cowork** : ajouter la marketplace depuis l'URL du repo, puis installer les plugins voulus.
+**Cowork** : ajouter la marketplace depuis l'URL du repo, puis installer `core` (et `business` quand il sera prêt).
 
 ## Outils externes (non inclus, installés par projet)
 

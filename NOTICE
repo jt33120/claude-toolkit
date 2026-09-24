@@ -1,7 +1,27 @@
 claude-toolkit
 
-Certaines skills sont adaptées de travaux tiers. Chaque skill concernée l'indique dans son en-tête.
+Certaines skills et agents sont adaptés de travaux tiers. Chaque fichier concerné
+l'indique dans un commentaire de provenance. Textes de licence : dossier licenses/.
 
-- anthropics/knowledge-work-plugins, Copyright Anthropic, PBC, Apache License 2.0
+- obra/superpowers — MIT, Copyright (c) 2025 Jesse Vincent
+  https://github.com/obra/superpowers
+  → dev: tdd, systematic-debugging, verification-before-completion, story-execution (structure)
+  Licence : licenses/MIT-obra-superpowers.txt
+
+- anthropics/claude-code, plugin pr-review-toolkit — MIT, Anthropic
+  https://github.com/anthropics/claude-code/tree/main/plugins/pr-review-toolkit
+  → dev agents: code-reviewer, code-simplifier, silent-failure-hunter, type-design-analyzer, pr-test-analyzer
+  Licence : licenses/MIT-anthropic-pr-review-toolkit.txt
+
+- anthropics/skills — Apache License 2.0, Copyright Anthropic, PBC
+  https://github.com/anthropics/skills
+  → dev: webapp-testing (modifié : frontmatter, provenance)
+  Licence : licenses/APACHE-2.0.txt
+
+- anthropics/knowledge-work-plugins — Apache License 2.0, Copyright Anthropic, PBC
   https://github.com/anthropics/knowledge-work-plugins
-- task-observer, Eoghan Henn (rebelytics.com), CC BY 4.0
+  → dev: infra-deploy (fusion et adaptation de deploy-checklist et incident-response)
+  Licence : licenses/APACHE-2.0.txt
+
+- bmad-code-org/BMAD-METHOD — non inclus ; story-execution reproduit la tenue des
+  fichiers de story et de sprint-status.yaml pour rester compatible.
