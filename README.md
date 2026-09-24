@@ -20,7 +20,7 @@ Marketplace personnelle de plugins Claude, utilisable dans **Claude Code** (CLI,
 /plugin install dev@claude-toolkit
 ```
 
-Puis, dans chaque repo de code : `/setup-repo`. Il écrit et commite `.claude/settings.json` pour que toute session (locale ou cloud) retrouve le même outillage :
+Puis, dans chaque repo de code : `/stack-check`. Il déclare la stack exacte du projet, écrit et commite `.claude/settings.json` pour que toute session (locale ou cloud) retrouve le même outillage, et vérifie ensuite à chaque session que chaque brique reste connectée en lecture/écriture :
 
 ```json
 {

@@ -5,7 +5,7 @@ l'indique dans un commentaire de provenance. Textes de licence : dossier license
 
 - obra/superpowers — MIT, Copyright (c) 2025 Jesse Vincent
   https://github.com/obra/superpowers
-  → dev: tdd, systematic-debugging, verification-before-completion, story-execution (structure)
+  → dev: tdd, systematic-debugging, verification-before-completion
   Licence : licenses/MIT-obra-superpowers.txt
 
 - anthropics/claude-code, plugin pr-review-toolkit — MIT, Anthropic
@@ -22,6 +22,3 @@ l'indique dans un commentaire de provenance. Textes de licence : dossier license
   https://github.com/anthropics/knowledge-work-plugins
   → dev: infra-deploy (fusion et adaptation de deploy-checklist et incident-response)
   Licence : licenses/APACHE-2.0.txt
-
-- bmad-code-org/BMAD-METHOD — non inclus ; story-execution reproduit la tenue des
-  fichiers de story et de sprint-status.yaml pour rester compatible.

@@ -12,7 +12,7 @@
     {
       "name": "dev",
       "source": "./plugins/dev",
-      "description": "Spec-driven dev avec BMAD : exécution de stories par sous-agents Opus 5.5, standards backend, TDD, debug, tests E2E, revue, sécurité, déploiement. Pour les sessions de code."
+      "description": "Spec-driven dev avec BMAD : stack-check vérifie la stack connectée (lecture/écriture), bmad-build/bmad-code-review exécutent et relisent les stories, standards backend, TDD, debug, tests E2E, revue, sécurité, déploiement. Pour les sessions de code."
     },
     {
       "name": "business",
