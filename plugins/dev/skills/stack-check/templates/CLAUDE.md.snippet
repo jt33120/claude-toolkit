@@ -1,0 +1,12 @@
+<!-- stack-check:begin -->
+## Claude workflow (this project)
+
+- Framing (new feature/project): BMAD analyst → PM → architect → UX, producing PRD → architecture → epics/stories, in that order. You validate each artifact before the next stage starts.
+- Build: `bmad-build` implements a story; `bmad-code-review`, plus the built-in `/code-review` and `/security-review`, run before any merge.
+- Review agents (code-reviewer, silent-failure-hunter, type-design-analyzer, pr-test-analyzer, code-simplifier) run only on explicit request, never automatically.
+- Code navigation: if a `graft/` folder exists at the repo root, query it with the `graft_*` MCP tools before grep/read.
+- Design: build or redesign UI in Claude Design (VS Code "/" menu → "Claude Design" — this is the machine-level authorization step), then run `/design-sync` and commit the synced tokens so cloud sessions pick them up too.
+- Small, obvious changes (typo, one-line fix, a config value): just do it — no BMAD ceremony.
+- Bugs: `systematic-debugging` — root cause before any fix.
+- Deploy: `infra-deploy` — checklist before shipping, incident workflow if production is down.
+<!-- stack-check:end -->

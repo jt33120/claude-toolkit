@@ -1,0 +1,45 @@
+# .claude/stack.yaml — declares this project's exact tech stack for `stack-check`.
+#
+# Written once by `stack-check` on its first run (or hand-edit it any time the
+# stack changes), then read at the start of every session to verify each
+# component below is actually connected via MCP with read and write access.
+#
+# Fill in only the components this project actually uses and delete the rest
+# of the commented examples. Wherever a component has more than one
+# environment, mark exactly which one is production — `stack-check` never
+# runs a write-probe against it.
+
+db:
+  provider: supabase          # supabase | neon
+  project_ref: xxxxxxxxxxxx   # Supabase project ref, or Neon project id
+  environments:
+    - name: production
+      production: true
+    - name: staging
+      production: false
+
+backend:
+  provider: railway
+  project: my-project         # Railway project name
+  service: api                # Railway service name
+  environments:
+    - name: production
+      production: true
+    - name: staging
+      production: false
+
+front:
+  provider: vercel
+  project: my-project-web     # Vercel project name/slug
+
+repo:
+  provider: github
+  owner: my-org
+  name: my-repo
+
+# Optional — any other MCP-connected tool this project relies on and wants
+# tracked. `stack-check` reports it as connected/not, with no dedicated
+# read/write probe unless one gets added to the skill later.
+# other:
+#   - name: n8n
+#     note: workflow automation
