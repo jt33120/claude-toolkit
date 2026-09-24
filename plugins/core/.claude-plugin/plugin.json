@@ -1,7 +1,7 @@
 {
   "name": "core",
-  "version": "0.5.0",
-  "description": "Skills transverses : maintenance du toolkit, voix et style des textes, stratégie FR/EN, budget GitHub Actions. À installer partout.",
+  "version": "0.6.0",
+  "description": "Skills transverses : maintenance du toolkit, voix des textes, stratégie FR/EN, budget GitHub Actions, pont Claude Code ↔ Codex. À installer partout.",
   "author": {
     "name": "jt33120"
   },
