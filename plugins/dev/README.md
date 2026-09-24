@@ -1,47 +1,40 @@
 # dev
 
-Développement piloté par les specs : **BMAD décide quoi faire** (jusqu'aux stories) **et le construit** (`bmad-build`, `bmad-code-review`) ; ce plugin ajoute la vérification de stack, les standards, et la revue/sécurité/déploiement autour. Tous les agents et skills tournent sur **Claude Opus 5.5** (`claude-opus-5-5`) avec un niveau d'effort adapté à la tâche.
+Développement avec BMAD (cadrage, stories, `bmad-build`, `bmad-code-review`) + qualité senior. Tout tourne sur Claude Opus 5.5 avec un effort adapté.
 
 ## Démarrage
 
-1. **Une fois par machine** : `/plugin marketplace add jt33120/claude-toolkit` puis `/plugin install core@claude-toolkit` et `/plugin install dev@claude-toolkit`.
-2. **Une fois par projet** : `/stack-check` — déclare la stack exacte (DB, backend, front, repo), câble `.claude/settings.json` (BMAD, security-guidance, skills éditeurs), initialise Graft et BMAD, ajoute les règles de workflow à `CLAUDE.md`.
-3. **Au quotidien** : `/stack-check` en début de session pour confirmer que chaque brique est bien connectée en lecture/écriture ; BMAD pour cadrer (PRD → architecture → stories) ; Claude Design pour l'UI ; revue (`bmad-code-review`, `/code-review`, `/security-review`) avant merge.
+1. Une fois par machine : `/plugin marketplace add jt33120/claude-toolkit`, `/plugin install core@claude-toolkit`, `/plugin install dev@claude-toolkit`.
+2. Par projet : `/stack-check` — déclare la stack, branche tout (première fois), puis vérifie à chaque session que chaque outil est connecté en lecture et écriture.
 
 ## Skills
 
 | Skill | Rôle | Effort |
 |---|---|---|
-| [stack-check](skills/stack-check/SKILL.md) | Déclare/vérifie la stack connectée en MCP (lecture + écriture) ; initialise le repo au premier lancement | low |
-| [backend-standards](skills/backend-standards/SKILL.md) | Standards senior FastAPI, Node/TS, Postgres, design d'API | medium |
-| [tdd](skills/tdd/SKILL.md) | Test-driven development strict | medium |
-| [systematic-debugging](skills/systematic-debugging/SKILL.md) | Cause racine avant correctif | high |
-| [verification-before-completion](skills/verification-before-completion/SKILL.md) | Preuve (tests, lint, types) avant de dire « fini » | low |
-| [webapp-testing](skills/webapp-testing/SKILL.md) | Tests E2E Playwright | medium |
-| [security](skills/security/SKILL.md) | Sécurité stack FastAPI/Supabase/Vercel/LLM + script d'audit | high |
-| [infra-deploy](skills/infra-deploy/SKILL.md) | Checklist de déploiement et réponse à incident (Vercel, Railway, Supabase, Neon) | medium |
+| stack-check | Déclare la stack, installe les outils, vérifie lecture/écriture des MCP | low |
+| ui-vocabulary | Nom exact, variantes, équivalents web/iOS/Android et alternatives de 152 composants et patterns | low |
+| frontend-direction | Suit le design system, sinon propose 3 directions contrastées et enregistre le choix | medium |
+| asset-brief | Icônes open source ou prompt Codex prêt à coller, puis intégration (favicon, icônes d'app) | low |
+| frontend-qa | QA web/mobile en 8 niveaux, rapport de bugs normé | high |
+| backend-standards | Couche fine au-dessus des skills officielles FastAPI, Supabase, Neon | medium |
+| tdd | Mode strict (prod) ou léger (POC, UI) | medium |
+| systematic-debugging | Cause racine avant correctif, voie rapide pour les bugs évidents | high |
+| verification-before-completion | Preuve avant de dire « fini » | low |
+| security | Plan et audit sécurité FastAPI/Supabase/Vercel/LLM | high |
+| infra-deploy | Checklist de déploiement et incidents (Vercel, Railway, Supabase, Neon) | medium |
 
-## Agents (tous `model: claude-opus-5-5`)
+## Agents de revue (sur demande ou via un workflow de revue)
 
-| Agent | Rôle | Effort |
-|---|---|---|
-| code-reviewer | Revue qualité et conventions | high |
-| code-simplifier | Simplifie sans changer le comportement | medium |
-| silent-failure-hunter | Traque les erreurs avalées | high |
-| type-design-analyzer | Qualité des types et modèles | medium |
-| pr-test-analyzer | Couverture et pertinence des tests | medium |
+code-reviewer (high) · code-simplifier (medium) · silent-failure-hunter (high) · type-design-analyzer (medium) · pr-test-analyzer (medium)
 
-Ces agents ne se déclenchent que sur demande explicite ou en `subagent_type` explicite — pas automatiquement à chaque diff.
+## MCP livrés avec le plugin
 
-## Installés par `stack-check` (non copiés, suivent leur éditeur)
+Playwright MCP, Chrome DevTools MCP, shadcn MCP (`.mcp.json`, sans clé).
 
-- **BMAD** (`bmad-method`, `bmad-toolbox`) — cadrage et exécution des stories (`bmad-build`, `bmad-code-review`)
-- **Anthropic `security-guidance`** — rappel de sécurité intégré
-- **Skills éditeurs selon la stack déclarée** : Supabase (`supabase`, `supabase-postgres-best-practices`), Neon (`neon-postgres`), Vercel/React (`react-best-practices`, `web-design-guidelines`, `vercel-optimize`), FastAPI (`fastapi`), Python (`modern-python` de Trail of Bits)
-- **Graft** — graphe de code pour la navigation
+## Installés par stack-check selon la stack
 
-## Workflow, en 3 étapes
+BMAD, security-guidance, skills Supabase / Neon / Vercel / FastAPI, modern-python, Graft ; frontend et mobile : voir `skills/stack-check/references/frontend-mobile.md`. Outils gratuits et open source uniquement.
 
-1. **Installer les plugins** — une fois par machine (`core` + `dev`).
-2. **`/stack-check`** — une fois par projet, pour initialiser (settings, skills, Graft, BMAD, `CLAUDE.md`).
-3. **Chaque session** — `/stack-check` pour confirmer les connexions, puis BMAD pour cadrer/construire, Claude Design pour l'UI, revue avant merge.
+## Flux frontend
+
+Design (Claude Design → `/design-sync`, ou `frontend-direction`) → build (BMAD + composants shadcn / natifs, `ui-vocabulary`) → assets (`asset-brief`, handoff Codex) → QA (`frontend-qa`) → audit (impeccable, web-design-guidelines).

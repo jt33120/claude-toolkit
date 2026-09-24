@@ -1,7 +1,7 @@
 {
   "name": "dev",
-  "version": "1.0.0",
-  "description": "Spec-driven dev avec BMAD : stack-check vérifie la stack connectée (lecture/écriture), bmad-build/bmad-code-review exécutent et relisent les stories, standards backend, TDD, debug, tests E2E, revue, sécurité, déploiement.",
+  "version": "2.0.0",
+  "description": "Dev avec BMAD : stack-check, couche frontend (vocabulaire UI, direction, assets, QA), standards backend, TDD, debug, sécurité, déploiement, agents de revue. MCP Playwright, Chrome DevTools et shadcn inclus.",
   "author": { "name": "jt33120" },
   "repository": "https://github.com/jt33120/claude-toolkit"
 }

@@ -13,12 +13,11 @@ l'indique dans un commentaire de provenance. Textes de licence : dossier license
   → dev agents: code-reviewer, code-simplifier, silent-failure-hunter, type-design-analyzer, pr-test-analyzer
   Licence : licenses/MIT-anthropic-pr-review-toolkit.txt
 
-- anthropics/skills — Apache License 2.0, Copyright Anthropic, PBC
-  https://github.com/anthropics/skills
-  → dev: webapp-testing (modifié : frontmatter, provenance)
-  Licence : licenses/APACHE-2.0.txt
-
 - anthropics/knowledge-work-plugins — Apache License 2.0, Copyright Anthropic, PBC
   https://github.com/anthropics/knowledge-work-plugins
   → dev: infra-deploy (fusion et adaptation de deploy-checklist et incident-response)
   Licence : licenses/APACHE-2.0.txt
+
+- ui-vocabulary : définitions originales ; noms et concepts issus de component.gallery,
+  Open UI, Material 3, Apple Human Interface Guidelines, shadcn/ui, Radix, React Aria
+  (cités dans la skill, aucun texte copié).
