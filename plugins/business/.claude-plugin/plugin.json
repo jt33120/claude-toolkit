@@ -1,0 +1,7 @@
+{
+  "name": "business",
+  "version": "0.1.0",
+  "description": "Produit, sales, marketing, rédaction, audit de viabilité, contrats. Pour les agents de gestion.",
+  "author": { "name": "jt33120" },
+  "repository": "https://github.com/jt33120/claude-toolkit"
+}

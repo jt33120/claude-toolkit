@@ -1,0 +1,7 @@
+{
+  "name": "core",
+  "version": "0.1.0",
+  "description": "Politique de fonctionnement transverse (coût, contexte, outils, amélioration continue). À installer partout.",
+  "author": { "name": "jt33120" },
+  "repository": "https://github.com/jt33120/claude-toolkit"
+}

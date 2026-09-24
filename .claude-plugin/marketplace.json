@@ -1,0 +1,21 @@
+{
+  "name": "claude-toolkit",
+  "owner": { "name": "jt33120" },
+  "plugins": [
+    {
+      "name": "core",
+      "source": "./plugins/core",
+      "description": "Politique de fonctionnement transverse (coût, contexte, outils, amélioration continue). À installer partout."
+    },
+    {
+      "name": "dev",
+      "source": "./plugins/dev",
+      "description": "Dev, design, review, sécurité, infra, data. Pour les sessions de code."
+    },
+    {
+      "name": "business",
+      "source": "./plugins/business",
+      "description": "Produit, sales, marketing, rédaction, audit de viabilité, contrats. Pour les agents de gestion."
+    }
+  ]
+}

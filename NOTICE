@@ -1,0 +1,7 @@
+claude-toolkit
+
+Certaines skills sont adaptées de travaux tiers. Chaque skill concernée l'indique dans son en-tête.
+
+- anthropics/knowledge-work-plugins, Copyright Anthropic, PBC, Apache License 2.0
+  https://github.com/anthropics/knowledge-work-plugins
+- task-observer, Eoghan Henn (rebelytics.com), CC BY 4.0

@@ -1,0 +1,7 @@
+{
+  "name": "dev",
+  "version": "0.1.0",
+  "description": "Dev, design, review, sécurité, infra, data. Pour les sessions de code.",
+  "author": { "name": "jt33120" },
+  "repository": "https://github.com/jt33120/claude-toolkit"
+}
