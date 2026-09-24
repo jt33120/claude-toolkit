@@ -1,6 +1,6 @@
 ---
 name: backend-standards
-description: 'Senior-level, opinionated backend standards for FastAPI, Node/TypeScript, Postgres, and API design — principles and a review checklist, with references loaded on demand. Use when writing or reviewing backend/API/database code ("backend standards", "API design review", "is this endpoint well-designed", "revue backend", "bonnes pratiques API", "standards base de données"). Distinct from `security` (stack-specific security audit) and `tdd` (test discipline) — this is architecture and API/data conventions.'
+description: 'Senior-level, opinionated backend standards for FastAPI, Node/TypeScript, Postgres, and API design — principles and a review checklist, pointing to vendor skills for stack-specific depth. Use when writing or reviewing backend/API/database code ("backend standards", "API design review", "is this endpoint well-designed", "revue backend", "bonnes pratiques API", "standards base de données"). Distinct from `security` (stack-specific security audit) and `tdd` (test discipline) — this is architecture and API/data conventions.'
 model: claude-opus-5-5
 effort: medium
 ---
@@ -14,9 +14,32 @@ them.
 
 # Backend Standards
 
-Opinionated, senior-level conventions for backend code. This file is the
-index and the checklist; load a reference only when the task touches its
-area — do not load all four for a one-line endpoint fix.
+Opinionated, senior-level conventions for backend code. This file is a
+**thin layer**: the index, the cross-stack principles, and the review
+checklist. Stack-specific depth belongs to the vendor skills below, not
+duplicated here — load a reference only when the task touches ground those
+vendor skills don't cover.
+
+## Vendor skills — defer to these first
+
+`stack-check` installs these per project when it detects the matching
+stack. **If one is present in the session, follow it — it wins over this
+skill on its own topic.** This skill is the cross-cutting layer above them
+(API contracts, error shape, transactions/idempotency as a whole), not a
+competing source of truth for FastAPI, Postgres, or Python-tooling detail.
+
+- **FastAPI** — the official FastAPI skill (`fastapi/fastapi` repo,
+  `.agents/skills/fastapi`). Endpoint/dependency patterns, Pydantic v2,
+  project layout, async correctness — the FastAPI-specific how-to.
+- **Postgres on Supabase** — `supabase-postgres-best-practices`
+  (`supabase/agent-skills`). Query performance, schema design, connection
+  management, and RLS policy detail.
+- **Postgres on Neon** — `neon-postgres` (`neondatabase/agent-skills`).
+  Neon's branching model, pooled connections, egress.
+- **Python tooling** — Trail of Bits' `modern-python` (`trailofbits/skills`,
+  `plugins/modern-python`): `uv` for dependency/env management, `ruff` for
+  lint+format, `ty` for type checking. Not backend architecture, but the
+  toolchain every Python backend here should run.
 
 ## Principles
 
@@ -49,44 +72,65 @@ area — do not load all four for a one-line endpoint fix.
 
 ## Review checklist
 
-- [ ] Request/response validated by schema at the boundary, not scattered
+- [ ] Boundary validated by schema (request/response/env), not scattered
       `if`s.
-- [ ] Errors use the project's standard shape and correct HTTP status codes
-      (see `references/api-design.md` for the RFC 9457 problem-details
-      format).
-- [ ] No blocking call inside an `async def` handler (sync driver, `time.sleep`,
-      unbounded CPU work) — see `references/fastapi.md` / `references/node.md`.
-- [ ] DB access goes through the pooled/serverless-safe connection path — see
-      `references/postgres.md`.
-- [ ] A new query that filters/joins/sorts on a column has an index backing
-      it, or a documented reason it doesn't.
-- [ ] No N+1 query pattern (a loop issuing one query per iteration) — see
-      `references/postgres.md`.
-- [ ] A multi-step write is in a transaction, or the endpoint is idempotent
-      (idempotency key, upsert, or a check-then-write pattern safe under
-      retry).
-- [ ] Pagination on any list endpoint that can grow unbounded — see
-      `references/api-design.md`.
-- [ ] No secret (API key, connection string, token) in code, fixtures, test
-      output, or a log line.
+- [ ] Errors use the project's standard shape and precise HTTP status codes
+      (`references/api-design.md` — RFC 9457 problem details).
+- [ ] No blocking call inside an async handler — sync driver, `time.sleep`,
+      unbounded CPU work (vendor FastAPI skill / `references/node.md`).
+- [ ] DB access goes through the pooled/serverless-safe connection path.
+- [ ] Every filtered/joined/sorted column is indexed, or the gap is
+      documented.
+- [ ] No N+1 (a loop issuing one query per iteration).
+- [ ] Multi-step writes are transactional, or the endpoint is idempotent
+      under retry (idempotency key, upsert, safe check-then-write).
+- [ ] Unbounded list endpoints paginate (`references/api-design.md`).
+- [ ] No secret in code, fixtures, test output, or a log line.
 - [ ] Logs are structured (level + fields), not string-concatenated prose.
-- [ ] Rate limiting exists on any public-writable endpoint, or there's a
-      documented reason it's deferred.
+- [ ] Public-writable endpoints are rate-limited, or the deferral is
+      documented.
 
 ## When to load which reference
 
-- **`references/fastapi.md`** — writing or reviewing a FastAPI endpoint,
-  dependency, or Pydantic v2 model; project layout and settings for a Python
-  backend.
 - **`references/node.md`** — writing or reviewing TypeScript/Node backend
-  code: validation, layering, async pitfalls, error handling.
-- **`references/postgres.md`** — anything touching a migration, an index, a
-  transaction boundary, or a serverless connection to Supabase/Neon. Row
-  Level Security itself is out of scope here — defer to the vendor's own
-  Supabase skill (`supabase/agent-skills`) for RLS policy design.
+  code: project structure, validation, layering, async pitfalls, error
+  handling, production readiness, Docker.
 - **`references/api-design.md`** — designing or reviewing a new endpoint's
   shape: REST conventions, pagination, idempotency keys, versioning, the
-  error format, rate limits, and what to log.
+  error format, rate limits, long-running operations, and what to log.
+- **Postgres section below** — the cross-cutting rules vendor skills don't
+  own; for anything Supabase- or Neon-specific (RLS, schema, connection
+  internals), load the matching vendor skill instead.
+- **FastAPI vendor skill** — any FastAPI endpoint/dependency/Pydantic work.
+
+## Postgres — what the vendor skills don't cover
+
+The vendor skills above own RLS, schema design, and platform-specific
+connection internals. These four rules are cross-cutting and apply
+regardless of which Postgres provider is in play:
+
+- **Serverless pooling.** A serverless/edge function opening a direct
+  connection per invocation exhausts `max_connections` under concurrency —
+  use the pooled/transaction-mode endpoint for application code, and reserve
+  the direct connection for migrations and session-level features
+  (`LISTEN/NOTIFY`, prepared statements, advisory locks). Transaction-mode
+  pooling drops session state between statements — code written for a
+  direct connection can silently misbehave once pointed at a pooler.
+- **Forward-only migrations.** The migration history is the schema's source
+  of truth, applied through CI/CD (or Alembic/Prisma Migrate/Drizzle Kit) —
+  never hand-edited against production. Never auto-run migrations on
+  multi-instance boot: two instances racing the same migration is a real
+  failure mode; run it as a separate, single-instance step.
+- **N+1 queries.** A loop issuing one query per iteration is the single
+  most common backend performance bug. Fix with `JOIN` / `WHERE id = ANY($1)`
+  or the ORM's explicit eager-loading — never rely on default lazy loading
+  inside a loop.
+- **Transactions and idempotency.** Wrap a multi-statement write in a single
+  short transaction — held open across an external HTTP call or a long
+  computation, it becomes production lock contention. A "check then insert"
+  race is not safe under concurrent requests even inside a transaction at
+  the default `READ COMMITTED` isolation level — use
+  `INSERT ... ON CONFLICT` instead.
 
 ## Not this skill
 

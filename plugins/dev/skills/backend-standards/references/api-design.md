@@ -2,14 +2,24 @@
 
 Original synthesis; sources cited inline. Primary sources:
 [RFC 9457 — Problem Details for HTTP APIs](https://www.rfc-editor.org/rfc/rfc9457),
-[Stripe API docs — idempotent requests](https://docs.stripe.com/api/idempotent_requests),
-and general REST convention as documented across
-[Microsoft's REST API Guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md).
+the IETF draft
+[The Idempotency-Key HTTP Header Field](https://datatracker.ietf.org/doc/draft-ietf-httpapi-idempotency-key-header/)
+(expired as an Internet-Draft, but already the de facto convention — see
+[Stripe's implementation](https://docs.stripe.com/api/idempotent_requests) for
+a production example),
+[Google AIP](https://google.aip.dev/) (Google's resource-oriented API design
+standard), and the
+[Microsoft REST API Guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md).
 
 ## REST conventions
 
 - Resources are nouns, plural (`/users`, `/orders/{id}/items`), not verbs
-  (`/getUser`). The HTTP method carries the verb.
+  (`/getUser`). The HTTP method carries the verb. For an API large enough to
+  need a rigorous take, [AIP-121](https://google.aip.dev/121) (resource-
+  oriented design) and [AIP-122](https://google.aip.dev/122) (resource
+  names) formalize this into a resource hierarchy
+  (`/publishers/{p}/books/{b}`) — better than a flat sprawl of unrelated
+  collections once nesting reflects real ownership.
 - Use status codes precisely: `200` (OK, has a body), `201` (created, return
   the created resource + `Location` header), `202` (accepted, async
   processing), `204` (no content, e.g. a successful `DELETE`), `400`
@@ -19,8 +29,11 @@ and general REST convention as documented across
   `409` (conflict — e.g. a uniqueness violation), `422` (well-formed but
   semantically invalid), `429` (rate limited), `500`/`502`/`503` (server-side
   failure — never returned deliberately as "business logic").
-- Be consistent about casing and naming across the whole API (`camelCase` or
-  `snake_case`, pick one) — a mixed API is a constant source of client bugs.
+- Be consistent about casing and naming across the whole API — a mixed API
+  is a constant source of client bugs. The Microsoft guidelines default to
+  camelCase for JSON fields and kebab-case for URL path segments; a
+  reasonable choice if the project has no existing convention, but the
+  choice matters less than applying it everywhere.
 
 ## Pagination
 
@@ -30,8 +43,14 @@ and general REST convention as documented across
   offset-based (`?page=2&limit=20`), which skips or repeats rows when items
   are inserted/deleted between pages — but offset pagination is acceptable
   for small, rarely-mutated collections where simplicity wins.
+- [AIP-158](https://google.aip.dev/158) formalizes the same idea as an
+  opaque `page_token` / `next_page_token` pair — semantically identical to
+  `cursor`/`next_cursor`. Microsoft's convention instead wraps the page as
+  `{ value: [...], nextLink: <absolute URL> }`, worth adopting wholesale if
+  the client already expects Microsoft-shaped APIs (Graph, Azure SDKs). The
+  field names matter less than the one hard rule below.
 - Always include a way for the client to know there's more (a `next_cursor`
-  / `has_more` field, or a `Link` header per
+  / `has_more` field, a `nextLink`, or a `Link` header per
   [RFC 8288](https://www.rfc-editor.org/rfc/rfc8288)) — never make the
   client guess from an empty page whether it reached the end or hit an
   error.
@@ -40,10 +59,18 @@ and general REST convention as documented across
 
 - Any endpoint that creates a resource with a real-world side effect
   (charging a card, sending an email, placing an order) should accept an
-  `Idempotency-Key` header: the same key retried returns the original
-  result instead of repeating the side effect. This is what makes a client
-  timeout-and-retry safe.
-  ([Stripe docs: Idempotent requests](https://docs.stripe.com/api/idempotent_requests))
+  `Idempotency-Key` request header: the same key retried returns the
+  original result instead of repeating the side effect. This is what makes
+  a client timeout-and-retry safe. Use the IETF header name rather than
+  inventing a bespoke one — it's what Stripe, PayPal, and most payment/
+  webhook APIs already ship, so clients and libraries expect it even though
+  the I-D itself expired without becoming an RFC.
+  ([IETF draft-ietf-httpapi-idempotency-key-header](https://datatracker.ietf.org/doc/draft-ietf-httpapi-idempotency-key-header/);
+  [Stripe docs: idempotent requests](https://docs.stripe.com/api/idempotent_requests))
+- Fingerprint the request body alongside the key: the same key arriving with
+  a *different* body is a client bug (a reused key for a different logical
+  request), not a legitimate retry — reject it (`409`/`422`) rather than
+  silently replaying the first response for a different request.
 - Store the key with the request's outcome (status + response body) keyed
   by `(endpoint, key)`, with a reasonable TTL (Stripe uses 24 hours) — not
   forever, and not so short a legitimate retry after a slow response
@@ -56,13 +83,31 @@ and general REST convention as documented across
 
 - Version in the URL path (`/v1/...`) or a header
   (`Accept: application/vnd.api+json;version=1`) — pick one convention and
-  apply it everywhere; don't mix.
+  apply it everywhere; don't mix. [AIP-185](https://google.aip.dev/185)
+  argues for path versioning specifically for a public API: a header is
+  easy for a client to omit by accident and doesn't show up in
+  browser/curl exploration. Microsoft instead mandates an explicit
+  `api-version` **query parameter** on every request (`YYYY-MM-DD` format,
+  rejecting with `400` if missing) — also defensible, but pick one up
+  front; mixing path and query versioning across endpoints of the same API
+  is its own bug class.
 - A breaking change (removing/renaming a field, changing a field's type,
   changing status-code semantics) requires a new version. Adding an
   optional field is not breaking and does not require one.
 - Deprecate with a `Sunset` header ([RFC 8594](https://www.rfc-editor.org/rfc/rfc8594))
   and a documented timeline before removing an old version — don't just
   delete it.
+
+## Long-running operations
+
+- An operation that can't complete synchronously (a bulk import, a report
+  generation) returns `202 Accepted` with an `operation-location`/`Location`
+  header pointing at a status resource — never make the client poll the
+  original endpoint or hold a connection open.
+- The status resource reports a status (`pending`/`running`/`succeeded`/
+  `failed`) plus a `result`/`error` once terminal, and stays fetchable for
+  at least 24h after completion so a slow client isn't left with nothing.
+  ([Microsoft REST API Guidelines: long-running operations](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md))
 
 ## Error format — RFC 9457
 
@@ -73,6 +118,12 @@ and general REST convention as documented across
   problem-specific extension members (e.g. `errors: [...]` for
   field-level validation failures).
   ([RFC 9457](https://www.rfc-editor.org/rfc/rfc9457))
+- Google's own APIs converge on the same idea from a different shape
+  (`google.rpc.Status`: `code` + `message` + typed `details[]`, per
+  [AIP-193](https://google.aip.dev/193)) — worth matching if the client
+  ecosystem is already gRPC/Google-shaped. For a plain HTTP/JSON API, RFC
+  9457 is the more interoperable default: it's an actual IETF standard with
+  an IANA-registered media type, not a convention tied to one vendor.
 - One shape for the whole API — a client should never need a different
   parser for a validation error versus a not-found error versus a rate-limit
   error.
