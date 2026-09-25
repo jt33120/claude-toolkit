@@ -1,0 +1,26 @@
+name: Validate toolkit
+
+on:
+  pull_request:
+    paths:
+      - '.agents/**'
+      - '.claude-plugin/**'
+      - 'plugins/**'
+      - 'scripts/**'
+      - 'tests/**'
+      - '.github/workflows/validate-toolkit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate structure and behavior
+        run: |
+          python3 scripts/validate_toolkit.py
+          python3 -m unittest discover -s tests

@@ -1,135 +1,28 @@
 ---
 name: verification-before-completion
 description: >
-  Gate before claiming any work is complete, fixed, or passing — requires running the
-  actual verification command fresh and reading its output before making the claim.
-  Use immediately before committing, pushing, opening a PR, marking a task done, or
-  saying tests/build/lint pass. English triggers: "is this done", "are the tests
-  passing", "ready to commit", "mark this complete", "ship it", "looks good to merge".
-  French triggers: "c'est terminé", "les tests passent", "prêt à committer", "on peut
-  merger", "c'est bon". Distinct from tdd (writing the tests) and systematic-debugging
-  (finding the root cause) — this gate runs after both, right before any completion
-  claim, and also before invoking infra-deploy's pre-deploy checklist.
-model: claude-opus-5-5
-effort: low
+  Check evidence before claiming a change works, tests pass, or a release is ready.
+  Choose checks that match the claim and change risk, read their output, and report
+  what was and was not verified. Use before a completion claim, PR, release, or deploy.
+  FR : « c'est terminé », « les tests passent », « prêt à committer », « on peut merger ».
 ---
 
 <!-- Adapted from obra/superpowers (MIT) — https://github.com/obra/superpowers — modified for jt33120/claude-toolkit -->
 
-# Verification Before Completion
+# Verification before completion
 
-## Overview
+**Evidence before claims.** Name the claim, run an appropriate check on the current change, read the result and exit code, then state exactly what it proves. A focused check proves only that focused scope; describe uncovered areas without calling the entire project green.
 
-**Core principle:** Evidence before claims, always.
+| Claim | Useful evidence |
+|---|---|
+| A bug is fixed | Reproduce the original symptom or run its regression test and inspect the result |
+| Impacted behavior works | Focused unit/integration tests or a direct behavioral check covering the changed path |
+| The full suite passes | A completed full-suite run on the relevant revision |
+| A build passes | A completed build, not a passing linter |
+| A release is ready | Required project gates, including appropriate security, build and deployment checks |
 
-**Violating the letter of this rule is violating the spirit of this rule.**
+For a low-risk reversible edit, checking the diff and the actual rendered or written result may be sufficient. Changes to auth, data, migrations, external actions or shared contracts need stronger checks. When no test environment is available, state the limitation and the checks you could perform.
 
-## The Iron Law
+Run the full suite at the review or release gate if the project requires it, or sooner when the scope warrants it. Do not rerun the same suite before each small commit or task transition if the tested revision and relevant inputs have not changed. A new change after a passing run may require a targeted rerun or the next CI gate; do not attribute an old result to an untested revision.
 
-```
-NO COMPLETION CLAIMS WITHOUT FRESH VERIFICATION EVIDENCE
-```
-
-If you haven't run the verification command in this message, you cannot claim it passes.
-
-## The Gate Function
-
-```
-BEFORE claiming any status or expressing satisfaction:
-
-1. IDENTIFY: What command proves this claim?
-2. RUN: Execute the FULL command (fresh, complete)
-3. READ: Full output, check exit code, count failures
-4. VERIFY: Does output confirm the claim?
-   - If NO: State actual status with evidence
-   - If YES: State claim WITH evidence
-5. ONLY THEN: Make the claim
-
-Skip any step = lying, not verifying
-```
-
-## Common Failures
-
-| Claim | Requires | Not Sufficient |
-|-------|----------|----------------|
-| Tests pass | Test command output: 0 failures | Previous run, "should pass" |
-| Linter clean | Linter output: 0 errors | Partial check, extrapolation |
-| Build succeeds | Build command: exit 0 | Linter passing, logs look good |
-| Bug fixed | Test original symptom: passes | Code changed, assumed fixed |
-| Regression test works | Red-green cycle verified | Test passes once |
-| Agent completed | VCS diff shows changes | Agent reports "success" |
-| Requirements met | Line-by-line checklist | Tests passing |
-
-## Red Flags - STOP
-
-- Using "should", "probably", "seems to"
-- Expressing satisfaction before verification ("Great!", "Perfect!", "Done!", etc.)
-- About to commit/push/PR without verification
-- Trusting agent success reports
-- Relying on partial verification
-- Thinking "just this once"
-- Tired and wanting work over
-- **ANY wording implying success without having run verification**
-
-## Rationalization Prevention
-
-| Excuse | Reality |
-|--------|---------|
-| "Should work now" | RUN the verification |
-| "I'm confident" | Confidence ≠ evidence |
-| "Just this once" | No exceptions |
-| "Linter passed" | Linter ≠ compiler |
-| "Agent said success" | Verify independently |
-| "I'm tired" | Exhaustion ≠ excuse |
-| "Partial check is enough" | Partial proves nothing |
-| "Different words so rule doesn't apply" | Spirit over letter |
-
-## Key Patterns
-
-**Tests:**
-```
-✅ [Run test command] [See: 34/34 pass] "All tests pass"
-❌ "Should pass now" / "Looks correct"
-```
-
-**Regression tests (TDD Red-Green, see the `tdd` skill):**
-```
-✅ Write → Run (pass) → Revert fix → Run (MUST FAIL) → Restore → Run (pass)
-❌ "I've written a regression test" (without red-green verification)
-```
-
-**Build:**
-```
-✅ [Run build] [See: exit 0] "Build passes"
-❌ "Linter passed" (linter doesn't check compilation)
-```
-
-**Requirements:**
-```
-✅ Re-read plan → Create checklist → Verify each → Report gaps or completion
-❌ "Tests pass, phase complete"
-```
-
-**Agent delegation:**
-```
-✅ Agent reports success → Check VCS diff → Verify changes → Report actual state
-❌ Trust agent report
-```
-
-## When To Apply
-
-**ALWAYS before:**
-- ANY variation of success/completion claims
-- ANY expression of satisfaction
-- ANY positive statement about work state
-- Committing, PR creation, task completion
-- Moving to next task
-- Delegating to agents
-- Handing off to `infra-deploy`'s pre-deploy checklist — a checklist run on unverified
-  claims is theater, not a gate
-
-**Rule applies to:**
-- Exact phrases
-- Paraphrases and synonyms
-- Implications of success
-- ANY communication suggesting completion/correctness
+Report the command or manual check, its outcome, and material gaps. A failure or incomplete run must be reported as such. For regression tests, observing a meaningful failure before the fix is useful; reverting a working fix just to repeat the failure is unnecessary.

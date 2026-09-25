@@ -1,0 +1,8 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "core",
+  "version": "0.7.0",
+  "description": "Instructions communes, maintenance des skills, style rédactionnel, budget CI et pont entre Claude Code et Codex.",
+  "author": { "name": "jt33120" },
+  "repository": "https://github.com/jt33120/claude-toolkit"
+}

@@ -8,11 +8,16 @@ revalorises regulierement (generalement chaque annee).
   prestations de services et les ventes de marchandises) peut etre en franchise en base : pas
   de TVA facturee, pas de TVA deductible, mention obligatoire sur facture ("TVA non applicable,
   art. 293 B du CGI").
-- Au-dela du seuil (ou du seuil majore de tolerance), l'assujettissement devient obligatoire,
-  generalement des le mois de depassement.
-- Un consultant IA qui facture aussi bien du conseil que des abonnements SaaS doit suivre son
-  CA cumule sur l'annee glissante et alerter l'utilisateur en approche de seuil plutot que
-  d'attendre le depassement.
+- Suivre separement le chiffre d'affaires de l'annee civile precedente (N-1) et celui de
+  l'annee civile en cours (N). Un depassement du seuil de base entraine en principe la TVA
+  au 1er janvier de l'annee suivante si le seuil majore n'est pas depasse. Le depassement
+  du seuil majore de l'annee en cours met fin a la franchise des le jour du depassement.
+- Un consultant IA qui vend du conseil et des abonnements SaaS doit verifier les regles
+  propres aux activites mixtes, suivre le CA par categorie et alerter avant les seuils.
+  Ne pas utiliser une fenetre de douze mois glissants pour decider de la franchise.
+
+Source officielle consultee le 25 septembre 2026 :
+[Service Public — franchise en base de TVA](https://entreprendre.service-public.gouv.fr/vosdroits/F21746).
 
 ## Regimes de declaration (si assujetti)
 - **Reel simplifie** : declaration annuelle avec acomptes semestriels — regime frequent pour une

@@ -16,7 +16,7 @@ CRITIQUE
   - Token / session stocké dans localStorage ou sessionStorage (vol via XSS)
   - Secret en clair dans le code (clé OpenAI sk-..., AWS AKIA..., service_role,
     password = "...", api_key = "...")
-  - .env suivi par git (présent et non ignoré)
+  - .env ou variante suivi par git (même si ignoré ensuite)
 
 IMPORTANT
   - /docs ou /redoc non désactivés (FastAPI() sans docs_url=None)
@@ -31,7 +31,8 @@ INFO
 Si pip-audit et/ou trufflehog sont installés, ils sont lancés et leurs résultats
 remontés (CVE dépendances, secrets dans l'historique git).
 
-Code de sortie : 1 si au moins un finding CRITIQUE, sinon 0. Utilisable en CI.
+Code de sortie : 1 si CRITIQUE, 2 si une vérification externe ou Git a échoué, sinon 0.
+L'absence des outils externes reste indiquée comme INFO ; ne pas la confondre avec un audit complet.
 """
 
 import argparse
@@ -95,6 +96,11 @@ class Report:
     @property
     def has_critical(self):
         return any(f.severity == SEV_CRIT for f in self.findings)
+
+    @property
+    def has_incomplete_scan(self):
+        return any(f.rule in {"pip-audit-erreur", "trufflehog-erreur", "git-verif-erreur"}
+                   for f in self.findings)
 
 
 def iter_files(root: Path):
@@ -195,49 +201,75 @@ def audit_env_git(root: Path, rep: Report):
                 ".env présent mais absent de .gitignore — risque de commit du secret.",
                 loc(env_files[0], root))
 
-    # .env réellement suivi par git ?
+    # Les variantes .env.local / .env.production peuvent aussi contenir des secrets.
     if (root / ".git").exists() and shutil.which("git"):
         try:
-            out = subprocess.run(["git", "-C", str(root), "ls-files", "*.env", ".env"],
-                                 capture_output=True, text=True, timeout=20)
-            tracked = [l for l in out.stdout.splitlines() if l.strip()]
+            out = subprocess.run(["git", "-C", str(root), "ls-files", "-z"],
+                                 capture_output=True, text=True, timeout=20, check=True)
+            tracked = [name for name in out.stdout.split("\0") if name and
+                       (Path(name).name == ".env" or
+                        (Path(name).name.startswith(".env.") and
+                         Path(name).name not in {".env.example", ".env.sample"}))]
             for t in tracked:
                 rep.add(SEV_CRIT, "env-suivi-git",
                         f"Fichier d'environnement suivi par git ({t}) — secrets versionnés.",
                         t)
-        except Exception:
-            pass
+        except (OSError, subprocess.SubprocessError, UnicodeError):
+            rep.add(SEV_IMP, "git-verif-erreur",
+                    "Impossible de vérifier les .env suivis par Git : résultat inconnu.")
+    elif (root / ".git").exists():
+        rep.add(SEV_IMP, "git-verif-erreur",
+                "Git non disponible : impossible de vérifier les .env suivis.")
 
 
 def run_external(rep: Report, root: Path):
     if shutil.which("pip-audit"):
-        try:
-            out = subprocess.run(["pip-audit", "-f", "json"],
-                                 capture_output=True, text=True, timeout=120, cwd=str(root))
-            data = json.loads(out.stdout or "{}")
-            vulns = data.get("dependencies", data) if isinstance(data, dict) else data
-            count = 0
-            if isinstance(vulns, list):
+        requirements = sorted(p for p in iter_files(root) if
+                              p.name.startswith("requirements") and p.suffix == ".txt")
+        sources = [["-r", str(path)] for path in requirements]
+        projects = sorted({p.parent for p in iter_files(root) if p.name == "pyproject.toml"})
+        sources.extend([[str(project)] for project in projects])
+        if not sources:
+            rep.add(SEV_INFO, "pip-audit-sans-cible",
+                    "Aucun requirements*.txt ni pyproject.toml : dépendances Python non auditées.")
+        for source in sources:
+            try:
+                out = subprocess.run(["pip-audit", "-f", "json", *source],
+                                     capture_output=True, text=True, timeout=120, cwd=str(root))
+                data = json.loads(out.stdout)
+                vulns = data.get("dependencies", []) if isinstance(data, dict) else data
+                if not isinstance(vulns, list):
+                    raise ValueError("format de rapport inattendu")
                 count = sum(len(d.get("vulns", [])) for d in vulns if isinstance(d, dict))
-            if count:
-                rep.add(SEV_CRIT, "cve-dependances",
-                        f"pip-audit signale {count} vulnérabilité(s) sur les dépendances.")
-        except Exception:
-            rep.add(SEV_INFO, "pip-audit-erreur", "pip-audit installé mais exécution échouée.")
+                if count:
+                    rep.add(SEV_CRIT, "cve-dependances",
+                            f"pip-audit signale {count} vulnérabilité(s) dans {source[-1]}.")
+                elif out.returncode != 0:
+                    raise ValueError("scan incomplet")
+            except (OSError, ValueError, subprocess.TimeoutExpired):
+                rep.add(SEV_IMP, "pip-audit-erreur",
+                        f"Audit des dépendances de {source[-1]} inachevé : résultat inconnu.")
     else:
         rep.add(SEV_INFO, "pip-audit-absent",
                 "pip-audit non installé — CVE des dépendances non vérifiées (pip install pip-audit).")
 
     if shutil.which("trufflehog"):
-        try:
-            out = subprocess.run(["trufflehog", "filesystem", str(root), "--json", "--no-update"],
-                                 capture_output=True, text=True, timeout=180)
-            hits = [l for l in out.stdout.splitlines() if l.strip().startswith("{")]
-            if hits:
-                rep.add(SEV_CRIT, "secrets-historique",
-                        f"trufflehog a trouvé {len(hits)} secret(s) potentiel(s) dans les fichiers/git.")
-        except Exception:
-            rep.add(SEV_INFO, "trufflehog-erreur", "trufflehog installé mais exécution échouée.")
+        scans = [("fichiers", ["filesystem", str(root)])]
+        if (root / ".git").exists():
+            scans.append(("historique Git", ["git", root.as_uri()]))
+        for label, arguments in scans:
+            try:
+                out = subprocess.run(["trufflehog", *arguments, "--json", "--no-update"],
+                                     capture_output=True, text=True, timeout=180)
+                hits = [line for line in out.stdout.splitlines() if line.strip().startswith("{")]
+                if hits:
+                    rep.add(SEV_CRIT, "secrets-trufflehog",
+                            f"trufflehog a trouvé {len(hits)} secret(s) potentiel(s) dans {label}.")
+                elif out.returncode != 0:
+                    raise ValueError("scan incomplet")
+            except (OSError, ValueError, subprocess.TimeoutExpired):
+                rep.add(SEV_IMP, "trufflehog-erreur",
+                        f"Scan trufflehog ({label}) inachevé : résultat inconnu.")
     else:
         rep.add(SEV_INFO, "trufflehog-absent",
                 "trufflehog non installé — secrets dans l'historique git non vérifiés.")
@@ -283,15 +315,19 @@ def main():
     audit_env_git(root, rep)
     if not args.no_external:
         run_external(rep, root)
+    else:
+        rep.add(SEV_INFO, "scans-externes-ignores",
+                "Option --no-external : vulnérabilités des dépendances et historique Git non scannés.")
 
     if args.json:
         print(json.dumps({"root": str(root),
                           "findings": [asdict(f) for f in rep.findings],
-                          "has_critical": rep.has_critical}, ensure_ascii=False, indent=2))
+                           "has_critical": rep.has_critical,
+                           "has_incomplete_scan": rep.has_incomplete_scan}, ensure_ascii=False, indent=2))
     else:
         print_report(rep, root)
 
-    sys.exit(1 if rep.has_critical else 0)
+    sys.exit(1 if rep.has_critical else 2 if rep.has_incomplete_scan else 0)
 
 
 if __name__ == "__main__":

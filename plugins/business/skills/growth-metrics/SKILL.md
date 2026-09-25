@@ -1,8 +1,6 @@
 ---
 name: growth-metrics
 description: "Answers whether the SaaS growth engine is actually working: MRR/ARR, churn, activation, CAC, LTV, funnel conversion, channel and campaign return, product performance, and what customers say publicly and privately — ending in the top three actions worth taking this week. Also tracks brand health and review/reputation (ratings, themes, response drafts, quiet-customer win-back). Use for growth check, is my marketing working, SaaS metrics, MRR, churn, CAC, LTV, funnel, brand review, reviews, reputation, avis clients, réputation, indicateurs SaaS, taux de résiliation."
-model: claude-opus-5-5
-effort: medium
 ---
 
 <!--

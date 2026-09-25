@@ -1,8 +1,6 @@
 ---
 name: client-report
 description: "Writes factual, anonymized status reports and stakeholder/Codir-style synthesis notes: progress, KPIs, risks, decisions needed, in neutral professional French or English. Triggers EN: status report, stakeholder update, executive summary, synthesis note, board memo. Triggers FR: note de synthese, rapport d'avancement, note Codir, compte-rendu de mission, note preparatoire."
-model: claude-opus-5-5
-effort: medium
 ---
 
 <!-- Provenance: merged from anthropics/knowledge-work-plugins (Apache-2.0) — product-management/skills/stakeholder-update,

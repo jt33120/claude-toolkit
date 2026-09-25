@@ -1,8 +1,6 @@
 ---
 name: writing-voice
 description: "Write or rewrite any text (email, LinkedIn post, landing page, UI microcopy, client report, README, message) in the project's own voice and without AI tells: builds a per-project voice profile interactively, adapts the format to the medium, checks the draft with a deterministic script, and learns from the user's edits. Use for any text meant for humans. FR : « écris un mail », « rédige un post », « réécris ce texte », « ça fait trop IA », « quel ton », « texte de la landing », « microcopy »."
-model: claude-opus-5-5
-effort: medium
 ---
 
 # Writing voice

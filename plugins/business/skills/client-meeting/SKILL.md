@@ -1,8 +1,6 @@
 ---
 name: client-meeting
 description: "Prepares a one-page brief before a client or prospect meeting (account research, history, discovery questions) and turns the meeting into a summary, follow-up email, and proposed next steps afterward. Triggers EN: prep me for this meeting, call prep, research this company, meeting summary, call recap, follow up on my call. Triggers FR: preparer un rendez-vous client, fiche de preparation, compte-rendu de reunion, relance apres rendez-vous."
-model: claude-opus-5-5
-effort: medium
 ---
 
 <!-- Provenance: merged and condensed from anthropics/knowledge-work-plugins (Apache-2.0) —

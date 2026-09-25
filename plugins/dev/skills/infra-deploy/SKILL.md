@@ -13,8 +13,6 @@ description: >
   once things are stable (systematic-debugging), for unit/e2e test verification before
   shipping (tdd, frontend-qa, verification-before-completion), or for infrastructure
   security hardening and audits (security).
-model: claude-opus-5-5
-effort: medium
 ---
 
 <!-- Adapted from anthropics/knowledge-work-plugins engineering/skills/deploy-checklist and
@@ -85,7 +83,7 @@ from the deploy sequence in Mode 1 below:
 - **Graceful shutdown:** the process must handle `SIGTERM` — stop accepting
   new connections, finish in-flight requests, exit — within Railway's kill
   timeout, or deploys and restarts drop requests. See the `backend-standards`
-  skill's `references/node.md` Docker section for the Node-specific
+  skill's [Node backend reference](../backend-standards/references/node.md) Docker section for the Node-specific
   mechanics (PID 1, no `npm start` wrapper).
 - **Image size:** a multi-stage build that ships only the production
   dependencies and build output (not the build toolchain or dev

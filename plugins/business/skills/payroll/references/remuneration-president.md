@@ -29,11 +29,14 @@ decision.
 - Pas de charges sociales URSSAF sur les dividendes percus par le president de SASU (specificite
   par rapport au gerant majoritaire de SARL, dont les dividendes au-dela d'un seuil sont
   soumis a cotisations).
-- Soumis aux prelevements sociaux (CSG/CRDS, taux a verifier, souvent autour de 17,2%) et a
-  l'impot sur le revenu : au choix, prelevement forfaitaire unique (flat tax, souvent 30% au
-  total incluant les prelevements sociaux) ou option pour le bareme progressif de l'IR (avec
+- Soumis aux prelevements sociaux (CSG/CRDS : 18,6 % depuis le 1er janvier 2026) et a
+  l'impot sur le revenu : par defaut, prelevement forfaitaire unique (PFU : 31,4 % au total
+  depuis cette date, dont 12,8 % d'IR) ou option pour le bareme progressif de l'IR (avec
   abattement de 40% sur le montant brut, interessant si tranche marginale faible).
 - Ne genere aucun droit social (pas de retraite, pas de couverture maladie liee au montant).
+
+**Verifier les taux applicables a la date du versement avant toute simulation.** Source officielle
+consultee le 25 septembre 2026 : [Service Public — evolution du PFU](https://entreprendre.service-public.gouv.fr/actualites/A18796).
 
 ## Arbitrage — facteurs a peser
 1. **Besoin de couverture sociale** : un minimum de salaire est souvent recommande pour ouvrir

@@ -12,8 +12,6 @@ description: >
   "stack-check", "vérifie mes connexions". Distinct from `infra-deploy` (deploy
   checklist / incident response) and `security` (security audit) — this is
   connectivity and read/write permission verification only.
-model: claude-opus-5-5
-effort: low
 ---
 
 <!-- claude-toolkit: jt33120/claude-toolkit — dev plugin -->

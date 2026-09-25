@@ -1,8 +1,6 @@
 ---
 name: seo-visibility
 description: "Audits and improves both halves of being found online: classic SEO (keywords, on-page, technical, content gaps, competitor comparison) and AI-answer visibility (crawler access, llms.txt, schema.org, whether ChatGPT/Perplexity/Claude cite the site). Works on any public site with no connector, from a URL. Use for SEO audit, keyword research, technical SEO, AI search visibility, GEO, AEO, being found on Google, showing up in ChatGPT, référencement, visibilité SEO, visibilité IA, audit technique, mots-clés."
-model: claude-opus-5-5
-effort: medium
 ---
 
 <!--

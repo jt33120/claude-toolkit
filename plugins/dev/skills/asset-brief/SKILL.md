@@ -1,8 +1,6 @@
 ---
 name: asset-brief
 description: "Decide where each visual asset comes from and prepare it: open-source icon sets for UI icons, a ready-to-paste OpenAI Codex image prompt for illustrations, hero images, app icons and marketing visuals, then integrate the files (formats, sizes, favicon/PWA set, app icons). Use when a UI needs icons, images, illustrations, an app icon or a favicon. FR : « il me faut une illustration », « génère une image », « icône de l app », « favicon », « assets visuels »."
-model: claude-opus-5-5
-effort: low
 ---
 
 # Asset brief

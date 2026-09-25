@@ -1,8 +1,6 @@
 ---
 name: frontend-qa
 description: "Deep QA of a web or mobile frontend with free open-source tools: smoke flows, exploratory testing, performance, accessibility, visual regression, responsive checks, durable end-to-end tests, and a standard bug report. Use before a merge or release, after a UI change, or when asked to test the front. FR : « teste le front », « QA de l app », « vérifie l interface », « tests e2e », « fais une passe QA »."
-model: claude-opus-5-5
-effort: high
 ---
 
 # Frontend QA
@@ -20,7 +18,7 @@ Pick the levels the change needs (a small UI fix: 1 + 4; a release: all). Start 
 | 7 | Durable tests | Playwright Test Agents (`npx playwright init-agents --loop=claude`): planner → generator → healer | TS specs in `tests/e2e/`, run with `npx playwright test` |
 | 8 | Mobile | XcodeBuildMCP (iOS simulator build/run/screenshots), Maestro MCP (iOS/Android flows in YAML) | Same flows on device sizes, safe areas, gestures, dark mode |
 
-Missing tool → `stack-check` installs it (see its `references/frontend-mobile.md`).
+Missing tool → `stack-check` installs it (see [`frontend-mobile.md`](../stack-check/references/frontend-mobile.md)).
 
 ## Bug report (output)
 

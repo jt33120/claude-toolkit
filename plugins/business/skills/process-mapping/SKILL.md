@@ -1,8 +1,6 @@
 ---
 name: process-mapping
 description: "Documents a business process (steps, RACI, SOP) and analyzes it for automation opportunities with AI/n8n/scripts, with a before/after comparison and an ROI estimate. Triggers EN: document this process, write an SOP, this process is slow, streamline this workflow, automate this, where's the bottleneck. Triggers FR: documenter un processus, ecrire une procedure, ce processus est trop lent, automatiser cette tache, ou est le goulot d'etranglement."
-model: claude-opus-5-5
-effort: medium
 ---
 
 <!-- Provenance: merged and condensed from anthropics/knowledge-work-plugins (Apache-2.0) —

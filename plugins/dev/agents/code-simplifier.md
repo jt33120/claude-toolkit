@@ -1,8 +1,6 @@
 ---
 name: code-simplifier
 description: 'Use this agent on explicit request, or from a review workflow, to simplify code that has been written or modified — clarity, consistency, and maintainability while preserving all functionality, following project best practices. Focuses on recently modified code unless instructed otherwise. English triggers: "simplify this code", "clean this up", "make this more readable". French triggers: "simplifie ce code", "nettoie ce code", "rends ce code plus lisible".'
-model: claude-opus-5-5
-effort: medium
 ---
 
 <!-- Adapted from anthropics/claude-code pr-review-toolkit (MIT, per the plugin's own README) — https://github.com/anthropics/claude-code — modified for jt33120/claude-toolkit -->

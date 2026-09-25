@@ -1,8 +1,6 @@
 ---
 name: content
 description: "Plans and drafts marketing content end to end for a small SaaS team: a rolling editorial calendar, on-brand LinkedIn/blog/newsletter/social copy, and full launch-campaign briefs (objective, audience, message, channel, calendar, budget, metrics). Use for content strategy, editorial calendar, blog post, LinkedIn post, newsletter, SaaS product launch, campaign plan, content marketing, calendrier éditorial, plan de contenu, campagne de lancement, article de blog, post LinkedIn, newsletter, contenu marketing."
-model: claude-opus-5-5
-effort: medium
 ---
 
 <!--

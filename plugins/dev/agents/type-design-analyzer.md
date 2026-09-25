@@ -1,8 +1,6 @@
 ---
 name: type-design-analyzer
 description: 'Use this agent on explicit request, or from a review workflow, for expert analysis of type design: the encapsulation and invariant expression of a new type, all types added in a pull request, or the type design quality of a refactor. Provides qualitative feedback and quantitative ratings on encapsulation, invariant expression, usefulness, and enforcement. English triggers: "review this type design", "analyze these types", "check type safety". French triggers: "analyse les types", "revue de la conception des types", "verifie la robustesse des types".'
-model: claude-opus-5-5
-effort: medium
 ---
 
 <!-- Adapted from anthropics/claude-code pr-review-toolkit (MIT, per the plugin's own README) — https://github.com/anthropics/claude-code — modified for jt33120/claude-toolkit -->

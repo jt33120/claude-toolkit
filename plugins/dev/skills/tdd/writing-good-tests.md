@@ -172,7 +172,7 @@ test as tautological.
 | Build a mock response | Mirror the real structure completely |
 | Need cleanup only tests use | Put it in test utilities |
 | Watch mock setup balloon | Switch to an integration test with real components |
-| Finish a test file | Run the mutation check |
+| Finish a test file | Consider a targeted mutation check when coverage is uncertain or the failure cost is high |
 
 ## Warning Signs
 

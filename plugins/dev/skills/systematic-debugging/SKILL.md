@@ -12,8 +12,6 @@ description: >
   known) and verification-before-completion (proving the fix actually works before
   claiming it does). Not for reviewing already-working code (code-reviewer) or for
   deploy-time incidents with users affected in production (infra-deploy).
-model: claude-opus-5-5
-effort: high
 ---
 
 <!-- Adapted from obra/superpowers (MIT) — https://github.com/obra/superpowers — modified for jt33120/claude-toolkit -->
@@ -37,8 +35,9 @@ Skip straight to a fix, no phases, only when **both** are true:
 - The fix is a handful of lines, touching only that root cause — not a
   design change, not spreading across more than the one obvious spot.
 
-Then: fix it, add a regression test (or run the existing one that should
-have caught this) proving the bug is gone, and stop.
+Then: fix it and verify the original symptom is gone. Add or run a regression
+test when the bug could return unnoticed; for a reversible typo, a direct
+check of the corrected behavior may be enough.
 
 **If either condition is doubtful — more than one plausible cause, the fix
 touches code you don't already understand, or you're reaching for a second
