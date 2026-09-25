@@ -36,8 +36,9 @@ cotisation chomage**. C'est different d'un gerant majoritaire de SARL (TNS).
   (maladie, retraite, prevoyance si mise en place), mais charges sociales elevees (souvent
   60-80% du net en charges patronales + salariales cumulees, ordre de grandeur a verifier).
 - **Dividendes** : pas de charges sociales URSSAF sur les dividendes du president de SASU (a la
-  difference du gerant majoritaire de SARL), mais soumis aux prelevements sociaux (CSG/CRDS,
-  18,6 % depuis le 1er janvier 2026) et au PFU de 31,4 % au total, ou au bareme de l'IR ;
+  difference du gerant majoritaire de SARL). Par defaut, PFU de 31,4 % au total depuis le
+  1er janvier 2026, **dont** 18,6 % de prelevements sociaux et 12,8 % d'IR ; option possible
+  pour le bareme de l'IR, avec prelevements sociaux applicables ;
   verifier les taux officiels applicables a la date du versement avant tout calcul ; pas de droits sociaux generes (pas de retraite,
   pas de couverture maladie liee) ; imposition de la SASU a l'IS en amont.
 - **Arbitrage typique** : un minimum de salaire pour ouvrir des droits sociaux (couverture
