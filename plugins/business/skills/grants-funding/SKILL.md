@@ -1,8 +1,6 @@
 ---
 name: grants-funding
 description: "Finds French and EU funding programs a SASU actually qualifies for (Bpifrance, CIR/CII, JEI, French Tech, regional grants, Horizon Europe, marches publics), runs a go/no-go before drafting, and drafts the application from real program data. Triggers (EN): find grants we qualify for, should we apply for this funding, Bpifrance, R&D tax credit, Horizon Europe, public tender, write the grant application. Triggers (FR): quelles aides pour ma SASU, subvention, Bpifrance, credit impot recherche, CIR, CII, statut JEI, French Tech, appel a projets, marche public, BOAMP, dossier de subvention."
-model: claude-opus-5-5
-effort: high
 ---
 
 <!--

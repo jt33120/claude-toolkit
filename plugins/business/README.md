@@ -1,6 +1,6 @@
 # business
 
-Gestion d'entreprise et croissance SaaS, pour Cowork et les agents de gestion. Tout tourne sur Claude Opus 5.5. Les textes passent par `writing-voice` et `language-strategy` (core). Contexte français par défaut (EUR, TVA, RGPD, droit français) : les points juridiques, fiscaux et sociaux sont à vérifier auprès des sources officielles ou d'un professionnel.
+Gestion d'entreprise et croissance SaaS, pour Cowork et les agents de gestion. Les textes passent par `writing-voice` et `language-strategy` (core). Contexte français par défaut (EUR, TVA, RGPD, droit français) : les points juridiques, fiscaux et sociaux sont à vérifier auprès des sources officielles ou d'un professionnel.
 
 | Thème | Skill | Rôle |
 |---|---|---|

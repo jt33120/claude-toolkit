@@ -15,8 +15,6 @@ description: >
   composant pour...", "alternatives à une modale", "vocabulaire UI", "liste
   exhaustive des options pour...", ou pour nommer précisément un élément
   d'interface dans un brief ou une spec.
-model: claude-opus-5-5
-effort: low
 ---
 
 # UI Vocabulary

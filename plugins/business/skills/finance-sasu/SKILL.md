@@ -1,8 +1,6 @@
 ---
 name: finance-sasu
 description: "Runs invoicing, quotes, transaction review, overdue-payment reminders, TVA tracking, and a 30/60/90-day cash forecast for a French SASU, using the Qonto connector when present. Triggers (EN): who owes me money, cash flow forecast, will I make it this month, TVA, invoice this client, chase this invoice, month-end close, bank transactions. Triggers (FR): qui me doit de l'argent, previsionnel de tresorerie, est-ce que je passe le mois, TVA, facturer ce client, relancer cette facture, cloture du mois, transactions bancaires, devis."
-model: claude-opus-5-5
-effort: medium
 ---
 
 <!--

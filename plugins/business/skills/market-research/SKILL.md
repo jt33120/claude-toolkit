@@ -1,8 +1,6 @@
 ---
 name: market-research
 description: "Research competitors and synthesize user/market research into a positioning brief, feature comparison, or set of prioritized findings. Triggers EN: competitive brief, competitive analysis, competitor research, synthesize research, market research, positioning gaps. Triggers FR: analyse concurrentielle, etude de marche, veille concurrentielle, synthese d'etudes utilisateurs, positionnement."
-model: claude-opus-5-5
-effort: medium
 ---
 
 <!-- Provenance: merged and condensed from anthropics/knowledge-work-plugins (Apache-2.0) —

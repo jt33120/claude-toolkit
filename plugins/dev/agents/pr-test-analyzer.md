@@ -1,8 +1,6 @@
 ---
 name: pr-test-analyzer
 description: 'Use this agent on explicit request, or from a review workflow (e.g. after a pull request is created or updated), to review test coverage quality and completeness — whether tests adequately cover new functionality and edge cases. English triggers: "review the tests in this PR", "check test coverage", "are the tests good enough". French triggers: "analyse les tests de la PR", "verifie la couverture de tests", "les tests sont-ils suffisants".'
-model: claude-opus-5-5
-effort: medium
 ---
 
 <!-- Adapted from anthropics/claude-code pr-review-toolkit (MIT, per the plugin's own README) — https://github.com/anthropics/claude-code — modified for jt33120/claude-toolkit -->

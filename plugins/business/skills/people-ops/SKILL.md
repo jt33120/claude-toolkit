@@ -1,8 +1,6 @@
 ---
 name: people-ops
 description: "Runs onboarding, annual/professional review conversations, compensation checks, and basic org planning for a French SASU with employees, including mutuelle and reglement interieur thresholds. Triggers (EN): onboarding plan, performance review, entretien annuel, org chart, headcount plan, employee handbook, comp benchmarking. Triggers (FR): plan d'integration, entretien annuel, entretien professionnel, organigramme, plan d'effectifs, reglement interieur, mutuelle, remuneration equipe."
-model: claude-opus-5-5
-effort: medium
 ---
 
 <!--

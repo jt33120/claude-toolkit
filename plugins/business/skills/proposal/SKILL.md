@@ -1,8 +1,6 @@
 ---
 name: proposal
 description: "Turns discovery notes, a call transcript, or an RFP into a priced commercial proposal, quote (devis), or technical proof-of-concept document, in French freelance/SASU context (TJM, forfait, TVA, conditions de paiement). Triggers EN: write a proposal, build a quote, price this job, draft a POC, technical demo document, SOW. Triggers FR: redige un devis, prepare une proposition commerciale, fais un POC, document technique de demo, chiffrer une prestation."
-model: claude-opus-5-5
-effort: medium
 ---
 
 <!-- Provenance: merged from anthropics/knowledge-work-plugins (Apache-2.0), small-business/skills/proposal-builder,

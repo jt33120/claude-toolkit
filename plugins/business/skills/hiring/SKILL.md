@@ -1,8 +1,6 @@
 ---
 name: hiring
 description: "Builds the hiring packet (job post, interview guide, offer letter) and screens applicants for a French SASU, respecting French non-discrimination law, promesse d'embauche, and freelance-vs-CDI distinctions. Triggers (EN): help me hire, write a job post, screen these applications, draft an offer letter, interview questions, who should I interview. Triggers (FR): je recrute, offre d'emploi, ecrire une annonce, trier les candidatures, promesse d'embauche, questions d'entretien, redige une offre, qui interviewer."
-model: claude-opus-5-5
-effort: medium
 ---
 
 <!--

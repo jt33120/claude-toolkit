@@ -1,8 +1,6 @@
 ---
 name: ci-budget
 description: "Audit and reduce GitHub Actions minutes on private repos without dropping real tests: measure minutes per workflow, align CI triggers with the BMAD rhythm (story / epic / review / merge), tune triggers, concurrency and caching. Use when Actions minutes run high, before adding a workflow, or when setting up CI on a new repo. FR : « optimise mes github actions », « trop de minutes CI », « quota actions », « revoir ci.yml », « stratégie CI »."
-model: claude-opus-5-5
-effort: medium
 ---
 
 # CI budget (GitHub Actions)
@@ -22,13 +20,13 @@ Rank workflows by minutes and start with the biggest one.
 
 | Moment | Work | GitHub Actions |
 |---|---|---|
-| Each story | Claude codes, runs the relevant tests locally, commits locally | Nothing |
-| During the epic | Push to a branch to back up or collaborate; draft PR if useful | No full suite |
+| Each story | The agent runs focused checks for changes with plausible behavioral risk; inspects the result for low-risk edits | Nothing, unless a project gate or risk calls for it |
+| During the epic | Push to a branch to back up or collaborate; draft PR if useful | Run targeted jobs for migration/security changes; avoid redundant full-suite runs |
 | End of epic | PR marked « Ready for review » | Full CI: build, tests, E2E, relevant security checks |
 | Fixes after review | New push on the PR | Full CI again on the fixed version |
 | Merge to the default branch | Deploy + production checks | Don't re-run what already passed on the PR |
 
-Do not limit pushes: push whenever backup or sharing is needed. What changes is which pushes trigger costly jobs. Exception: a migration or a security change gets its targeted checks right away, even mid-epic.
+Do not limit pushes: push whenever backup or sharing is needed. What changes is which pushes trigger costly jobs. A migration or a security change gets its targeted checks right away, even mid-epic. Follow a project's required branch checks rather than promising that draft PRs never run CI.
 
 ## 3. Trigger patterns
 

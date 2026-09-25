@@ -12,8 +12,6 @@ description: >
   architecture; `infra-deploy` runs deploy checklists and live incidents. Déclencheurs
   français : "sécuriser", "audit sécurité", "cyber", "durcir", "faille", "injection",
   "RGPD", "conformité", "isolation tenant", "auth JWT", "CORS".
-model: claude-opus-5-5
-effort: high
 ---
 
 <!-- Original skill by the repo owner, migrated from a personal Claude skill into jt33120/claude-toolkit. -->
@@ -103,17 +101,18 @@ en CI) :
 ## 3. Mode AUDIT EXISTANT — remédiation priorisée
 
 ### Étape 1 — Lancer le script déterministe
-Avant de raisonner, collecter des **preuves**. Exécuter :
+Avant de raisonner, collecter des **preuves**. Résoudre le chemin du script fourni
+avec le skill (depuis son dossier d'installation), puis exécuter :
 
 ```bash
-python scripts/audit.py <chemin_du_projet>
+python <dossier-du-skill>/scripts/audit.py <chemin_du_projet>
 ```
 
-Le script scanne le code (stdlib only, pas de dépendance), et si `pip-audit` /
-`trufflehog` sont installés, les lance aussi. Il classe chaque finding en
-`CRITIQUE` / `IMPORTANT` / `INFO` et retourne un code de sortie non nul s'il y a du
-CRITIQUE — utilisable tel quel en CI. Voir l'entête du script pour la liste exacte
-des règles.
+Le script scanne le code (stdlib only, pas de dépendance). Si `pip-audit` /
+`trufflehog` sont installés, il cible les dépendances du projet et scanne séparément
+les fichiers et l'historique Git. Une erreur d'outil laisse un résultat **inconnu**,
+jamais un résultat « sans risque » (code de sortie 2 ; critique = 1). Les motifs regex
+sont des indices à examiner, pas une certification de sécurité. Voir l'entête du script.
 
 ### Étape 2 — Compléter par une revue manuelle
 Le script attrape les motifs mécaniques. Compléter par ce que seul un humain (ou le

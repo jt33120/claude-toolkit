@@ -1,8 +1,6 @@
 ---
 name: viability-audit
 description: "Qualifie par elimination si un projet peut rapporter de l'argent, et departage plusieurs projets candidats. Triggers FR: audit de viabilite, ce projet est-il viable, lequel de mes projets je garde, faut-il continuer ce projet. Triggers EN: viability audit, is this project viable, should I kill this project, which project should I build."
-model: claude-opus-5-5
-effort: high
 ---
 
 <!-- Provenance: base and references/ adapted from the author's private skill "audit-viabilite" (elimination gates, French freelance/SASU context).

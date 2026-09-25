@@ -1,0 +1,8 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "business",
+  "version": "1.1.0",
+  "description": "Gestion d'entreprise et croissance SaaS : stratégie, vente, marketing, juridique, finance et opérations.",
+  "author": { "name": "jt33120" },
+  "repository": "https://github.com/jt33120/claude-toolkit"
+}

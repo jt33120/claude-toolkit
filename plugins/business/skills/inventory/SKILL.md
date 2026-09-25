@@ -1,8 +1,6 @@
 ---
 name: inventory
 description: "Works out what to reorder and when, from actual sales/usage velocity — physical goods or SaaS resources like licenses, seats, or API quotas. Triggers (EN): what do I need to reorder, am I going to run out, restock, how much stock is left, draft a purchase order, we're running low on licenses. Triggers (FR): que dois-je reapprovisionner, je vais bientot manquer de stock, reappro, combien de stock reste-t-il, bon de commande, on manque de licences."
-model: claude-opus-5-5
-effort: low
 ---
 
 <!--

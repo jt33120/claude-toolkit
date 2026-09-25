@@ -1,8 +1,6 @@
 ---
 name: legal-check
 description: "Reviews contracts, NDAs, CGV/CGU for a SaaS, and flags RGPD/AI Act compliance gaps for a French SASU consultant. Triggers (EN): review this contract, what am I signing, red flags, NDA check, GDPR compliance, AI Act, terms of service, privacy policy. Triggers (FR): relis ce contrat, qu'est-ce que je signe, points de vigilance, verifier cette NDA, conformite RGPD, CGV, CGU, mentions legales, politique de confidentialite."
-model: claude-opus-5-5
-effort: high
 ---
 
 <!--

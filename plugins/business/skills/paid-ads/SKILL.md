@@ -1,8 +1,6 @@
 ---
 name: paid-ads
 description: "Reads paid-ad performance across Google, Meta, LinkedIn and TikTok Ads (via connector or exported CSV), explains in plain terms what's working and what's burning budget, recommends targeting/budget/creative changes with the exact EUR impact of each, drafts new ad copy and creative briefs, and only executes a change in the ad account after explicit approval. Use for ad performance, ROI on ads, cost per lead going up, should I pause this campaign, write ad copy, Google Ads, Meta Ads, LinkedIn Ads, TikTok Ads, publicités payantes, performance des annonces, budget pub, coût par lead."
-model: claude-opus-5-5
-effort: medium
 ---
 
 <!--

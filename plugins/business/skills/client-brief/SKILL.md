@@ -1,8 +1,6 @@
 ---
 name: client-brief
 description: "Turns a client's vague ask or problem statement into a structured, client-facing requirements brief (goals, non-goals, user stories, acceptance criteria) — the document to align on before detailed product/engineering planning. Triggers EN: write a brief, scope this feature, requirements document, client requirements, what does the client actually want. Triggers FR: cadrage client, note de cadrage, cahier des charges leger, definir le perimetre."
-model: claude-opus-5-5
-effort: medium
 ---
 
 <!-- Provenance: condensed from anthropics/knowledge-work-plugins (Apache-2.0), product-management/skills/write-spec.

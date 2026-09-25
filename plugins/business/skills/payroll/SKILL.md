@@ -1,8 +1,6 @@
 ---
 name: payroll
 description: "Explains salary structure, president compensation vs dividends, social charges, and payroll prep for a French SASU that may hire. Triggers (EN): run payroll, how much should I pay myself, president salary vs dividends, social charges, URSSAF, DSN, payslip, hire an employee salary. Triggers (FR): fiche de paie, combien me verser, remuneration du president, dividendes ou salaire, charges sociales, URSSAF, DSN, bulletin de salaire, salaire brut net, convention collective."
-model: claude-opus-5-5
-effort: medium
 ---
 
 <!--
@@ -38,8 +36,10 @@ cotisation chomage**. C'est different d'un gerant majoritaire de SARL (TNS).
   (maladie, retraite, prevoyance si mise en place), mais charges sociales elevees (souvent
   60-80% du net en charges patronales + salariales cumulees, ordre de grandeur a verifier).
 - **Dividendes** : pas de charges sociales URSSAF sur les dividendes du president de SASU (a la
-  difference du gerant majoritaire de SARL), mais soumis aux prelevements sociaux (CSG/CRDS,
-  ~17,2%) et a la flat tax ou au bareme de l'IR ; pas de droits sociaux generes (pas de retraite,
+  difference du gerant majoritaire de SARL). Par defaut, PFU de 31,4 % au total depuis le
+  1er janvier 2026, **dont** 18,6 % de prelevements sociaux et 12,8 % d'IR ; option possible
+  pour le bareme de l'IR, avec prelevements sociaux applicables ;
+  verifier les taux officiels applicables a la date du versement avant tout calcul ; pas de droits sociaux generes (pas de retraite,
   pas de couverture maladie liee) ; imposition de la SASU a l'IS en amont.
 - **Arbitrage typique** : un minimum de salaire pour ouvrir des droits sociaux (couverture
   maladie, trimestres de retraite) + le reste en dividendes une fois les resultats connus, mais

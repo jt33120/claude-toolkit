@@ -1,8 +1,6 @@
 ---
 name: customer-support
 description: "Triages SaaS support tickets, drafts customer replies, packages escalations, and writes help-center articles for a solo-founder SaaS. Triggers (EN): triage this ticket, draft a reply to this customer, escalate this bug, write a help article, customer is angry, outage message. Triggers (FR): trier ce ticket, repondre a ce client, remonter ce bug, article d'aide, client mecontent, message de panne, support client SaaS."
-model: claude-opus-5-5
-effort: medium
 ---
 
 <!--

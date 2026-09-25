@@ -1,8 +1,6 @@
 ---
 name: pipeline-management
 description: "Runs the sales pipeline end to end for a solo founder or small team, with or without a CRM: stage-by-stage health and coverage, forecast (commit/best-case/pipeline), single-deal review with a signal-adjusted win probability, proactive deal-signal alerts (gone quiet, slipping, competitor mention), a close plan and mutual action plan for late-stage deals, win/loss pattern analysis, CRM hygiene checks, lead triage/scoring, and CRM autopilot logging from email/calls. Falls back to a spreadsheet CRM when none exists. Use for pipeline review, forecast, deal review, deal health, win probability, close plan, win loss analysis, CRM hygiene, lead scoring, update my CRM, log this call, revue de pipeline, prévisions de ventes, hygiène CRM, score des leads."
-model: claude-opus-5-5
-effort: medium
 ---
 
 <!--

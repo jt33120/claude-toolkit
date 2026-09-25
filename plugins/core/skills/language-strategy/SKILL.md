@@ -1,8 +1,6 @@
 ---
 name: language-strategy
 description: "Juggle French and English efficiently: English as the working language for prompts, specs, code and AI-to-AI briefs (models perform best in English), the audience's language for deliverables, with a per-project glossary and native rewriting instead of literal translation. Use when a task mixes FR and EN, when writing specs or prompts for other AIs, when translating or producing bilingual content, or when setting up BMAD languages. FR : « en anglais ou en français », « traduis », « version anglaise », « bilingue », « quelle langue pour la spec »."
-model: claude-opus-5-5
-effort: low
 ---
 
 # Language strategy

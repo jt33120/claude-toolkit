@@ -1,8 +1,6 @@
 ---
 name: account-management
 description: "Manages existing SaaS customer accounts once a founder has more than a handful: health scoring (relationship, engagement, commercial, support, value delivered), QBR prep, a renewal radar with risk scoring and prep briefs, expansion/upsell whitespace mapping, a living strategic account plan, and a stakeholder map of who actually decides and who's missing. Use for customer health check, is this account at risk, renewal, QBR prep, upsell opportunities, expansion, account plan, who are the stakeholders, santé client, renouvellement, plan de compte, cartographie des parties prenantes."
-model: claude-opus-5-5
-effort: medium
 ---
 
 <!--
