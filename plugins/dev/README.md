@@ -22,6 +22,7 @@ Développement avec BMAD (cadrage, stories, `bmad-build`, `bmad-code-review`) + 
 | verification-before-completion | Preuve avant de dire « fini » |
 | security | Plan et audit sécurité FastAPI/Supabase/Vercel/LLM |
 | infra-deploy | Checklist de déploiement et incidents (Vercel, Railway, Supabase, Neon) |
+| video-remotion | Montage et rendu vidéo en code avec Remotion (reels 9:16, démos, sous-titres animés) |
 
 ## Agents de revue (sur demande ou via un workflow de revue)
 
