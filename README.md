@@ -58,6 +58,7 @@ Le contrôle léger valide manifests, noms et descriptions de skills, chemins de
 
 - [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) : workflow agile par agents (`npx bmad-method install`)
 - [Graft](https://github.com/trailhq/Graft) : graphe de connaissance du code (`npx @nanonets/graft init --agents claude --no-global`)
+- [public-apis](https://github.com/public-apis/public-apis) : catalogue d'APIs gratuites ou freemium, à consulter avant toute nouvelle dépendance ou service payant (rappel inscrit dans le `CLAUDE.md` des projets par `stack-check`)
 
 ## Crédits
 

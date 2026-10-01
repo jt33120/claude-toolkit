@@ -85,8 +85,10 @@ Then, in order:
 5. **Append the `CLAUDE.md` snippet — idempotent.** Read `CLAUDE.md` at the
    repo root (create it if missing). If the markers
    `<!-- stack-check:begin -->` / `<!-- stack-check:end -->` are already
-   present, leave it alone. Otherwise append the block from
-   `templates/CLAUDE.md.snippet` verbatim, markers included.
+   present, replace only the text between them with the current template
+   (so template updates reach existing repos; nothing outside the markers
+   changes). Otherwise append the block from `templates/CLAUDE.md.snippet`
+   verbatim, markers included.
 
 6. **Show the full diff, then ask.** Not a summary — the actual diff of
    `.claude/settings.json`, `.claude/stack.yaml`, any new
