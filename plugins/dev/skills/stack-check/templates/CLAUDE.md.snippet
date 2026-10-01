@@ -6,6 +6,7 @@
 - Review agents (code-reviewer, silent-failure-hunter, type-design-analyzer, pr-test-analyzer, code-simplifier) run only on explicit request, never automatically.
 - Code navigation: if a `graft/` folder exists at the repo root, query it with the `graft_*` MCP tools before grep/read.
 - Design: build or redesign UI in Claude Design (VS Code "/" menu → "Claude Design" — this is the machine-level authorization step), then run `/design-sync` and commit the synced tokens so cloud sessions pick them up too.
+- New dependency or external service: before installing a package, subscribing to a paid API or writing an integration, search https://github.com/public-apis/public-apis (and the vendor's official skill/MCP) for a free or existing option. Check before adopting: still maintained, real pricing and quotas, licence, data location (GDPR).
 - Small, obvious changes (typo, one-line fix, a config value): just do it — no BMAD ceremony.
 - Bugs: `systematic-debugging` — root cause before any fix.
 - Deploy: `infra-deploy` — checklist before shipping, incident workflow if production is down.
