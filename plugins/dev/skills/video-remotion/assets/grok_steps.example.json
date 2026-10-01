@@ -1,0 +1,15 @@
+{
+  "_comment": "Calibrate once: run `npx playwright codegen https://grok.com/imagine`, do one generation by hand, then copy each locator below. Placeholders in braces come from shots.json. Set stop_if_visible to the exact wording Grok shows for its usage limit and captcha.",
+  "url": "https://grok.com/imagine",
+  "steps": [
+    {"do": "click", "target": {"role": "button", "name": "Video"}, "when": {"type": "video"}},
+    {"do": "click", "target": {"role": "button", "name": "{ratio}"}},
+    {"do": "fill", "target": {"role": "textbox"}, "value": "{prompt}"},
+    {"do": "press", "target": {"role": "textbox"}, "key": "Enter"},
+    {"do": "download", "target": {"role": "button", "name": "Download", "nth": 0}, "timeout": 240}
+  ],
+  "stop_if_visible": [
+    {"text": "reached your"},
+    {"css": "iframe[src*='captcha'], iframe[title*='challenge']"}
+  ]
+}

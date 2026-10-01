@@ -1,6 +1,6 @@
 ---
 name: video-remotion
-description: "Edit and render videos as code with Remotion (React): reels and shorts 9:16, product demos, motion design, animated captions, intros/outros, montage of existing clips, free stock B-roll (Pexels, Pixabay). Installs the official Remotion agent skills, scaffolds the project, previews in Remotion Studio and renders MP4. Use when the user wants to cut, assemble, animate or subtitle a video. FR : « montage vidéo », « fais un reel », « monte ces rushes », « sous-titres animés », « vidéo de démo », « B-roll », « vidéos libres de droits », « Remotion »."
+description: "Edit and render videos as code with Remotion (React): reels and shorts 9:16, product demos, motion design, animated captions, intros/outros, montage of existing clips, free stock B-roll (Pexels, Pixabay), AI shots batched through the user's Grok subscription. Installs the official Remotion agent skills, scaffolds the project, previews in Remotion Studio and renders MP4. Use when the user wants to cut, assemble, animate or subtitle a video. FR : « montage vidéo », « fais un reel », « monte ces rushes », « sous-titres animés », « vidéo de démo », « B-roll », « vidéos libres de droits », « plans IA », « génère avec Grok », « Remotion »."
 ---
 
 # Video with Remotion
@@ -37,9 +37,20 @@ Free sources, commercial use allowed. Keys are free (account on pexels.com and p
 4. Montage: load with `staticFile("broll/<file>")` in `<OffthreadVideo muted>`; use `objectFit: "cover"` to fill the frame, trim to the useful 2–5 s, keep the audio from the user's music/voice-over only.
 5. Credits: Pexels asks to credit the author and link to Pexels. Put a line in the video description (or an end card) built from `credits.json`, and give it to the user with the render.
 6. Not allowed: recognizable people in a misleading context, implying endorsement by anyone shown, or reselling the clips as stock. Clips from other sources (Wikimedia Commons, Internet Archive, NASA) are handled manually: record the exact license and author in `credits.json` and respect its attribution terms (CC BY, CC BY-SA, etc.).
-7. Heavy clips: add `public/broll/*.mp4` to `.gitignore` and commit `credits.json` only.
+7. Heavy clips: add `public/broll/*.mp4` and `public/ai/*` (except `ai-credits.json`) to `.gitignore`; commit the credit files only.
 
-## 5. Check, then render
+## 5. AI shots (Grok subscription, robot at human pace)
+
+Generation runs outside Claude: Claude only writes the shot list, a local robot replays the user's own clicks in a dedicated Chrome profile, one shot at a time with 30–90 s pauses. It runs on the user's Mac, never in a cloud session.
+
+1. Shot list: write `shots.json` (model: `assets/shots.example.json`) — unique `id`, concrete `prompt` (subject, camera, light, "no text"), `type` image/video, `ratio`. Only hero shots; the rest comes from B-roll.
+2. Once per machine: `pip install playwright`, then `python scripts/grok_batch.py login` and sign in to Grok in the window that opens.
+3. Calibrate once (and again when Grok's page changes): copy `assets/grok_steps.example.json` to the project, run `npx playwright codegen https://grok.com/imagine`, do one generation by hand and put the recorded locators in the steps file. Targets accept `role`+`name`, `text`, `label`, `placeholder`, `testid`, `css`, `nth`; `{field}` is filled from the shot; `when` limits a step to some shots.
+4. Run: `python scripts/grok_batch.py run shots.json --steps grok_steps.json --out public/ai` (default 15 shots per run). Files are named `<id>.<ext>`, prompts logged in `public/ai/ai-credits.json`; shots already saved are skipped, so rerun after an interruption. `check` lists what is missing without opening a browser.
+5. The robot stops on a captcha, a usage-limit message or an unknown screen and reports it: the user finishes by hand. Never add captcha solving, parallel sessions or shorter pauses.
+6. Grok's consumer terms restrict bots; the account risk is the user's choice — say it once when setting this up, then use the official API if volume grows.
+
+## 6. Check, then render
 
 1. `npx remotion studio` — the user reviews and asks for changes there.
 2. Spot-check key frames without a full render: `npx remotion still <id> out/frame.png --frame=<n>`.
@@ -48,6 +59,6 @@ Free sources, commercial use allowed. Keys are free (account on pexels.com and p
 
 ## Licenses
 
-Stock clips: see step 4. Remotion itself:
+Stock clips: see step 4. AI shots: see step 5. Remotion itself:
 
 Free for individuals, non-profits and companies up to 3 employees, commercial use included. Beyond that, a Remotion company license is required — say so before starting if the user's organisation may exceed it.
