@@ -1,0 +1,4 @@
+[
+  {"id": "s01-intro", "type": "video", "ratio": "9:16", "prompt": "Slow aerial shot over a coastal race track at golden hour, cinematic, no text"},
+  {"id": "s02-detail", "type": "image", "ratio": "9:16", "prompt": "Macro shot of a carbon steering wheel, soft studio light, no logo"}
+]

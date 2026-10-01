@@ -1,6 +1,6 @@
 ---
 name: video-remotion
-description: "Edit and render videos as code with Remotion (React): reels and shorts 9:16, product demos, motion design, animated captions, intros/outros, montage of existing clips. Installs the official Remotion agent skills, scaffolds the project, previews in Remotion Studio and renders MP4. Use when the user wants to cut, assemble, animate or subtitle a video. FR : « montage vidéo », « fais un reel », « monte ces rushes », « sous-titres animés », « vidéo de démo », « Remotion »."
+description: "Edit and render videos as code with Remotion (React): reels and shorts 9:16, product demos, motion design, animated captions, intros/outros, montage of existing clips, free stock B-roll (Pexels, Pixabay), AI shots batched through the user's Grok subscription. Installs the official Remotion agent skills, scaffolds the project, previews in Remotion Studio and renders MP4. Use when the user wants to cut, assemble, animate or subtitle a video. FR : « montage vidéo », « fais un reel », « monte ces rushes », « sous-titres animés », « vidéo de démo », « B-roll », « vidéos libres de droits », « plans IA », « génère avec Grok », « Remotion »."
 ---
 
 # Video with Remotion
@@ -27,13 +27,38 @@ Remotion turns React components into frames, then encodes MP4/WebM/GIF. Claude w
 - Every animation derives from `useCurrentFrame()` (`interpolate`, `spring`); never CSS animations or `setTimeout`.
 - Captions: transcribe with `@remotion/install-whisper-cpp` (local, free), display with `@remotion/captions`; keep text inside the platform safe zone (reels: avoid the bottom ~20 % and right edge).
 
-## 4. Check, then render
+## 4. B-roll (stock footage beyond screen recordings)
+
+Free sources, commercial use allowed. Keys are free (account on pexels.com and pixabay.com) and read from `PEXELS_API_KEY` / `PIXABAY_API_KEY`; never print or commit them. If a key is missing, say which one and where to create it, then continue with the other source or the user's own rushes.
+
+1. Plan shots first: for each scene write 2–3 concrete search terms in English (e.g. "hands typing laptop night", "aerial coastal road").
+2. Search: `python scripts/broll.py search "<terms>" --orientation portrait --min-duration 4` (omit `--orientation` for landscape). Output is JSON: pick by duration, resolution and page title, never by the first hit; open `page_url` if unsure.
+3. Download only the chosen clips: `python scripts/broll.py download <pexels|pixabay> <id> --out public/broll`. Each file is logged in `public/broll/credits.json` (source page, author, license).
+4. Montage: load with `staticFile("broll/<file>")` in `<OffthreadVideo muted>`; use `objectFit: "cover"` to fill the frame, trim to the useful 2–5 s, keep the audio from the user's music/voice-over only.
+5. Credits: Pexels asks to credit the author and link to Pexels. Put a line in the video description (or an end card) built from `credits.json`, and give it to the user with the render.
+6. Not allowed: recognizable people in a misleading context, implying endorsement by anyone shown, or reselling the clips as stock. Clips from other sources (Wikimedia Commons, Internet Archive, NASA) are handled manually: record the exact license and author in `credits.json` and respect its attribution terms (CC BY, CC BY-SA, etc.).
+7. Heavy clips: add `public/broll/*.mp4` and `public/ai/*` (except `ai-credits.json`) to `.gitignore`; commit the credit files only.
+
+## 5. AI shots (Grok subscription, robot at human pace)
+
+Generation runs outside Claude: Claude only writes the shot list, a local robot replays the user's own clicks in a dedicated Chrome profile, one shot at a time with 30–90 s pauses. It runs on the user's Mac, never in a cloud session.
+
+1. Shot list: write `shots.json` (model: `assets/shots.example.json`) — unique `id`, concrete `prompt` (subject, camera, light, "no text"), `type` image/video, `ratio`. Only hero shots; the rest comes from B-roll.
+2. Once per machine: `pip install playwright`, then `python scripts/grok_batch.py login` and sign in to Grok in the window that opens.
+3. Calibrate once (and again when Grok's page changes): copy `assets/grok_steps.example.json` to the project, run `npx playwright codegen https://grok.com/imagine`, do one generation by hand and put the recorded locators in the steps file. Targets accept `role`+`name`, `text`, `label`, `placeholder`, `testid`, `css`, `nth`; `{field}` is filled from the shot; `when` limits a step to some shots.
+4. Run: `python scripts/grok_batch.py run shots.json --steps grok_steps.json --out public/ai` (default 15 shots per run). Files are named `<id>.<ext>`, prompts logged in `public/ai/ai-credits.json`; shots already saved are skipped, so rerun after an interruption. `check` lists what is missing without opening a browser.
+5. The robot stops on a captcha, a usage-limit message or an unknown screen and reports it: the user finishes by hand. Never add captcha solving, parallel sessions or shorter pauses.
+6. Grok's consumer terms restrict bots; the account risk is the user's choice — say it once when setting this up, then use the official API if volume grows.
+
+## 6. Check, then render
 
 1. `npx remotion studio` — the user reviews and asks for changes there.
 2. Spot-check key frames without a full render: `npx remotion still <id> out/frame.png --frame=<n>`.
 3. Final: `npx remotion render <id> out/<name>.mp4` (add `--crf` for quality/size trade-off). Report path, duration, size and resolution.
 4. Do not commit renders or heavy rushes; add `out/` to `.gitignore`.
 
-## License
+## Licenses
+
+Stock clips: see step 4. AI shots: see step 5. Remotion itself:
 
 Free for individuals, non-profits and companies up to 3 employees, commercial use included. Beyond that, a Remotion company license is required — say so before starting if the user's organisation may exceed it.
