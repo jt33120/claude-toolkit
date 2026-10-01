@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "dev",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Développement, direction frontend, tests, débogage, sécurité, infrastructure, vidéo Remotion et revue de code.",
   "author": { "name": "jt33120" },
   "repository": "https://github.com/jt33120/claude-toolkit"
