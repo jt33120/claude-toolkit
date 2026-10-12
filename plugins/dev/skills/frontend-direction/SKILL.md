@@ -5,11 +5,17 @@ description: "Frame the visual and interaction direction of a UI (web or mobile)
 
 # Frontend direction
 
+<!-- Incorporates adapted guidance from anthropics/skills frontend-design (Apache-2.0) and selected UI UX Pro Max reference data (MIT). See references/frontend-design.md, references/ATTRIBUTION.md and the repository NOTICE for pinned sources and modifications. -->
+
 **Rule 0 — the project wins.** If a design system exists (Claude Design synced with `/design-sync`, a tokens file, a component library in the repo, or `.claude/design-direction.md`), follow it and only propose within its bounds. This skill gives options and checks, never a house style.
+
+Before styling a new or reshaped screen, use [frontend-content](../frontend-content/SKILL.md) to decide visible content, on-demand detail and spec-only context. Keep its three-level hierarchy; do not turn the entire brief into UI copy.
 
 ## 1. Context (ask only what is missing)
 
 Platform(s): web / iOS / Android / cross-platform · audience and tone · existing brand assets · density (data-heavy vs content-led) · constraints (accessibility level, dark mode, languages).
+
+When establishing a direction or correcting a generic result, consult [Frontend Design principles](references/frontend-design.md), adapted from Anthropic. Read the UI UX Pro Max catalogs only for the current decision: `references/styles.csv`, `references/colors.csv`, `references/typography.csv` or `references/ux-guidelines.csv`.
 
 ## 2. Three contrasting directions (only when there is no design system)
 
@@ -26,8 +32,15 @@ For each direction give: a name, a one-line intent, type pairing (≤ 2 families
 - **Mobile:** native components (SwiftUI, Jetpack Compose) or Expo UI; keep platform navigation idioms.
 - **Motion:** purposeful (feedback, continuity, hierarchy), roughly 150–300 ms for UI transitions, always respect reduced-motion.
 
+## 3a. Represent information
+
+Use [charts and disclosure](references/charts-and-disclosure.md) for choosing a number, table, chart or diagram. Consult `references/charts.csv` only when a chart shortlist is useful. Keep the question, labels, units and decision-critical context visible; make supporting calculations explorable. Record the selection and interaction contract in the companion spec.
+
 ## 4. Pre-show checklist
 
+- [ ] One dominant idea per panel; no repeated title/subtitle/paragraph/chart summary
+- [ ] Visible, exploration and detail levels work; meaningful context is preserved in the spec
+- [ ] Visuals answer a question; exact values and necessary dense comparisons remain usable
 - [ ] Every stylistic choice is intentional and traceable to the direction (no leftover template look)
 - [ ] Clear type hierarchy, consistent spacing scale and grid
 - [ ] Real content; loading, empty and error states designed
@@ -36,4 +49,4 @@ For each direction give: a name, a one-line intent, type pairing (≤ 2 families
 
 ## 5. Audit and QA
 
-If installed: `impeccable` and Vercel `web-design-guidelines` (web). Then `frontend-qa`. Assets: `asset-brief`.
+Use the bundled Impeccable adaptations as needed: `critique` to assess, `distill` to reduce clutter, `clarify` for copy and `layout` for structure. Then `frontend-qa` for functional and disclosure checks. Vercel `web-design-guidelines` may complement web QA if installed. Assets: `asset-brief`.

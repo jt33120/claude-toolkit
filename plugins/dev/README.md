@@ -13,7 +13,12 @@ Développement avec BMAD (cadrage, stories, `bmad-build`, `bmad-code-review`) + 
 |---|---|
 | stack-check | Déclare la stack, installe les outils, vérifie lecture/écriture des MCP |
 | ui-vocabulary | Nom exact, variantes, équivalents web/iOS/Android et alternatives de 152 composants et patterns |
-| frontend-direction | Suit le design system, sinon propose 3 directions contrastées et enregistre le choix |
+| frontend-content | Choisit le contenu visible, à explorer et à détailler ; livre le produit et sa spec, sans perdre le contexte |
+| frontend-direction | Suit le design system, sinon propose 3 directions ; intègre Frontend Design d'Anthropic et les catalogues UI UX Pro Max, dont le choix de graphiques |
+| distill | Adaptation Impeccable : retire les redondances et le bruit, conserve les usages et reporte le contexte dans la spec |
+| clarify | Adaptation Impeccable : libellés, actions, erreurs et aides courts, cohérents et compréhensibles |
+| critique | Adaptation Impeccable : évalue hiérarchie, charge cognitive et clarté ; priorise les défauts avec preuves |
+| layout | Adaptation Impeccable : ordre de lecture, regroupement, densité et comportement responsive |
 | asset-brief | Icônes open source ou prompt Codex prêt à coller, puis intégration (favicon, icônes d'app) |
 | frontend-qa | QA web/mobile en 8 niveaux, rapport de bugs normé |
 | backend-standards | Couche fine au-dessus des skills officielles FastAPI, Supabase, Neon |
@@ -38,4 +43,10 @@ BMAD, security-guidance, skills Supabase / Neon / Vercel / FastAPI, modern-pytho
 
 ## Flux frontend
 
-Design (Claude Design → `/design-sync`, ou `frontend-direction`) → build (BMAD + composants shadcn / natifs, `ui-vocabulary`) → assets (`asset-brief`, handoff Codex) → QA (`frontend-qa`) → audit (impeccable, web-design-guidelines).
+`frontend-content` → design (Claude Design → `/design-sync`, ou `frontend-direction`) → build (BMAD + composants shadcn / natifs, `ui-vocabulary`) → assets (`asset-brief`) → passes ciblées (`distill`, `clarify`, `layout`, `critique`) → QA (`frontend-qa`).
+
+Livrer **le produit et sa documentation/spec**. L'agent choisit ce qui sert l'utilisateur et garde le reste dans la spec : niveau 1, synthèse visible ; niveau 2, exploration au clic ; niveau 3, détail, calculs et preuves. Les informations nécessaires à la décision restent visibles. Choisir un chiffre, tableau, graphe ou schéma selon la question ; éviter les titres, sous-titres et paragraphes qui répètent le même message.
+
+Les mêmes fichiers de skills sont livrés à Claude Code et Codex. Les quatre passes Impeccable sont des adaptations autonomes, sans dépendance à son CLI. Frontend Design et UI UX Pro Max complètent `frontend-direction`, sans seconde skill qui ferait doublon.
+
+Exemples d'invocation : Claude Code `/dev:frontend-content` ou `/dev:distill` ; Codex `$frontend-content` ou `$distill` selon la découverte du plugin dans le client.

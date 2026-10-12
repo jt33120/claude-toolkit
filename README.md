@@ -45,6 +45,24 @@ Puis, dans chaque repo de code : `/stack-check`. Il déclare la stack exacte du 
 
 **Projet commun Claude + Codex** : utiliser la skill `agent-bridge` pour maintenir `AGENTS.md`, son import `@AGENTS.md` dans `CLAUDE.md`, les skills de projet et une passation. Son script protège les fichiers existants ; les liens locaux et les copies Windows doivent être synchronisés sur chaque poste. Dans une session Codex locale au terminal, `/import` reprend les éléments Claude Code choisis sans lancer Claude ; appeler réellement Claude Code reste un workflow local distinct.
 
+## Frontends : produit et spec
+
+Le plugin `dev` applique un parcours commun à Claude Code et Codex : `frontend-content` choisit l'information à afficher et conserve le contexte dans la spec ; `frontend-direction` traite la direction et le choix des visuels. Les passes `distill`, `clarify`, `critique` et `layout`, adaptées d'Impeccable, complètent le build et la QA. Frontend Design d'Anthropic et les références UI UX Pro Max sont intégrés à `frontend-direction`.
+
+Trois niveaux : **synthèse visible → exploration au clic → détail**. Les prix, erreurs, conséquences et hypothèses qui changent une décision restent visibles au bon moment. Un graphe doit répondre à une question ; une valeur ou un tableau peut être le meilleur choix.
+
+Pour inscrire la règle dans un projet partagé, ajouter à son `AGENTS.md` (importé par `CLAUDE.md` avec `@AGENTS.md`) :
+
+```markdown
+- Avant de construire ou modifier un écran, utiliser frontend-content.
+- Livrer le produit et sa spec ; choisir synthèse, exploration et détail.
+- Conserver le contexte dans la spec, supprimer le texte UI redondant et choisir
+  les visuels selon la question. Garder l'information décisive visible.
+- Vérifier le résultat avec les passes frontend utiles puis frontend-qa.
+```
+
+Voir le [flux frontend](plugins/dev/README.md#flux-frontend) et le modèle de spec dans la skill.
+
 ## Vérifier le toolkit
 
 ```bash

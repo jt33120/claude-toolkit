@@ -1,0 +1,4 @@
+interface:
+  display_name: "Layout"
+  short_description: "Structurer la lecture et adapter la densité UI"
+  default_prompt: "Utilise $layout pour revoir la composition et la lecture de cet écran."

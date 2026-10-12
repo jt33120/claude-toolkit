@@ -1,0 +1,4 @@
+interface:
+  display_name: "Distill"
+  short_description: "Alléger une interface en préservant les usages"
+  default_prompt: "Utilise $distill pour simplifier cet écran et garder le contexte dans sa spec."

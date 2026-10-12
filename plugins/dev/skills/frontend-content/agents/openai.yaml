@@ -1,0 +1,4 @@
+interface:
+  display_name: "Frontend content"
+  short_description: "Choisir le contenu du front et conserver la spec"
+  default_prompt: "Utilise $frontend-content pour concevoir ce front et sa spec avec trois niveaux de détail."

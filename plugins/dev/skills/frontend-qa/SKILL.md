@@ -20,6 +20,19 @@ Pick the levels the change needs (a small UI fix: 1 + 4; a release: all). Start 
 
 Missing tool → `stack-check` installs it (see [`frontend-mobile.md`](../stack-check/references/frontend-mobile.md)).
 
+## Information and disclosure checks
+
+Read [frontend-content](../frontend-content/SKILL.md) and the relevant UI spec for UI changes. Check the implemented contract alongside the affected levels above:
+
+- Identify the main result/task without opening secondary content; detect repeated labels, explanations, decorative cards and competing actions.
+- Open and close exploration/detail with keyboard and touch. Verify descriptive triggers, expanded states, focus order/return and discoverability without hover.
+- Keep price, consent, blockers, destructive consequences and qualifications that change the decision visible before acting.
+- Compare displayed numbers, chart scales/units, formulas and assumptions with their sources and spec. Check an accessible summary or data equivalent.
+- Confirm removed UI context still has a documented destination, and the current spec matches implemented strings, states and interactions.
+- For dense expert screens, verify necessary comparisons remain available together. For print/export in scope, verify the main message survives without interaction.
+
+Use `critique`, `distill`, `clarify` or `layout` for design/content findings. Record observed evidence and unresolved limits; do not claim a text-count check proves clarity.
+
 ## Bug report (output)
 
 | # | Severity (blocker/major/minor/cosmetic) | Screen / flow | Repro steps | Expected | Actual | Evidence (screenshot/trace path) | Suspected cause |

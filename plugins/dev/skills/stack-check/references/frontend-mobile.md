@@ -6,10 +6,12 @@ Install only what the declared stack needs (`front:` in `.claude/stack.yaml`: `w
 
 Playwright MCP, Chrome DevTools MCP, shadcn MCP — CHECK: each responds to one read call.
 
+Shared frontend skills for Claude Code and Codex: `frontend-content` (product + spec, three disclosure levels), `frontend-direction` (Anthropic Frontend Design principles and UI UX Pro Max catalogs), plus the focused Impeccable adaptations `distill`, `clarify`, `critique` and `layout`. Use them before/after implementation as needed; do not install duplicate copies of these skills.
+
 ## Web
 
 - Vendor skills: `npx skills add vercel-labs/agent-skills --skill react-best-practices --skill web-design-guidelines -a claude-code -y`
-- Design audit: `npx skills add pbakaus/impeccable -a claude-code -y` *(verify)*
+- The complete upstream Impeccable runtime is optional for features beyond the bundled adaptations. Install it only for a concrete need after checking skill-name conflicts; it is not a prerequisite for this toolkit's frontend flow.
 - E2E + accessibility: `npm i -D @playwright/test @axe-core/playwright && npx playwright install && npx playwright init-agents --loop=claude`
 
 ## iOS native (SwiftUI)

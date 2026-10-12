@@ -1,0 +1,4 @@
+interface:
+  display_name: "Critique"
+  short_description: "Évaluer la hiérarchie et prioriser les défauts UI"
+  default_prompt: "Utilise $critique pour examiner cette interface et prioriser les corrections."

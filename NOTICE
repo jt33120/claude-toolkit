@@ -3,6 +3,29 @@ claude-toolkit
 Certaines skills et agents sont adaptés de travaux tiers. Chaque fichier concerné
 l'indique dans un commentaire de provenance. Textes de licence : dossier licenses/.
 
+- pbakaus/impeccable — Apache License 2.0, Copyright 2025 Paul Bakaus
+  https://github.com/pbakaus/impeccable
+  Commit : 919dbeba520df760a157fe635be62faae88d58da
+  → dev : distill, clarify, critique, layout, adaptées des références de commandes.
+  Modifications : skills autonomes et courtes pour Claude Code/Codex, contrat
+  produit + spec, conservation des fonctionnalités et règles de projet ;
+  orchestration, détecteur et CLI upstream non inclus.
+  Licence : licenses/APACHE-2.0.txt
+
+- anthropics/skills, frontend-design — Apache License 2.0
+  https://github.com/anthropics/skills/tree/main/skills/frontend-design
+  Commit : dbd4588f9e1033efb41dad4bef2f7947c8993d44
+  → dev : frontend-direction, référence frontend-design.md adaptée et abrégée.
+  Modifications : règles du projet et contrat de contenu prioritaires ;
+  plan ASCII et confirmation obligatoire non repris.
+  Licence : licenses/APACHE-2.0.txt
+
+- nextlevelbuilder/ui-ux-pro-max-skill — MIT, Copyright (c) 2024 Next Level Builder
+  https://github.com/nextlevelbuilder/ui-ux-pro-max-skill
+  → dev : catalogues de frontend-direction, dont charts.csv ajouté sans modification.
+  Sources et commits : plugins/dev/skills/frontend-direction/references/ATTRIBUTION.md
+  Licence : plugins/dev/skills/frontend-direction/references/LICENSE-ui-ux-pro-max-skill
+
 - obra/superpowers — MIT, Copyright (c) 2025 Jesse Vincent
   https://github.com/obra/superpowers
   → dev: tdd, systematic-debugging, verification-before-completion

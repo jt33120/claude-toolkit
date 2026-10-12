@@ -1,0 +1,4 @@
+interface:
+  display_name: "Clarify"
+  short_description: "Rendre les textes UI courts et compréhensibles"
+  default_prompt: "Utilise $clarify pour réécrire les textes de cette interface."
