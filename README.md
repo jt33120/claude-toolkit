@@ -1,26 +1,173 @@
 # claude-toolkit
 
-Marketplace de plugins pour **Claude Code**, **Codex** et les surfaces qui acceptent les plugins portables. Chaque skill est maintenue une seule fois dans ce dépôt ; l'installation et les connecteurs restent propres à chaque environnement.
+Boîte à outils partagée pour **Claude Code et Codex** : des skills pour cadrer, développer, concevoir les interfaces, vérifier le résultat et gérer une activité. Chaque skill est maintenue une seule fois dans ce dépôt.
 
-## Plugins
+**Installer une fois dans chaque assistant → configurer chaque projet → travailler normalement à chaque session.**
 
-| Plugin | Usage | Où l'installer |
+## Comprendre les trois éléments
+
+| Élément | Rôle | Quand |
 |---|---|---|
-| [`core`](plugins/core) | Politique de fonctionnement transverse | Partout |
-| [`dev`](plugins/dev) | Dev, design, review, sécurité, infra, data | Repos de code |
-| [`business`](plugins/business) | Produit, sales, marketing, rédaction, contrats | Agents de gestion, Cowork |
+| Marketplace | Le catalogue des plugins de ce dépôt | À ajouter une fois dans chaque outil |
+| Plugin | Un paquet de skills et, éventuellement, de serveurs MCP | À installer et activer dans l'environnement utilisé |
+| Skill | Une procédure que l'IA charge pour une tâche précise | Choisie selon la demande ou appelée explicitement |
 
-## Installation
+L'IA découvre les noms et descriptions des skills, puis charge les instructions et références nécessaires à la tâche. Les règles à appliquer dans toutes les sessions d'un projet vivent dans ses fichiers d'instructions.
 
-**Claude Code** (une fois par machine)
+| Plugin | Usage | Choix de départ |
+|---|---|---|
+| [`core`](plugins/core/README.md) | Instructions communes, maintenance du toolkit, partage Claude/Codex | Installer pour les sessions de code |
+| [`dev`](plugins/dev/README.md) | Développement, frontend, QA, sécurité, infrastructure, vidéo | Installer avec `core` pour coder |
+| [`business`](plugins/business/README.md) | Produit, vente, marketing, finance, RH, contrats | Ajouter pour les usages de gestion et Cowork |
+
+## 1. Installer une fois
+
+### Claude Code
+
+Dans le **terminal de l'ordinateur**, exécuter :
 
 ```bash
+claude plugin marketplace add jt33120/claude-toolkit
+claude plugin install core@claude-toolkit --scope user
+claude plugin install dev@claude-toolkit --scope user
+```
+
+Le scope `user` rend les plugins disponibles dans les projets de cet utilisateur sur cet ordinateur. Ouvrir ensuite une nouvelle session Claude Code, ou utiliser `/reload-plugins` dans une session déjà ouverte.
+
+Pour installer depuis une **session interactive Claude Code**, utiliser les commandes suivantes, puis choisir l'installation pour l'utilisateur :
+
+```text
 /plugin marketplace add jt33120/claude-toolkit
 /plugin install core@claude-toolkit
 /plugin install dev@claude-toolkit
 ```
 
-Puis, dans chaque repo de code : `/stack-check`. Il déclare la stack exacte du projet, écrit et commite `.claude/settings.json` pour que toute session (locale ou cloud) retrouve le même outillage, et vérifie ensuite à chaque session que chaque brique reste connectée en lecture/écriture :
+Vérifier avec `claude plugin list` dans le terminal, ou `/plugin` dans la session. Taper `/` doit faire apparaître les skills avec leur préfixe, par exemple `/dev:frontend-content`.
+
+### Codex local et application de bureau
+
+Dans le **terminal**, ajouter le catalogue :
+
+```bash
+codex plugin marketplace add jt33120/claude-toolkit
+```
+
+Dans le catalogue **Plugins de l'application de bureau**, sélectionner la source `claude-toolkit`, puis installer et activer `core` et `dev`. Ouvrir une nouvelle discussion. Dans Codex CLI ou l'extension IDE, `/skills` ou `$` permet de retrouver les skills disponibles.
+
+Si le client utilisé ne propose pas cette installation, suivre le [guide agent-bridge](plugins/core/skills/agent-bridge/SKILL.md) : un clone local du toolkit peut exposer les mêmes skills à Codex, avec des liens ou des copies gérées.
+
+### Cowork et sessions cloud
+
+Dans Cowork, ajouter la marketplace depuis l'URL de ce dépôt, puis installer `core` et `business` selon le besoin.
+
+L'installation locale reste propre à l'environnement utilisé. Une session cloud a sa propre configuration ; les plugins installés sur l'ordinateur ne s'y transfèrent pas automatiquement. Pour Claude Code dans le navigateur, ne pas compter sur les seuls plugins locaux ou sur `.claude/settings.json` pour les charger.
+
+Le plugin `dev` fournit Playwright MCP, Chrome DevTools MCP et shadcn MCP. Leur exécution locale demande `npx`, les dépendances nécessaires et l'accès réseau. Configurer les comptes et autorisations des autres connecteurs dans chaque environnement.
+
+## 2. Configurer chaque projet une fois
+
+Dans le projet, demander à l'IA :
+
+> Utilise agent-bridge pour configurer les instructions communes à Claude Code et Codex. Conserve les fichiers existants. Inscris dans AGENTS.md l'obligation d'utiliser frontend-content avant de construire ou modifier un front, de livrer le produit et sa spec, puis de vérifier le résultat avec les skills frontend adaptées. Vérifie que les skills demandées sont disponibles dans cet environnement.
+
+Les règles communes vont dans **`AGENTS.md`**, à la racine du projet. Pour les partager avec Claude Code, ajouter cette ligne dans **`CLAUDE.md`**, en conservant ses autres instructions :
+
+```markdown
+@AGENTS.md
+```
+
+Le [guide agent-bridge](plugins/core/skills/agent-bridge/SKILL.md) détaille la migration, les liens/copies de skills et la configuration MCP. Garder les consignes propres à Claude dans `CLAUDE.md`. Versionner les instructions communes avec le projet pour les retrouver dans les prochaines sessions.
+
+Pour les interfaces, ajouter à `AGENTS.md` :
+
+```markdown
+- Avant de construire ou modifier un écran, utiliser frontend-content.
+- Livrer le produit et sa spec ; choisir synthèse, exploration et détail.
+- Conserver le contexte dans la spec et supprimer le texte UI redondant.
+- Choisir un chiffre, un tableau, un graphe ou un schéma selon la question.
+- Garder l'information décisive visible au moment de l'action.
+- Vérifier le résultat avec les passes frontend utiles puis frontend-qa.
+```
+
+Pour déclarer les outils du projet dans Claude Code, lancer **`/dev:stack-check`**. Au premier passage, cette skill recueille la stack et prépare les fichiers de configuration et outils adaptés. Elle présente les changements et demande l'accord avant le commit. Aux passages suivants, elle vérifie les connexions existantes.
+
+`stack-check` prépare principalement la configuration Claude. Utiliser `agent-bridge` pour le partage avec Codex et configurer ses connecteurs dans l'environnement où il s'exécute.
+
+## 3. Utiliser les skills à chaque session
+
+Après la configuration, donner la tâche normalement : « construis cet écran », « simplifie cette interface », « corrige ce bug ». Les skills peuvent être sélectionnées automatiquement quand leur description correspond à la demande.
+
+Pour demander explicitement une passe :
+
+| Besoin | Claude Code | Codex CLI / IDE |
+|---|---|---|
+| Partager les instructions Claude/Codex | `/core:agent-bridge` | `$agent-bridge` |
+| Vérifier la stack | `/dev:stack-check` | `$stack-check` |
+| Concevoir le contenu du front et sa spec | `/dev:frontend-content` | `$frontend-content` |
+| Choisir une direction visuelle | `/dev:frontend-direction` | `$frontend-direction` |
+| Alléger un écran | `/dev:distill` | `$distill` |
+| Clarifier les libellés et messages | `/dev:clarify` | `$clarify` |
+| Évaluer le design | `/dev:critique` | `$critique` |
+| Revoir la mise en page | `/dev:layout` | `$layout` |
+| Vérifier le frontend | `/dev:frontend-qa` | `$frontend-qa` |
+| Chercher la cause d'un bug | `/dev:systematic-debugging` | `$systematic-debugging` |
+
+Dans Codex, choisir la skill dans `/skills` ou le sélecteur `$` si son nom est présenté avec un namespace. Une skill absente du sélecteur doit d'abord être installée ou activée dans cet environnement.
+
+Exemple dans Claude Code :
+
+```text
+/dev:frontend-content Construis l'écran de comparaison des offres.
+Conserve les hypothèses dans la spec et rends les calculs accessibles au clic.
+```
+
+Exemple dans Codex :
+
+```text
+$distill Simplifie cet écran en conservant les fonctionnalités
+et le contexte dans sa spec.
+```
+
+Lors d'un changement d'agent en cours de travail, `agent-bridge` prévoit une courte passation dans `.agents/HANDOFF.md` : objectif, travail terminé, prochaine étape et questions ouvertes.
+
+## Parcours frontend : produit et spec
+
+`frontend-content` → `frontend-direction` → réalisation → passes ciblées (`distill`, `clarify`, `layout`, `critique`) → `frontend-qa`.
+
+Livrer **le produit utilisable et sa documentation/spec**. Trois niveaux : **synthèse visible → exploration au clic → détail**. Les prix, erreurs, conséquences et hypothèses qui changent la décision restent visibles au bon moment. Chaque visuel répond à une question.
+
+Les passes `distill`, `clarify`, `critique` et `layout` sont adaptées d'Impeccable. Frontend Design d'Anthropic et les références UI UX Pro Max, dont le choix des graphiques, sont intégrés à `frontend-direction`.
+
+Voir le [modèle de spec](plugins/dev/skills/frontend-content/references/content-spec-template.md), les [exemples de répartition du contenu](plugins/dev/skills/frontend-content/references/examples.md) et le [flux frontend détaillé](plugins/dev/README.md#flux-frontend).
+
+## Mettre à jour
+
+Dans le **terminal**, pour Claude Code :
+
+```bash
+claude plugin marketplace update claude-toolkit
+claude plugin update core@claude-toolkit
+claude plugin update dev@claude-toolkit
+```
+
+Mettre également à jour `business@claude-toolkit` s'il est installé. Dans une session, `/plugin marketplace update claude-toolkit` rafraîchit le catalogue ; l'onglet Installed de `/plugin` permet de mettre à jour chaque plugin avec **Update now**. Ouvrir une nouvelle session ou suivre l'indication de rechargement.
+
+Pour Codex, rafraîchir la marketplace :
+
+```bash
+codex plugin marketplace upgrade claude-toolkit
+```
+
+Puis vérifier et mettre à jour les plugins installés dans le catalogue de l'application. Pour un clone utilisé via `agent-bridge`, mettre à jour le clone et relancer le bridge si des copies gérées doivent être rafraîchies. Dans Cowork, mettre à jour le plugin depuis la marketplace.
+
+## Configuration avancée
+
+<details>
+<summary>Activer le toolkit et BMAD dans un projet Claude Code</summary>
+
+La configuration de projet complète l'installation dans cet environnement. Chaque poste doit disposer des plugins activés ; une session cloud utilise ses propres possibilités de chargement.
+
+Exemple à **fusionner** dans `.claude/settings.json` en conservant les réglages existants. Activer les entrées BMAD et security-guidance uniquement si ces outils sont utilisés et installés :
 
 ```json
 {
@@ -39,45 +186,39 @@ Puis, dans chaque repo de code : `/stack-check`. Il déclare la stack exacte du 
 }
 ```
 
-**Cowork** : ajouter la marketplace depuis l'URL du repo, puis installer `core` et, selon les besoins, `business`.
+Le plugin BMAD donne accès à ses agents et skills. Le projet doit aussi être initialisé : suivre la skill BMAD de setup ; `stack-check` vérifie d'abord si cette initialisation existe déjà.
 
-**Codex local / app de bureau** : ajouter le catalogue de ce dépôt avec `codex plugin marketplace add jt33120/claude-toolkit`, puis choisir `core`, `dev` et/ou `business` dans le catalogue. Un clone local expose également `.agents/plugins/marketplace.json` ; l'installation et l'activation s'effectuent dans le client. Les manifests portables `plugins/*/plugin.json` et le `mcp.json` de `dev` complètent les manifests Claude ; les serveurs MCP locaux exigent `npx`, leurs paquets et les permissions réseau adaptées. L'installation des fichiers sur une machine ne rend pas automatiquement le plugin disponible dans une conversation Work ou un agent cloud : l'y installer/configurer séparément.
+</details>
 
-**Projet commun Claude + Codex** : utiliser la skill `agent-bridge` pour maintenir `AGENTS.md`, son import `@AGENTS.md` dans `CLAUDE.md`, les skills de projet et une passation. Son script protège les fichiers existants ; les liens locaux et les copies Windows doivent être synchronisés sur chaque poste. Dans une session Codex locale au terminal, `/import` reprend les éléments Claude Code choisis sans lancer Claude ; appeler réellement Claude Code reste un workflow local distinct.
+Les catalogues de ce dépôt sont `.claude-plugin/marketplace.json` pour Claude et `.agents/plugins/marketplace.json` pour les hôtes compatibles. Les manifests portables `plugins/*/plugin.json` et le `mcp.json` de `dev` complètent les fichiers Claude.
 
-## Frontends : produit et spec
-
-Le plugin `dev` applique un parcours commun à Claude Code et Codex : `frontend-content` choisit l'information à afficher et conserve le contexte dans la spec ; `frontend-direction` traite la direction et le choix des visuels. Les passes `distill`, `clarify`, `critique` et `layout`, adaptées d'Impeccable, complètent le build et la QA. Frontend Design d'Anthropic et les références UI UX Pro Max sont intégrés à `frontend-direction`.
-
-Trois niveaux : **synthèse visible → exploration au clic → détail**. Les prix, erreurs, conséquences et hypothèses qui changent une décision restent visibles au bon moment. Un graphe doit répondre à une question ; une valeur ou un tableau peut être le meilleur choix.
-
-Pour inscrire la règle dans un projet partagé, ajouter à son `AGENTS.md` (importé par `CLAUDE.md` avec `@AGENTS.md`) :
-
-```markdown
-- Avant de construire ou modifier un écran, utiliser frontend-content.
-- Livrer le produit et sa spec ; choisir synthèse, exploration et détail.
-- Conserver le contexte dans la spec, supprimer le texte UI redondant et choisir
-  les visuels selon la question. Garder l'information décisive visible.
-- Vérifier le résultat avec les passes frontend utiles puis frontend-qa.
-```
-
-Voir le [flux frontend](plugins/dev/README.md#flux-frontend) et le modèle de spec dans la skill.
+Pour importer une configuration Claude dans Codex local, voir `agent-bridge` et la commande `/import` lorsque le client la propose. L'import reprend la configuration choisie ; appeler Claude Code depuis Codex reste une opération distincte.
 
 ## Vérifier le toolkit
+
+Depuis un clone du dépôt :
 
 ```bash
 python3 scripts/validate_toolkit.py
 python3 -m unittest discover -s tests
 ```
 
-Le contrôle léger valide manifests, noms et descriptions de skills, chemins de référence et CSV de styles. Il s'exécute aussi sur les PR via GitHub Actions. La table `styles.csv` contient actuellement les identifiants 1–58 et 71–89 ; les identifiants 59–70 sont absents de la source et ne sont pas inventés.
+Le contrôle valide les manifests, noms et descriptions de skills, chemins de référence et CSV de styles. Il s'exécute aussi sur les PR via GitHub Actions. La table `styles.csv` contient les identifiants 1–58 et 71–89 ; les identifiants 59–70 sont absents de la source et ne sont pas inventés.
 
-## Outils externes (non inclus, installés par projet)
+## Outils externes
 
-- [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) : workflow agile par agents (`npx bmad-method install`)
-- [Graft](https://github.com/trailhq/Graft) : graphe de connaissance du code (`npx @nanonets/graft init --agents claude --no-global`)
-- [public-apis](https://github.com/public-apis/public-apis) : catalogue d'APIs gratuites ou freemium, à consulter avant toute nouvelle dépendance ou service payant (rappel inscrit dans le `CLAUDE.md` des projets par `stack-check`)
+Ces outils se configurent par projet selon le besoin :
 
-## Crédits
+- [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) : cadrage et réalisation par agents ; suivre son workflow de setup.
+- [Graft](https://github.com/trailhq/Graft) : graphe de connaissance du code, initialisé par `stack-check` lorsqu'il fait partie du setup.
+- [public-apis](https://github.com/public-apis/public-apis) : catalogue à consulter avant d'ajouter une dépendance ou un service externe.
 
-Voir [NOTICE](NOTICE).
+## Documentation officielle et crédits
+
+- [Claude Code : installer et gérer les plugins](https://code.claude.com/docs/en/discover-plugins)
+- [Claude Code : utiliser les skills](https://code.claude.com/docs/en/skills)
+- [Claude Code : partager les instructions de projet](https://code.claude.com/docs/en/memory)
+- [OpenAI : plugins et marketplaces](https://developers.openai.com/plugins/build/plugins)
+- [OpenAI : utiliser et distribuer les skills](https://learn.chatgpt.com/docs/build-skills)
+
+Sources et licences des adaptations : [NOTICE](NOTICE).

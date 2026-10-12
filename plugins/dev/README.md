@@ -4,8 +4,8 @@ Développement avec BMAD (cadrage, stories, `bmad-build`, `bmad-code-review`) + 
 
 ## Démarrage
 
-1. Une fois par machine : `/plugin marketplace add jt33120/claude-toolkit`, `/plugin install core@claude-toolkit`, `/plugin install dev@claude-toolkit`.
-2. Par projet : `/stack-check` — déclare la stack, branche tout (première fois), puis vérifie à chaque session que chaque outil est connecté en lecture et écriture.
+1. Suivre le [guide de démarrage](../../README.md) : installation dans chaque assistant, instructions persistantes par projet, puis utilisation des skills.
+2. Dans Claude Code : `/dev:stack-check` déclare la stack au premier passage, puis vérifie les connexions. Utiliser `agent-bridge` pour le partage des instructions et skills avec Codex ; configurer les connecteurs dans chaque environnement.
 
 ## Skills
 
