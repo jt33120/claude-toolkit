@@ -106,6 +106,8 @@ vi.mock('ToolCatalog', () => ({
 vi.mock('MCPServerManager');
 ```
 
+**Mock only system boundaries**: external APIs (payment, e-mail, LLM), time, randomness, sometimes the database or file system. Never your own modules or internal collaborators. Make boundaries easy to replace: inject the client (`processPayment(order, paymentClient)`, not `new StripeClient()` inside), and expose one function per external operation (`api.getUser`, `api.createOrder`) rather than a generic `fetch(endpoint, options)` whose mock needs branching logic.
+
 **Make doubles specific.** When arguments, call counts, or ordering are
 part of the contract, assert them — a fake that accepts anything verifies
 nothing. Give each branch (success, error, malformed) its own fixture or

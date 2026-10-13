@@ -22,10 +22,11 @@ Développement avec BMAD (cadrage, stories, `bmad-build`, `bmad-code-review`) + 
 | asset-brief | Icônes open source ou prompt Codex prêt à coller, puis intégration (favicon, icônes d'app) |
 | frontend-qa | QA web/mobile en 8 niveaux, rapport de bugs normé |
 | backend-standards | Couche fine au-dessus des skills officielles FastAPI, Supabase, Neon |
-| tdd | Tests ciblés selon le risque, régression testée quand elle peut revenir |
-| systematic-debugging | Cause racine avant correctif, voie rapide pour les bugs évidents |
+| tdd | Tests ciblés selon le risque, tranches verticales à l'interface publique, mocks limités aux dépendances externes |
+| systematic-debugging | Cause racine avant correctif : boucle de reproduction rapide, 3–5 hypothèses classées, logs de debug balisés puis retirés ; voie rapide pour les bugs évidents |
 | verification-before-completion | Preuve avant de dire « fini » |
 | security | Plan et audit sécurité FastAPI/Supabase/Vercel/LLM |
+| wizard | Script bash interactif qui te guide dans les étapes manuelles (clés API, `.env`, secrets GitHub, migration ponctuelle) |
 | infra-deploy | Checklist de déploiement et incidents (Vercel, Railway, Supabase, Neon) |
 | video-remotion | Montage et rendu vidéo en code avec Remotion (reels 9:16, démos, sous-titres animés) ; B-roll libre de droits Pexels/Pixabay avec suivi des crédits ; plans IA par lot via l'abonnement Grok (robot local au rythme humain) |
 

@@ -111,6 +111,8 @@ Pour demander explicitement une passe :
 | Revoir la mise en page | `/dev:layout` | `$layout` |
 | Vérifier le frontend | `/dev:frontend-qa` | `$frontend-qa` |
 | Chercher la cause d'un bug | `/dev:systematic-debugging` | `$systematic-debugging` |
+| Mettre un plan à l'épreuve | `/core:grilling` | `$grilling` |
+| Guider une configuration manuelle (clés, secrets) | `/dev:wizard` | `$wizard` |
 
 Dans Codex, choisir la skill dans `/skills` ou le sélecteur `$` si son nom est présenté avec un namespace. Une skill absente du sélecteur doit d'abord être installée ou activée dans cet environnement.
 

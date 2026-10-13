@@ -49,3 +49,12 @@ l'indique dans un commentaire de provenance. Textes de licence : dossier license
   → business : toutes les skills sauf viability-audit (base originale du propriétaire du repo),
   fusionnées et adaptées au contexte français (sources listées en tête de chaque skill).
   Licence : licenses/APACHE-2.0.txt
+
+- mattpocock/skills — MIT, Copyright (c) 2026 Matt Pocock
+  https://github.com/mattpocock/skills
+  Commit : 49dd158d1076134a641b33efb035946536778336
+  → core : grilling (adaptée), toolkit-maintainer/references/writing-for-agents.md
+    (writing-for-agents + SKILL-MECHANICS fusionnés, texte inchangé).
+  → dev : wizard (skill adaptée, scripts/template.sh repris tel quel) ; idées de
+    diagnosing-bugs fusionnées dans systematic-debugging, de tdd/mocking dans tdd.
+  Licence : licenses/MIT-mattpocock-skills.txt
