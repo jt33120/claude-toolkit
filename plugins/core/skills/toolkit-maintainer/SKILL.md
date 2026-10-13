@@ -28,7 +28,7 @@ Source unique de vérité des skills : **github.com/jt33120/claude-toolkit**. Ch
 
 1. Reformuler le besoin et proposer : nom, plugin, création ou extension d'une skill existante.
 2. Pour une création, une suppression ou un renommage : faire valider par l'utilisateur avant d'écrire.
-3. Rédiger la skill (courte, instructions actionnables, pas de théorie).
+3. Rédiger la skill (courte, instructions actionnables, pas de théorie). Avant d'écrire ou de retoucher une skill, un `CLAUDE.md` ou un `AGENTS.md`, lire `references/writing-for-agents.md` : description qui déclenche, hiérarchie étapes/références, critères de fin, mots-clés porteurs, élagage.
 4. Lancer `python3 scripts/validate_toolkit.py` et les tests pertinents. Pousser en **un seul commit** via l'outil GitHub MCP (skill + README du plugin + les deux manifests + NOTICE si besoin). Message : `<plugin>: <verbe> <skill> — <pourquoi>`.
    Sans MCP GitHub : `git` si des identifiants sont disponibles, sinon livrer les fichiers et le chemin exact où les placer.
 5. Terminer par :

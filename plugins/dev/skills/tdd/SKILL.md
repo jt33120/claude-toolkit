@@ -9,7 +9,7 @@ description: >
   « implémente », « développe cette fonctionnalité », « quels tests lancer ».
 ---
 
-<!-- Adapted from obra/superpowers (MIT) — https://github.com/obra/superpowers — modified for jt33120/claude-toolkit -->
+<!-- Adapted from obra/superpowers (MIT) — https://github.com/obra/superpowers — and mattpocock/skills (MIT) — https://github.com/mattpocock/skills — modified for jt33120/claude-toolkit -->
 
 # Test-driven development
 
@@ -28,6 +28,10 @@ Choose the narrowest check that would catch a plausible regression. A test that 
 1. Write one focused test for the missing behavior or original bug. Run it; confirm the expected failure. If the environment prevents a meaningful red run, record that limitation.
 2. Implement the smallest fix. Run that test, then relevant nearby tests. Report any failures you find, including pre-existing ones.
 3. Refactor while keeping the focused tests green. Expand to integration or end-to-end checks when the change crosses boundaries or has significant risk.
+
+Work in **vertical slices**: one test → the minimal code that passes it → next test, each a tracer bullet informed by the last. Writing a batch of tests before any implementation tests imagined behaviour and locks in a structure too early.
+
+Test at a **seam**: the public interface where behaviour is observable without reaching inside (an API route, a service function, a component's rendered output). For a new module, name the seam(s) under test in one line before the first test.
 
 For an existing defect, `systematic-debugging` establishes the cause first. A regression test is especially useful when the bug could return unnoticed. If direct reproduction is more reliable than an automated test, record how the symptom was reproduced and verified.
 

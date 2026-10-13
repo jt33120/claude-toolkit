@@ -14,7 +14,7 @@ description: >
   deploy-time incidents with users affected in production (infra-deploy).
 ---
 
-<!-- Adapted from obra/superpowers (MIT) — https://github.com/obra/superpowers — modified for jt33120/claude-toolkit -->
+<!-- Adapted from obra/superpowers (MIT) — https://github.com/obra/superpowers — and mattpocock/skills, diagnosing-bugs (MIT) — https://github.com/mattpocock/skills — modified for jt33120/claude-toolkit -->
 
 # Systematic Debugging
 
@@ -90,11 +90,33 @@ You MUST complete each phase before proceeding to the next.
    - Read stack traces completely
    - Note line numbers, file paths, error codes
 
-2. **Reproduce Consistently**
-   - Can you trigger it reliably?
-   - What are the exact steps?
-   - Does it happen every time?
-   - If not reproducible → gather more data, don't guess
+2. **Build a tight feedback loop — the core of the investigation**
+
+   Get **one command** that goes **red** on this exact symptom, then shrink it.
+   Try, roughly in this order: a failing test at the seam that reaches the bug;
+   a curl/HTTP script against the dev server; a CLI run diffed against a known-good
+   output; a Playwright script asserting on DOM/console/network; a captured
+   request or event replayed in isolation; a throwaway harness calling the code
+   path directly; `git bisect run` between a good and a bad state; the same input
+   through old vs new version, diffed.
+
+   Tighten it: faster (narrow scope, skip unrelated setup), sharper (assert the
+   user's exact symptom, not "didn't crash"), deterministic (pin time, seed
+   randomness, isolate files and network). For an intermittent bug, raise the
+   reproduction rate (loop 100×, parallelise, add stress) until it is debuggable.
+
+   Done when you have already run that command and shown its (redacted) output,
+   and it is red-capable, deterministic, fast and runnable without a human. If no
+   loop is possible, say so, list what you tried, and ask for access to the
+   environment, a redacted artifact (HAR, logs) or permission for temporary
+   instrumentation — do not hypothesise without a loop.
+
+   **Minimise**: cut inputs, callers, config and steps one at a time, re-running
+   the loop, until every remaining element is needed to stay red. The minimal
+   repro becomes the regression test.
+
+   **Redact** every secret in commands, logs and artifacts you show
+   (`<REDACTED>`); keep credentials in environment variables.
 
 3. **Check Recent Changes**
    - What changed that could cause this?
@@ -179,15 +201,19 @@ You MUST complete each phase before proceeding to the next.
 
 **Scientific method:**
 
-1. **Form Single Hypothesis**
-   - State clearly: "I think X is the root cause because Y"
-   - Write it down
-   - Be specific, not vague
+1. **Rank 3–5 falsifiable hypotheses**
+   - Each states its prediction: "If X is the cause, changing Y makes the bug disappear"
+   - A hypothesis without a prediction is a hunch: sharpen or drop it
+   - Show the ranked list to the user before testing — they often know what changed; continue with your ranking if they are away
+   - Test them one at a time, most likely first
 
 2. **Test Minimally**
    - Make the SMALLEST possible change to test hypothesis
    - One variable at a time
    - Don't fix multiple things at once
+   - Prefer a debugger/REPL, then targeted logs at the boundaries that separate hypotheses; never "log everything and grep"
+   - Tag every temporary log with a unique prefix (e.g. `[DEBUG-a4f2]`) so cleanup is one grep
+   - Performance bug: measure a baseline first (timer, profiler, query plan), then bisect
 
 3. **Verify Before Continuing**
    - Did it work? Yes → Phase 4
@@ -217,10 +243,13 @@ You MUST complete each phase before proceeding to the next.
    - No "while I'm here" improvements
    - No bundled refactoring
 
-3. **Verify Fix**
+3. **Verify Fix and Clean Up**
    - Test passes now?
    - No other tests broken?
-   - Issue actually resolved?
+   - Issue actually resolved? Re-run the original (un-minimised) feedback loop
+   - All `[DEBUG-…]` logs and throwaway harnesses removed (grep the prefix)
+   - The confirmed cause is stated in the commit or PR message
+   - No seam where a regression test can reproduce the real bug pattern? Record it: that is an architecture finding
    - Use the `verification-before-completion` skill before claiming success
 
 4. **If Fix Doesn't Work**
@@ -293,10 +322,10 @@ If you catch yourself thinking:
 
 | Phase | Key Activities | Success Criteria |
 |-------|---------------|------------------|
-| **1. Root Cause** | Read errors, reproduce, check changes, gather evidence | Understand WHAT and WHY |
+| **1. Root Cause** | Read errors, build and minimise a red feedback loop, check changes, gather evidence | One fast command reproduces the exact symptom |
 | **2. Pattern** | Find working examples, compare | Identify differences |
-| **3. Hypothesis** | Form theory, test minimally | Confirmed or new hypothesis |
-| **4. Implementation** | Create test, fix, verify | Bug resolved, tests pass |
+| **3. Hypothesis** | Rank 3–5 falsifiable theories, test one at a time | Confirmed or new hypothesis |
+| **4. Implementation** | Create test, fix, verify, remove debug logs | Bug resolved, tests pass, cause in commit message |
 
 ## When Process Reveals "No Root Cause"
 
