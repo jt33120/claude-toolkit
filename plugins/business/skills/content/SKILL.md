@@ -20,7 +20,7 @@ All customer-facing copy this skill drafts must go through the core skills **wri
 
 1. **Strategy** — "what should I post/promote this month?" Look at what is actually selling or getting signups (exports from Stripe/analytics, or a pasted summary) and produce a 30-day brief: push hard / hold steady / reposition, with the reasoning. 200-400 words, no calendar yet.
 2. **Calendar** — turn an approved strategy (or a bare request) into a rolling editorial calendar: date, channel, topic, status. Hold it between runs — extend the horizon, do not rebuild it from scratch each time.
-3. **Draft** — write one piece: blog post, LinkedIn/X/Instagram post, newsletter, landing page copy, press release, case study, or a SaaS launch announcement. See `references/content-templates.md` for structure by type.
+3. **Draft** — write one piece: blog post, LinkedIn/X/Instagram post, newsletter, landing page copy, press release, case study, or a SaaS launch announcement. See `references/content-templates.md` for structure by type. When the piece comes from a watch report (security or AI news), follow `references/veille-post.md` instead.
 4. **Campaign** — a full launch or push: objective, audience, key messages, channel mix, week-by-week calendar, content pieces needed, budget split, success metrics, risks. See `references/content-templates.md` for the campaign brief structure and channel/budget benchmarks.
 
 ## Step 1 — Ground the ask
@@ -62,3 +62,4 @@ Present drafts and the calendar inline, clearly formatted, ready to paste. Never
 ## Reference files
 
 - `references/content-templates.md` — structure by content type, headline/hook formulas, campaign brief structure, channel and budget benchmarks, cadence guidance.
+- `references/veille-post.md` — watch-based post, actions-first carousel, video and newsletter built from a watch report.

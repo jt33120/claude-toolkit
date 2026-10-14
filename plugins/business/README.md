@@ -6,6 +6,9 @@ Gestion d'entreprise et croissance SaaS, pour Cowork et les agents de gestion. L
 |---|---|---|
 | Stratégie | viability-audit | Verdict de viabilité d'un projet (portes éliminatoires, modules code, marché, red team) |
 | | market-research | Concurrence, marché, synthèse d'entretiens |
+| Veille | veille-collect | Collecte de veille cyber et IA : registre de sources, recherches par thème, LinkedIn en lecture, signaux vérifiés ; veille concurrentielle et normative |
+| | veille-report | Filtre et critique des signaux, rapport de veille quotidien et synthèse du vendredi |
+| | opportunity-brief | Fiche go / no-go d'une opportunité issue de la veille, puis epics et stories BMad après validation humaine |
 | Vente | prospection | Ciblage, messages, séquences de relance, objections |
 | | client-meeting | Avant (recherche, préparation) et après (compte rendu, suivi) un rendez-vous |
 | | proposal | Propositions, devis (TJM, forfait, TVA), POC techniques |
@@ -14,7 +17,7 @@ Gestion d'entreprise et croissance SaaS, pour Cowork et les agents de gestion. L
 | Delivery client | client-brief | Cahier des charges côté client, passage vers BMAD |
 | | client-report | Reporting client, notes Codir, synthèses anonymisées |
 | | process-mapping | Cartographie de processus et opportunités d'automatisation |
-| Marketing | content | Calendrier éditorial, LinkedIn, blog, newsletter, lancements |
+| Marketing | content | Calendrier éditorial, LinkedIn, blog, newsletter, lancements ; posts, carrousels et vidéos tirés d'un rapport de veille |
 | | seo-visibility | SEO et visibilité dans les réponses des IA |
 | | paid-ads | Google, Meta, LinkedIn, TikTok Ads, sans modification sans accord |
 | | growth-metrics | MRR, churn, activation, CAC, LTV, funnel, marque et avis |
