@@ -62,6 +62,17 @@ Dans Cowork, ajouter la marketplace depuis l'URL de ce dépôt, puis installer `
 
 L'installation locale reste propre à l'environnement utilisé. Une session cloud a sa propre configuration ; les plugins installés sur l'ordinateur ne s'y transfèrent pas automatiquement. Pour Claude Code dans le navigateur, ne pas compter sur les seuls plugins locaux ou sur `.claude/settings.json` pour les charger.
 
+**Claude Code sur le web (sessions cloud)** : coller ce script dans le **Setup script** de l'environnement (menu de l'environnement cloud dans la barre de titre d'une session → Edit). Il s'exécute au démarrage de chaque nouvelle session, avant Claude Code, pour tous les dépôts de cet environnement ; il peut être relancé sans erreur.
+
+```bash
+claude plugin marketplace add jt33120/claude-toolkit >/dev/null 2>&1 || claude plugin marketplace update claude-toolkit
+for p in core dev business; do
+  claude plugin install "$p@claude-toolkit" --scope user || true
+done
+```
+
+Retirer `business` de la boucle si l'environnement ne sert qu'au code. Vérifier dans une nouvelle session : `/` doit lister `/dev:…` et `/core:…`.
+
 Le plugin `dev` fournit Playwright MCP, Chrome DevTools MCP et shadcn MCP. Leur exécution locale demande `npx`, les dépendances nécessaires et l'accès réseau. Configurer les comptes et autorisations des autres connecteurs dans chaque environnement.
 
 ## 2. Configurer chaque projet une fois
