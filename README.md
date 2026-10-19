@@ -42,7 +42,16 @@ Pour installer depuis une **session interactive Claude Code**, utiliser les comm
 /plugin install dev@claude-toolkit
 ```
 
-Vérifier avec `claude plugin list` dans le terminal, ou `/plugin` dans la session. Taper `/` doit faire apparaître les skills avec leur préfixe, par exemple `/dev:frontend-content`.
+**Windows avec l'extension VS Code seule** : `/plugin` n'est pas disponible dans l'extension et `claude` n'est souvent pas dans le PATH. L'extension embarque le programme en ligne de commande : l'appeler par son chemin complet, dans Git Bash ou PowerShell (adapter le numéro de version du dossier).
+
+```bash
+CLAUDE=~/.vscode/extensions/anthropic.claude-code-*-win32-x64/resources/native-binary/claude.exe
+$CLAUDE plugin marketplace add jt33120/claude-toolkit
+$CLAUDE plugin install core@claude-toolkit --scope user
+$CLAUDE plugin install dev@claude-toolkit --scope user
+```
+
+Puis recharger la fenêtre VS Code. Vérifier avec `claude plugin list` dans le terminal, ou `/plugin` dans la session. Taper `/` doit faire apparaître les skills avec leur préfixe, par exemple `/dev:frontend-content`.
 
 ### Codex local et application de bureau
 
@@ -62,7 +71,18 @@ Dans Cowork, ajouter la marketplace depuis l'URL de ce dépôt, puis installer `
 
 L'installation locale reste propre à l'environnement utilisé. Une session cloud a sa propre configuration ; les plugins installés sur l'ordinateur ne s'y transfèrent pas automatiquement. Pour Claude Code dans le navigateur, ne pas compter sur les seuls plugins locaux ou sur `.claude/settings.json` pour les charger.
 
-Le plugin `dev` fournit Playwright MCP, Chrome DevTools MCP et shadcn MCP. Leur exécution locale demande `npx`, les dépendances nécessaires et l'accès réseau. Configurer les comptes et autorisations des autres connecteurs dans chaque environnement.
+**Claude Code sur le web (sessions cloud)** : coller ce script dans le **Setup script** de l'environnement (menu de l'environnement cloud dans la barre de titre d'une session → Edit). Il s'exécute au démarrage de chaque nouvelle session, avant Claude Code, pour tous les dépôts de cet environnement ; il peut être relancé sans erreur.
+
+```bash
+claude plugin marketplace add jt33120/claude-toolkit >/dev/null 2>&1 || claude plugin marketplace update claude-toolkit
+for p in core dev business; do
+  claude plugin install "$p@claude-toolkit" --scope user || true
+done
+```
+
+Retirer `business` de la boucle si l'environnement ne sert qu'au code. Vérifier dans une nouvelle session : `/` doit lister `/dev:…` et `/core:…`.
+
+Le plugin `dev` fournit Playwright MCP, Chrome DevTools MCP et shadcn MCP. Leur exécution locale demande `npx`, les dépendances nécessaires et l'accès réseau. Si un serveur Playwright MCP est déjà configuré sur le poste (navigateur précis, profil), les deux coexistent ; désactiver celui du plugin avec `/mcp` s'il ouvre le mauvais navigateur. Derrière un proxy d'entreprise qui bloque `npx`, ces serveurs ne démarrent pas, sans effet sur les skills. Configurer les comptes et autorisations des autres connecteurs dans chaque environnement.
 
 ## 2. Configurer chaque projet une fois
 
@@ -111,6 +131,7 @@ Pour demander explicitement une passe :
 | Revoir la mise en page | `/dev:layout` | `$layout` |
 | Vérifier le frontend | `/dev:frontend-qa` | `$frontend-qa` |
 | Chercher la cause d'un bug | `/dev:systematic-debugging` | `$systematic-debugging` |
+| Faire ou mettre à jour un schéma | `/dev:diagrams` | `$diagrams` |
 | Mettre un plan à l'épreuve | `/core:grilling` | `$grilling` |
 | Guider une configuration manuelle (clés, secrets) | `/dev:wizard` | `$wizard` |
 
