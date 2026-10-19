@@ -42,7 +42,16 @@ Pour installer depuis une **session interactive Claude Code**, utiliser les comm
 /plugin install dev@claude-toolkit
 ```
 
-Vérifier avec `claude plugin list` dans le terminal, ou `/plugin` dans la session. Taper `/` doit faire apparaître les skills avec leur préfixe, par exemple `/dev:frontend-content`.
+**Windows avec l'extension VS Code seule** : `/plugin` n'est pas disponible dans l'extension et `claude` n'est souvent pas dans le PATH. L'extension embarque le programme en ligne de commande : l'appeler par son chemin complet, dans Git Bash ou PowerShell (adapter le numéro de version du dossier).
+
+```bash
+CLAUDE=~/.vscode/extensions/anthropic.claude-code-*-win32-x64/resources/native-binary/claude.exe
+$CLAUDE plugin marketplace add jt33120/claude-toolkit
+$CLAUDE plugin install core@claude-toolkit --scope user
+$CLAUDE plugin install dev@claude-toolkit --scope user
+```
+
+Puis recharger la fenêtre VS Code. Vérifier avec `claude plugin list` dans le terminal, ou `/plugin` dans la session. Taper `/` doit faire apparaître les skills avec leur préfixe, par exemple `/dev:frontend-content`.
 
 ### Codex local et application de bureau
 
@@ -73,7 +82,7 @@ done
 
 Retirer `business` de la boucle si l'environnement ne sert qu'au code. Vérifier dans une nouvelle session : `/` doit lister `/dev:…` et `/core:…`.
 
-Le plugin `dev` fournit Playwright MCP, Chrome DevTools MCP et shadcn MCP. Leur exécution locale demande `npx`, les dépendances nécessaires et l'accès réseau. Configurer les comptes et autorisations des autres connecteurs dans chaque environnement.
+Le plugin `dev` fournit Playwright MCP, Chrome DevTools MCP et shadcn MCP. Leur exécution locale demande `npx`, les dépendances nécessaires et l'accès réseau. Si un serveur Playwright MCP est déjà configuré sur le poste (navigateur précis, profil), les deux coexistent ; désactiver celui du plugin avec `/mcp` s'il ouvre le mauvais navigateur. Derrière un proxy d'entreprise qui bloque `npx`, ces serveurs ne démarrent pas, sans effet sur les skills. Configurer les comptes et autorisations des autres connecteurs dans chaque environnement.
 
 ## 2. Configurer chaque projet une fois
 
