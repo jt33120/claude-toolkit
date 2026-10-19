@@ -22,6 +22,7 @@ Développement avec BMAD (cadrage, stories, `bmad-build`, `bmad-code-review`) + 
 | asset-brief | Icônes open source ou prompt Codex prêt à coller, puis intégration (favicon, icônes d'app) |
 | frontend-qa | QA web/mobile en 8 niveaux, rapport de bugs normé |
 | backend-standards | Couche fine au-dessus des skills officielles FastAPI, Supabase, Neon |
+| diagrams | Schémas en code versionnés : Mermaid par défaut (rendu natif GitHub), D2 pour les livrables soignés, LikeC4 pour un modèle C4 interrogeable ; validation avant commit |
 | tdd | Tests ciblés selon le risque, tranches verticales à l'interface publique, mocks limités aux dépendances externes |
 | systematic-debugging | Cause racine avant correctif : boucle de reproduction rapide, 3–5 hypothèses classées, logs de debug balisés puis retirés ; voie rapide pour les bugs évidents |
 | verification-before-completion | Preuve avant de dire « fini » |
