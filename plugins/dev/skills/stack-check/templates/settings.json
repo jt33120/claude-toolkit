@@ -1,7 +1,8 @@
 {
   "extraKnownMarketplaces": {
     "claude-toolkit": {
-      "source": { "source": "github", "repo": "jt33120/claude-toolkit" }
+      "source": { "source": "github", "repo": "jt33120/claude-toolkit" },
+      "autoUpdate": true
     },
     "bmad": {
       "source": { "source": "github", "repo": "bmad-code-org/bmad-plugins" }

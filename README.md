@@ -77,12 +77,32 @@ L'installation locale reste propre à l'environnement utilisé. Une session clou
 claude plugin marketplace add jt33120/claude-toolkit >/dev/null 2>&1 || claude plugin marketplace update claude-toolkit
 for p in core dev business; do
   claude plugin install "$p@claude-toolkit" --scope user || true
+  claude plugin update "$p@claude-toolkit" || true
 done
 ```
 
 Retirer `business` de la boucle si l'environnement ne sert qu'au code. Vérifier dans une nouvelle session : `/` doit lister `/dev:…` et `/core:…`.
 
 Le plugin `dev` fournit Playwright MCP, Chrome DevTools MCP et shadcn MCP. Leur exécution locale demande `npx`, les dépendances nécessaires et l'accès réseau. Si un serveur Playwright MCP est déjà configuré sur le poste (navigateur précis, profil), les deux coexistent ; désactiver celui du plugin avec `/mcp` s'il ouvre le mauvais navigateur. Derrière un proxy d'entreprise qui bloque `npx`, ces serveurs ne démarrent pas, sans effet sur les skills. Configurer les comptes et autorisations des autres connecteurs dans chaque environnement.
+
+### Recevoir les mises à jour automatiquement
+
+Rien à réinstaller : chaque nouvelle version publiée (numéro de version du plugin augmenté) arrive par mise à jour. Pour une marketplace tierce comme celle-ci, la mise à jour automatique est désactivée par défaut ; l'activer une fois par poste dans les réglages utilisateur (`~/.claude/settings.json`, sous Windows `%USERPROFILE%\.claude\settings.json`) en ajoutant `autoUpdate` à l'entrée existante :
+
+```json
+{
+  "extraKnownMarketplaces": {
+    "claude-toolkit": {
+      "source": { "source": "github", "repo": "jt33120/claude-toolkit" },
+      "autoUpdate": true
+    }
+  }
+}
+```
+
+Claude Code rafraîchit alors la marketplace et met à jour les plugins en arrière-plan après le démarrage ; la nouvelle version est chargée à la session suivante (ou après `/reload-plugins`). Équivalent dans le terminal : `/plugin` → Marketplaces → claude-toolkit → Enable auto-update. Mise à jour manuelle immédiate : `claude plugin marketplace update claude-toolkit` puis `claude plugin update dev@claude-toolkit`.
+
+Les sessions cloud se mettent à jour par le script de setup ci-dessus, à chaque démarrage. Codex et Cowork ont leur propre gestion des mises à jour dans leur catalogue de plugins.
 
 ## 2. Configurer chaque projet une fois
 
