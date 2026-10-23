@@ -12,12 +12,12 @@ Demande de Julian (xSOM, 23/10/2026) : transformer la news en accroche commercia
 ## Règles
 
 - Uniquement des offres publiées sur le site de l'entreprise, avec le nom exact du site (on peut préciser le pôle : « Audit réseaux & cybersécurité »). Ne jamais inventer une offre, un prix, un client ou un chiffre. La ligne sous le nom est rédigée pour la news : elle ne doit rien promettre que la page de l'offre ne dise pas.
-- Pour xSOM, il n'existe pas de base « catalogue » dans Notion (vérifié le 23/10/2026 : la base Projects suit des projets, Opportunités des évolutions de produit). La spécification Notion « Système agentique de veille et de produit » § 1 renvoie à l'organisation GitHub `xsom-consulting`, où les sources sont :
+- Pour xSOM, la liste qui fait foi est la base Notion **« Offres xSOM »** (`collection://6952124e-c41e-4a88-9934-e67f9a52172f`, page « xSOM · Veille & Produit »), créée le 23/10/2026 et vérifiée chaque lundi par l'agent Sources. Ne prendre que les lignes cochées « Proposable », sous le nom de la colonne Offre ; « Ce que dit le site » donne la formulation d'un carton quand elle diffère, « Quand la proposer » aide à choisir. Ne jamais prendre une ligne de Projects ou d'Opportunités pour une offre. La base est vérifiée contre ces sources de l'organisation GitHub `xsom-consulting` :
   - `infra-xsom_website` (`index.html`, `expertises.html`) → www.xsom.fr : pôle **Réseaux & cybersécurité** (Architecture réseau · DORA · NIS2 · LPM · PCA / PRA · Audit), pôle **Infrastructures IA & cloud HPC**, pôle **Données & MLOps** ;
   - `ai-website` → ai.xsom.fr, fleet.xsom.fr, guard.xsom.fr : **xSOM Fleet** (programme pilote), **Secret Guard** (open source, Apache-2.0), conseil IA sur mesure ;
   - `.github/profile/README.md` : Fleet et Secret Guard comme produits publics.
-  - Pas encore proposables : **Model Advisor** (dépôt vide au 23/10/2026), **AI Guard** (remplacé par Fleet), projets internes (personal-agent, xsom-agents, veille-collect).
-- Relire ces pages avant chaque carton (elles changent) ; un produit absent du site n'est pas proposé.
+  - Pas encore proposables : **Model Advisor** (dépôt vide au 23/10/2026), **AI Guard** (remplacé par Fleet), **xSOM Personal Agent** (produit ou outil interne, à trancher), outils internes (xsom-agents, veille-collect).
+- Ouvrir la page publique de chaque offre retenue avant le rendu (elle peut avoir changé depuis lundi) ; un produit absent du site n'est pas proposé.
 - Le lien avec la news doit être direct : l'offre prévient ou résout le problème montré. Si aucune offre ne s'y rattache honnêtement, mettre une seule ligne générale (« Un système critique à faire évoluer ? Parlons-en. ») plutôt que de forcer.
 - Un produit en développement est présenté comme tel (« programme pilote »).
 - Jamais dit par la voix, jamais dans le corps de la narration.
