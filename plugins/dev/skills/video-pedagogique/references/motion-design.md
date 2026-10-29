@@ -67,6 +67,9 @@ Comme le 4:5 en gardant libres les 250 px du haut et les 20 % du bas, ainsi que 
 | Liste qui se nettoie | Liste illustrative d'applis : une ligne se débranche (prise qui s'ouvre) et se replie ; les barres de droits rétrécissent | « débranche », « droits » |
 | Interrupteur | Interrupteur vert → coupé, avec la consigne | « coupées », « consignes » |
 | Question finale | Grande clé qui se balance + question serif | « qui », dernier mot |
+| Vrai navigateur (cours) | Fenêtre Chrome recréée : adresse tapée, onglet qui charge, vraie page d'erreur | le verbe (« tape »), le symptôme |
+| Écran partagé paradoxe (cours) | À gauche le symptôme, à droite le terminal qui dit que tout va bien | « pourtant », « aussi » |
+| Chaîne de maillons (cours) | Cases « ? » qui se remplissent une à une au nom de chaque maillon, la requête qui avance ; la chaîne reste ensuite en petit en haut (repère) | le nom de chaque maillon |
 | Schéma qui se construit (cours) | Boîtes reliées qui apparaissent une à une, un paquet qui circule sur les liens | le nom de chaque maillon |
 | Terminal (cours) | Commande tapée lettre à lettre, puis sortie ligne à ligne | le verbe de l'action (« tape », « vérifie ») |
 | Question à silence (cours) | Question en grand, anneau de compte à rebours pendant le silence, révélation | fin de la question → début de la réponse |
@@ -74,6 +77,10 @@ Comme le 4:5 en gardant libres les 250 px du haut et les 20 % du bas, ainsi que 
 | Barré (piège) | Le mauvais geste affiché puis barré en rouge, le bon geste dessous | le mot du piège |
 
 Repères constants : le chapitre en haut à droite, une barre de progression, les mêmes symboles d'une scène et d'une vidéo à l'autre.
+
+## Texture CRT (optionnelle)
+
+Lignes de balayage, halo, couleurs légèrement décalées, grain, bombé de l'écran, ajoutés après le rendu par `scripts/crt.py` (jamais dans le navigateur). Cours : `--soft`, 2 ou 3 glitchs (`--glitch T:D`) sur les mots d'erreur ou de danger. Plus de glitchs ou `--micro` seulement pour un format court et nerveux.
 
 ## Vrais visuels
 
