@@ -10,7 +10,9 @@ Deux parties : **le socle**, à cocher pour toute vidéo, et **le type**, qui aj
 - [ ] Charte écrite (palette, 3 polices et leur rôle, transitions, symboles récurrents).
 - [ ] Chaque affirmation relue à sa source primaire ; nuances gardées (« selon », « aligné sur »).
 - [ ] Script dans la fourchette de mots [mots] ; chaque phrase dicible à voix haute ; aucun mot de la liste des interdits.
-- [ ] Plan de scènes : pour chaque scène, mots déclencheurs → visuel.
+- [ ] Tableau de séquences ([sequences.md](sequences.md)) : chaque ligne a un message en une phrase, une difficulté, une représentation justifiée et ce que fait le spectateur ; puis les mots déclencheurs.
+- [ ] Aucune image choisie pour un mot plutôt que pour une idée ; aucun schéma montré avant d'en avoir besoin ; un mème au plus par minute, sur un moment d'émotion.
+- [ ] Vidéo de plus de 2 min ou nouveau style : maquette animée avec voix provisoire regardée par l'utilisateur.
 - [ ] Validation de l'utilisateur reçue (script + plan), ou mode autonome annoncé.
 - [ ] Crédits estimés (≈ 1 par caractère) et solde vérifié.
 
@@ -28,6 +30,7 @@ Deux parties : **le socle**, à cocher pour toute vidéo, et **le type**, qui aj
   - aucun écran vide plus de 1,5 s, caméra jamais figée ;
   - aucun texte coupé ou qui sort du cadre, aucun chevauchement involontaire ;
   - un seul point focal ; tailles lisibles sur téléphone (≥ 20 px en 1080 de large) ;
+  - chaque passage du tableau se reconnaît sur la planche (message visible sans le son) ; le repère persistant est à jour ;
   - « ILLUSTRATION » sur tout ce qui est inventé, source sous chaque capture.
 
 ### Livraison

@@ -30,7 +30,7 @@ Développement avec BMAD (cadrage, stories, `bmad-build`, `bmad-code-review`) + 
 | wizard | Script bash interactif qui te guide dans les étapes manuelles (clés API, `.env`, secrets GitHub, migration ponctuelle) |
 | infra-deploy | Checklist de déploiement et incidents (Vercel, Railway, Supabase, Neon) |
 | video-remotion | Montage et rendu vidéo en code avec Remotion (reels 9:16, démos, sous-titres animés) ; rendu fiable des vidéos longues (effets interdits, réparation des images corrompues, assemblage des scènes par ré-encodage) ; B-roll libre de droits Pexels/Pixabay avec suivi des crédits ; plans IA par lot via l'abonnement Grok (robot local au rythme humain) |
-| video-pedagogique | Vidéo en motion design avec voix off : socle commun (8 règles, déroulé avec validation avant la voix, checklist) + fiche de paramètres par type (news-reel et cours validés, démo produit et pub à valider) ; voix ElevenLabs, typographie cinétique calée au mot, bruitages et musique de fond synthétisés, contrôle qualité (mots déclencheurs, planches), carton d'offre muet |
+| video-pedagogique | Vidéo en motion design avec voix off : méthode « message d'abord » (tableau de séquences, maquette avec voix provisoire), socle commun (9 règles, déroulé avec validation avant la voix, checklist) + fiche de paramètres par type (news-reel et cours validés, démo produit et pub à valider) ; voix ElevenLabs, typographie cinétique calée au mot, bruitages et musique de fond synthétisés, texture CRT après rendu, contrôle qualité (mots déclencheurs, planches), carton d'offre muet |
 
 ## Agents de revue (sur demande ou via un workflow de revue)
 

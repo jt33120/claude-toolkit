@@ -13,7 +13,8 @@ La partie variable d'une vidéo. Copier le gabarit dans le projet (`video.md` ou
 - Durée cible : <…> · mots : <…> · scènes : <…>
 - Structure : <gabarit du type, adapté>
 - Rythme : micro-changement toutes les <…> s · nouvelle scène toutes les <…> s · relance toutes les <…> min
-- Références : <3 à 5 liens ou fichiers> · charte : <palette, polices, symboles>
+- Références : <3 à 5 liens ou fichiers> · charte : <palette, polices, symboles> · texture : <aucune / CRT discret / CRT marqué>
+- Tableau de séquences : <chemin du fichier> · maquette : <oui / non>
 - Voix : <voix, modèle, vitesse, ton> · génération : <une seule / par scène> · crédits estimés : <…> (solde : <…>)
 - Sous-titres : <oui mot à mot / non, mots-clés seulement>
 - Son : bruitages <oui/non> · musique <ambiance calme/clair/tension, niveau, coupée où ?> · sortie <LUFS>
