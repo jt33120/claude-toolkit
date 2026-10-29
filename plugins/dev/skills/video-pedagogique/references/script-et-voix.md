@@ -1,17 +1,6 @@
 # Script et voix
 
-## Gabarit (≈ 145 mots, 50 à 55 s)
-
-| Temps | Durée | Rôle | Contrainte |
-|---|---|---|---|
-| Accroche | 0–3 s | Le paradoxe ou la perte | 8 à 12 mots, écrit en entier à l'écran dès l'image 1 |
-| Qui / quoi | 3–13 s | Les acteurs, la source dite | « Selon <source>, … » ; un nom propre par phrase |
-| Échelle | 13–19 s | Un chiffre qui parle | Nombre en toutes lettres pour la voix ; compteur à l'écran |
-| Retournement | 19–28 s | « La plupart… Mais… » | La conséquence concrète, avec une durée ou un montant |
-| Leçon | 28–34 s | Une phrase à retenir | « Retenez ça. » + la phrase ; écran noir, musique coupée |
-| Réflexe | 34–49 s | Qui fait quoi, cette semaine | Une action principale, deux précisions au plus |
-| Question | 49–52 s | Renvoyer au spectateur | Concrète, sans morale |
-| Offre (muette) | +5–6 s | Ce que l'entreprise propose | Voir carton-offre.md |
+Commun à tous les types. Le gabarit de script propre à chaque type est dans `types/`.
 
 ## Écrire pour l'oreille
 
@@ -22,20 +11,6 @@
 - Les deux-points et les virgules en série créent des pauses : les garder seulement là où une pause sert.
 - Interdits : « Dans un monde où », « À l'ère de », question rhétorique en ouverture, crucial, essentiel, incontournable, majeur, sans précédent, révolutionnaire, « Ce n'est pas X, c'est Y », « n'est plus une option », conclusions moralisatrices, point d'exclamation.
 - Test : chaque phrase pourrait-elle être dite à voix haute à un collègue ? Sinon, réécrire.
-
-## Exemple validé (23/10/2026, Storm-0940 / ConnectWise, 150 mots, 52 s)
-
-```
-[low, steady voice, restrained urgency] Pas besoin de votre mot de passe. Ils avaient DÉJÀ la clé.
-Selon Microsoft, des pirates alignés sur l'État chinois prennent la main sur des applis de ConnectWise. Un outil de sauvegarde… déjà autorisé chez ses clients.
-[dramatically] Et là, ils lâchent des agents IA. Presque sans humain. Plus de deux mille deux cent cinquante clients visés.
-La plupart ont tenu. Mais chez certains… en moins de TROIS heures, les agents étaient administrateurs. Sans taper un seul mot de passe.
-Retenez ça. Les pirates ne visent plus seulement vos mots de passe. Ils visent les applis à qui vous avez déjà dit OUI.
-[warmly] Votre réflexe : demandez à votre prestataire la liste des applis branchées sur votre Microsoft 365. Ce qui ne sert plus, on débranche. Le reste garde juste les droits nécessaires. Client ConnectWise ? Connexions coupées, jusqu'aux consignes de l'éditeur.
-Alors… qui a les clés de votre messagerie ?
-```
-
-La version refusée le même jour disait la même chose en liste (« Selon Microsoft… Ce service sauvegarde… Alors, que faire ? Demandez… ») : même information, aucune tension.
 
 ## Voix ElevenLabs
 
@@ -51,7 +26,8 @@ La version refusée le même jour disait la même chose en liste (« Selon Micro
 - Capitales : un mot par phrase au plus, 2 à 4 sur le script, sur le mot qui porte la phrase (DÉJÀ, TROIS, OUI).
 - Points de suspension « … » : 2 ou 3 sur le script, pour une pause qui crée l'attente.
 - Pas de SSML (`<break>` est ignoré par v3/v4).
-- Une seule génération pour tout le texte, avec horodatage par caractère, puis découpe par scène.
+- Une seule génération pour tout le texte, avec horodatage par caractère, puis découpe par scène. Sans horodatage (connecteur restreint) : une génération par scène et alignement Whisper ([types/cours.md](types/cours.md)).
+- Budget : ≈ 1 crédit par caractère ; estimer et vérifier le solde avant de lancer, ne jamais relancer une génération réussie.
 - Après génération : lister les silences > 0,5 s entre deux mots (pauses involontaires) et la durée totale ; si la durée dépasse 60 s, couper le texte.
 - Si un outil de transcription est disponible, retranscrire l'audio et comparer au script pour repérer les mots mal prononcés.
 

@@ -1,6 +1,6 @@
 {
   "name": "dev",
-  "version": "2.8.0",
+  "version": "2.9.0",
   "description": "Dev avec BMAD : stack-check, frontend produit + spec, progressive disclosure, direction et visualisations, passes Impeccable, assets et QA, standards backend, TDD, debug, sécurité, déploiement, vidéo Remotion, vidéo pédagogique en motion design, agents de revue. MCP Playwright, Chrome DevTools et shadcn inclus.",
   "author": { "name": "jt33120" },
   "repository": "https://github.com/jt33120/claude-toolkit"

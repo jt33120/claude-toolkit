@@ -1,6 +1,6 @@
 # Carton d'offre muet (fin de vidéo)
 
-Demande de Julian (xSOM, 23/10/2026) : transformer la news en accroche commerciale, sans le dire à l'oral. Le carton est affiché 5 à 6 s après la question finale, voix terminée, musique qui continue puis s'éteint.
+Demande de l'utilisateur (23/10/2026) : transformer la news en accroche commerciale, sans le dire à l'oral. Le carton est affiché 5 à 6 s après la question finale, voix terminée, musique qui continue puis s'éteint.
 
 ## Contenu
 
