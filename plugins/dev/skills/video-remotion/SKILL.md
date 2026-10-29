@@ -1,6 +1,6 @@
 ---
 name: video-remotion
-description: "Edit and render videos as code with Remotion (React): reels and shorts 9:16, product demos, motion design, animated captions, intros/outros, montage of existing clips, free stock B-roll (Pexels, Pixabay), AI shots batched through the user's Grok subscription. Installs the official Remotion agent skills, scaffolds the project, previews in Remotion Studio and renders MP4. Use when the user wants to cut, assemble, animate or subtitle a video. FR : « montage vidéo », « fais un reel », « monte ces rushes », « sous-titres animés », « vidéo de démo », « B-roll », « vidéos libres de droits », « plans IA », « génère avec Grok », « Remotion »."
+description: "Edit and render videos as code with Remotion (React): reels and shorts 9:16, product demos, motion design, animated captions, intros/outros, montage of existing clips, free stock B-roll (Pexels, Pixabay), AI shots batched through the user's Grok subscription, reliable rendering of long multi-scene videos (corrupted frames repaired, scenes joined without duration errors). Installs the official Remotion agent skills, scaffolds the project, previews in Remotion Studio and renders MP4. Use when the user wants to cut, assemble, animate or subtitle a video. FR : « montage vidéo », « fais un reel », « monte ces rushes », « sous-titres animés », « vidéo de démo », « B-roll », « vidéos libres de droits », « plans IA », « génère avec Grok », « images corrompues », « Remotion »."
 ---
 
 # Video with Remotion
@@ -50,7 +50,17 @@ Generation runs outside Claude: Claude only writes the shot list, a local robot 
 5. The robot stops on a captcha, a usage-limit message or an unknown screen and reports it: the user finishes by hand. Never add captcha solving, parallel sessions or shorter pauses.
 6. Grok's consumer terms restrict bots; the account risk is the user's choice — say it once when setting this up, then use the official API if volume grows.
 
-## 6. Check, then render
+## 6. Reliable rendering (long or multi-scene videos)
+
+- **No CSS `filter` (`blur`, `drop-shadow`) and no `mix-blend-mode`** on animated layers. Headless Chrome then produces corrupted "mosaic" frames (a tile repeated, a flash of another screen), more often under CPU load. Glows and depth: `boxShadow`, gradients, opacity. A short video may keep a blur entry if `deglitch.py check` stays at 0.
+- **One composition per scene** for anything over ~2 min: render, fix and re-render a scene alone; feedback given as timecodes maps to one scene.
+- Render with `--concurrency` ≤ half the cores when other jobs (transcription, encoding) run, and `--timeout=120000`; retry a failed scene once.
+- After each scene render: `python3 scripts/deglitch.py fix out/sNN.mp4 out/sNN_ok.mp4` (replaces each corrupted frame with the previous good one).
+- Join scenes with `python3 scripts/assemble.py out/final.mp4 out/s*_ok.mp4 [--cap-mb 18.5 --cap-out out/web.mp4]`: re-encodes through the concat filter. Never join independently encoded scenes with `-c copy`: the duration can come out several times too long.
+- Then `python3 scripts/deglitch.py check out/final.mp4` on the final file: report that number, not the per-scene ones.
+- Long jobs on a remote machine: start them in the background (`nohup … &`) and poll a log file; never run two copies of the same job writing the same output.
+
+## 7. Check, then render
 
 1. `npx remotion studio` — the user reviews and asks for changes there.
 2. Spot-check key frames without a full render: `npx remotion still <id> out/frame.png --frame=<n>`.

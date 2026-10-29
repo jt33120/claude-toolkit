@@ -15,11 +15,15 @@ export const shake = (f: number, t: number, amp = 14) => {
   return { x: Math.sin((f - t) * 2.7) * amp * k, y: Math.cos((f - t) * 3.3) * amp * 0.6 * k };
 };
 
-/** Entrée « whip » : glisse latérale + flou qui se dissipe. p de 0 à 1 (spring ou interpolate). */
-export const whip = (p: number, dx = 260): React.CSSProperties => ({
+/**
+ * Entrée « whip » : glisse latérale rapide. p de 0 à 1 (spring ou interpolate).
+ * blur > 0 ajoute un flou qui se dissipe (14 dans les news validées) : réservé aux vidéos courtes,
+ * car `filter` peut produire des images corrompues au rendu ; contrôler ensuite avec deglitch.py.
+ */
+export const whip = (p: number, dx = 260, blur = 0): React.CSSProperties => ({
   opacity: p,
   transform: `translateX(${(1 - p) * dx}px)`,
-  filter: `blur(${(1 - p) * 14}px)`,
+  ...(blur > 0 ? { filter: `blur(${(1 - p) * blur}px)` } : {}),
 });
 
 /** Opacité d'un élément qui vit entre deux mots (fondu d'entrée et de sortie). */
