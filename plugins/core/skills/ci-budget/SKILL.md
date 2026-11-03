@@ -16,7 +16,17 @@ Goal: run expensive checks **less often, at the right moment** — never remove 
 
 Rank workflows by minutes and start with the biggest one.
 
-## 2. Target rhythm (BMAD)
+## 2. Match CI to the project stage
+
+Read `stage` in `.claude/stack.yaml` (missing = `poc`; testing depth per stage is in the dev plugin's `tdd`).
+
+- `poc`: no test workflow. Tests run locally; GitHub is backup and sharing. At most a cheap lint/build job on `workflow_dispatch` or on PR ready-for-review. Disable or delete workflows copied from templates.
+- `mvp`: the rhythm below, full CI only at ready-for-review and merge.
+- `prod`: the rhythm below, plus deploy checks (`infra-deploy`).
+
+If a solo developer pushes to "see if tests pass", the real gap is a non-reproducible local environment: fix that (lockfile, setup script, `docker compose` for services) instead of buying CI minutes.
+
+## 3. Target rhythm (BMAD)
 
 | Moment | Work | GitHub Actions |
 |---|---|---|
@@ -28,7 +38,7 @@ Rank workflows by minutes and start with the biggest one.
 
 Do not limit pushes: push whenever backup or sharing is needed. What changes is which pushes trigger costly jobs. A migration or a security change gets its targeted checks right away, even mid-epic. Follow a project's required branch checks rather than promising that draft PRs never run CI.
 
-## 3. Trigger patterns
+## 4. Trigger patterns
 
 ```yaml
 on:
@@ -52,6 +62,6 @@ jobs:
 - Cache dependencies (`actions/setup-node` / `setup-python` cache, Docker layer cache), set `timeout-minutes` on every job, avoid wide matrices on PRs.
 - Scheduled jobs: lowest useful frequency, and skip when nothing changed.
 
-## 4. Deliver
+## 5. Deliver
 
 A table per workflow (current minutes → expected minutes, change, risk), then the YAML diff. Apply only after the user validates, and re-measure after two weeks.

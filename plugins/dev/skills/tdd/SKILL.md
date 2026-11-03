@@ -13,6 +13,18 @@ description: >
 
 # Test-driven development
 
+## Size testing to the project stage
+
+Read `stage` in `.claude/stack.yaml` (missing = `poc`). The stage caps the effort; the table below then picks the check for each change.
+
+| Stage | Tests worth writing | Where they run | Skip |
+|---|---|---|---|
+| `poc` | A handful of fast tests on the logic the POC exists to prove (a calculation, a parser, an LLM output format) and a regression test for a bug that already came back once | Locally, the single targeted test, quiet output | CI test runs, E2E, visual regression, coverage targets, tests per helper, mock-heavy setups |
+| `mvp` | Add behaviour tests on critical paths: auth, permissions, payments, data writes, migrations | Locally while coding; CI at the PR ready-for-review gate (`ci-budget`) | Exhaustive edge cases on code still changing every week |
+| `prod` | Full discipline below; every fixed bug gets its regression test | Locally, then CI on PR and before deploy | Nothing that guards a real user path |
+
+Moving from `poc` to `mvp` is a decision, not a drift: when real users or real data arrive, update `stage`, then add the critical-path tests before adding features. The local loop must not depend on CI: if tests only pass reliably in GitHub Actions, fix the local environment first (lockfile, setup script, `docker compose` for services such as a database) rather than pushing to test.
+
 ## Decide what evidence matters
 
 | Change | Evidence during implementation | Wider gate |
