@@ -9,6 +9,13 @@
 # environment, mark exactly which one is production — `stack-check` never
 # runs a write-probe against it.
 
+# Project stage — drives how much testing and CI is worth paying for
+# (see the dev plugin's `tdd` skill). Change it on purpose when the project moves up.
+#   poc  : exploring, no real users, code may be thrown away
+#   mvp  : first real users or real data, not yet critical
+#   prod : users depend on it, data or money at stake
+stage: poc
+
 db:
   provider: supabase          # supabase | neon
   project_ref: xxxxxxxxxxxx   # Supabase project ref, or Neon project id

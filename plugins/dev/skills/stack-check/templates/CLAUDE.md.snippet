@@ -8,6 +8,7 @@
 - Design: build or redesign UI in Claude Design (VS Code "/" menu → "Claude Design" — this is the machine-level authorization step), then run `/design-sync` and commit the synced tokens so cloud sessions pick them up too.
 - UI content: use `frontend-content` before building a screen. Deliver the working product and its maintained spec; choose synthesis → exploration → detail, preserve context in the spec, remove redundant UI text and choose visuals by the question. Keep decision-critical information visible. Use `distill`, `clarify`, `layout` and `frontend-qa` as needed.
 - New dependency or external service: before installing a package, subscribing to a paid API or writing an integration, search https://github.com/public-apis/public-apis (and the vendor's official skill/MCP) for a free or existing option. Check before adopting: still maintained, real pricing and quotas, licence, data location (GDPR).
+- Project stage: read `stage` in `.claude/stack.yaml` (missing = poc). Size tests and CI to it with `tdd` and `ci-budget`: in a POC, a few fast local tests on the core logic, no CI test runner, no E2E or visual suites.
 - Small, obvious changes (typo, one-line fix, a config value): just do it — no BMAD ceremony.
 - Bugs: `systematic-debugging` — root cause before any fix.
 - Deploy: `infra-deploy` — checklist before shipping, incident workflow if production is down.

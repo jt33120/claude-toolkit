@@ -33,7 +33,7 @@ connector offers.
 ## a) INIT — first run only
 
 Triggered when `.claude/stack.yaml` doesn't exist. If the user typed the
-stack inline, use that; otherwise ask, in plain language, for: database
+stack inline, use that; otherwise ask, in plain language, for: project stage (poc, mvp or prod — see `templates/stack.yaml`), database
 (Supabase or Neon, project ref/id, and which environment is production),
 backend (Railway project/service/environments), frontend (Vercel project),
 repo (GitHub owner/repo), and any other MCP-connected tool worth tracking.
