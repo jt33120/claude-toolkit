@@ -1,0 +1,16 @@
+{
+  "description": "oral : lit la réponse finale à voix haute quand le mode oral est activé (/oral on)",
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/skills/oral/scripts/run.sh\" hook",
+            "timeout": 20
+          }
+        ]
+      }
+    ]
+  }
+}
