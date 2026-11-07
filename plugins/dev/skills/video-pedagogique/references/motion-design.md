@@ -4,6 +4,8 @@
 
 À utiliser quand le projet n'a pas sa propre charte ; une charte de marque la remplace entièrement.
 
+> Variante sobre, préférée pour une audience professionnelle (validée le 07/11/2026) : **une seule police** (Inter variable, graisses 500 à 800, interlettrage −0,02 em sur les titres ; mono seulement pour du code), **blanc + un seul accent** (ex. `#4da3ff`), gris-bleu `#7f9bbf` pour le secondaire, rouge réservé à un tampon d'alerte ; pas d'italique. La charte ci-dessous (serif italique, mono ambre, cinq couleurs) a été jugée « trop IA » et « hyper colorée » sur une vidéo technique de 3 min.
+
 - Fond sombre persistant (grille qui dérive lentement, halo de couleur) : il bouge toujours un peu, mais ce n'est pas un « changement ».
 - Couleurs : fond `#04070e`, cyan `#5ee6ff` pour les idées, ambre `#ffb547` pour les chiffres, rouge `#ff5a6e` pour le danger, vert `#7cffb2` pour ce qui tient ou est juste, violet `#b79cff` en accent rare, blanc `#f2f5fa` pour le reste, gris `#8a93a6` pour le secondaire.
 - Trois polices, chacune son rôle : serif italique (Instrument Serif, OFL) pour les grandes idées, sans grasse (Manrope) pour le texte qui accompagne la voix, mono (JetBrains Mono) pour les chiffres et le code.
