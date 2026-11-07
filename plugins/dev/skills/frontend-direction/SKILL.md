@@ -22,6 +22,7 @@ When establishing a direction or correcting a generic result, consult [Frontend 
 For each direction give: a name, a one-line intent, type pairing (≤ 2 families + scale), palette by role (background, surface, text, accent, semantic) with AA contrast, shape and radius, spacing scale and density, motion level, 2–3 signature components.
 
 - The 3 must differ on at least 3 axes. Do not default to the previous project's direction.
+- **Mirror test:** would a neighbouring brief in the same category get this exact page? If yes, change one decision (layout shape, hero, palette, type) and say which.
 - **Mobile:** start from platform conventions (Apple HIG, Material 3). Differentiate through color, type, iconography and motion, not by breaking native navigation patterns.
 - The user picks or mixes. Write `.claude/design-direction.md` (tokens + rationale) and suggest pushing it into Claude Design so design and code share one source.
 
@@ -46,6 +47,19 @@ Use [charts and disclosure](references/charts-and-disclosure.md) for choosing a 
 - [ ] Real content; loading, empty and error states designed
 - [ ] AA contrast, visible focus states, touch targets ≥ 44 pt / 48 dp
 - [ ] Dark mode handled if in scope
+
+## 4b. Floor against the generated look
+
+<!-- Adapted from Nutlope/hallmark (MIT, Copyright (c) 2026 Hallmark contributors) and Leonxlnx/taste-skill (MIT, Copyright (c) 2026 Leonxlnx). -->
+
+Not waivable, whatever the direction:
+
+- Every colour and font goes through a token; no literal value past the token block.
+- No `transition: all`; never animate `width`, `height`, `top` or `left`. No fade-in on every section, scroll-jacking or parallax on text.
+- Never an invented metric, testimonial, customer, logo wall or review; a missing proof stays absent or a labelled placeholder.
+- No purple-to-blue gradient, card inside a card, emoji used as an icon, or drawn imitation of a real logo.
+- Landing page: headline, one sentence and the primary action visible at 1280×800 without scrolling; about 80 words per screen; container width capped so gutters grow on large screens.
+- Equal left and right content edges; `overflow-x: clip` rather than `hidden` or `100vw`.
 
 ## 5. Audit and QA
 
