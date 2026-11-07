@@ -2,6 +2,15 @@
 
 Trois couches, dans cet ordre d'importance : la voix, les bruitages, la musique. Tout est synthétisé ou généré pour la vidéo : aucun échantillon ni morceau externe, donc aucune licence à suivre.
 
+## Générés plutôt que synthétisés (vidéo de plus d'une minute)
+
+Leçon du 07/11/2026 : sur une vidéo de 3 min, la nappe grave et les bruitages synthétisés étaient mixés trop bas et inaudibles sur un téléphone (« il manque une musique de fond et des bruitages », alors qu'ils étaient là). Pour une vidéo longue ou « immersive » :
+
+- `scripts/audio_assets.py` génère avec ElevenLabs (`sound-generation`, `music`) une banque de bruitages (whoosh, impact, frappe clavier, sonnerie d'appel visio, notification, glitch, alerte, pièces, porte, tampon, riser, ambiance de bureau) et une musique instrumentale dans les médiums (≈ 100 BPM, batterie douce, basse ronde, sans aigus ni voix) : une nappe trop grave disparaît sur un haut-parleur de téléphone.
+- Un souffle à chaque changement de scène, un bruitage d'action sur le mot qui le décrit (sonnerie sur « visio », clavier sur « installer », porte sur « aucune porte »), une ambiance de bureau à 0,12 sous les scènes de bureau.
+- La musique générée a beaucoup de dynamique (−38 à −18 dB selon les passages) : la niveler (`dynaudnorm=f=400:g=41:m=12`) avant de la mixer, puis viser ≈ −29 dB moyen pour la musique seule (≈ 13 dB sous la voix), compression latérale douce sous la voix (ratio 2,5).
+- Mesurer, ne pas supposer : niveau moyen de la musique seule sur un passage sans voix (carton final), et de l'ensemble sur un passage parlé.
+
 ## Musique de fond
 
 Pourquoi discrète : une musique trop présente fait baisser ce qu'on retient d'une explication, parce qu'elle prend une part de l'attention (principe de cohérence de Mayer ; Moreno & Mayer, 2000). Une nappe calme, sans paroles ni mélodie qui accroche, maintient l'ambiance et remplit les silences sans entrer en concurrence avec la voix.

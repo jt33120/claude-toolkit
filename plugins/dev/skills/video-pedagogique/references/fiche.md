@@ -6,7 +6,7 @@ La partie variable d'une vidéo. Copier le gabarit dans le projet (`video.md` ou
 
 ```markdown
 # Fiche vidéo : <titre>
-- Type : news-reel | cours | demo-produit | pub
+- Type : news-reel | veille-narree | cours | demo-produit | pub
 - Public : <qui regarde, ce qu'il sait déjà>
 - Objectif : <ce qu'il doit savoir faire ou penser après>
 - Canal et format : <réseau / Notion / e-mail / site> · <ratio, taille> · 30 i/s
@@ -45,3 +45,5 @@ La partie variable d'une vidéo. Copier le gabarit dans le projet (`video.md` ou
 | Validation avant la voix | script | script + plan + carte des relances | script + parcours montré | 2 ou 3 pistes d'accroche |
 
 Le seuil de 19 Mo vient de l'envoi de fichiers dans Notion par l'API, limité à 20 Mio.
+
+Type **veille-narree** (validé) : 16:9 1920×1080 · ≈ 3 min · 550–650 mots · 13–15 scènes · micro-changement ≤ 2,5 s · nouvelle scène 8–20 s · structure accroche « dossier » → 3 affaires (quoi / comment / vraie question) → révélation → réflexes → conviction → carton muet · sous-titres mot à mot · voix en une prise avec `<break>` · bruitages et musique générés. Détails : [types/veille-narree.md](types/veille-narree.md).
