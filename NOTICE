@@ -58,3 +58,30 @@ l'indique dans un commentaire de provenance. Textes de licence : dossier license
   → dev : wizard (skill adaptée, scripts/template.sh repris tel quel) ; idées de
     diagnosing-bugs fusionnées dans systematic-debugging, de tdd/mocking dans tdd.
   Licence : licenses/MIT-mattpocock-skills.txt
+
+- forrestchang/andrej-karpathy-skills — MIT (déclarée dans le README, pas de fichier LICENSE)
+  https://github.com/forrestchang/andrej-karpathy-skills
+  Commit : 2c606141936f1eeef17fa3043a72095b4765b9c2
+- DietrichGebert/ponytail — MIT, Copyright (c) 2026 DietrichGebert
+  https://github.com/DietrichGebert/ponytail
+  Commit : 96608e078b2d5ea607c5c3b8b5a54d1c1fba6846
+  → dev : règle « Coding discipline » du snippet CLAUDE.md de stack-check, réécrite
+    à partir des deux sources (aucun texte copié). Licence : licenses/MIT-ponytail.txt
+
+- cloudflare/security-audit-skill — MIT, Copyright (c) 2025-2026 Cloudflare, Inc.
+  https://github.com/cloudflare/security-audit-skill
+  Commit : c1c8a8c1471069fb0e188eeaff69b8e8db6564a8
+  → dev : security, section « Qualifier une trouvaille » (critères adaptés et traduits ;
+    workflow complet non repris, renvoi à la skill d'origine).
+  Licence : licenses/MIT-cloudflare-security-audit-skill.txt
+
+- Nutlope/hallmark — MIT, Copyright (c) 2026 Hallmark contributors
+  https://github.com/Nutlope/hallmark — Commit : 407fa689f4a276f2fd389208d271d0fef08f5058
+- Leonxlnx/taste-skill — MIT, Copyright (c) 2026 Leonxlnx
+  https://github.com/Leonxlnx/taste-skill — Commit : f6b76575f949707b4e3c37cd86cb44b0b98643e8
+  → dev : frontend-direction, section « Floor against the generated look » et test du
+    miroir (sélection de règles, scripts et thèmes non repris).
+  Licences : licenses/MIT-hallmark.txt, licenses/MIT-taste-skill.txt
+
+- cathrynlavery/diagram-design (MIT) et tt-a1i/archify (Apache-2.0) : cités dans
+  dev/diagrams comme skills à installer, aucun contenu copié.

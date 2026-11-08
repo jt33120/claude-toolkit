@@ -14,7 +14,7 @@ Développement avec BMAD (cadrage, stories, `bmad-build`, `bmad-code-review`) + 
 | stack-check | Déclare la stack et le stade du projet (poc, mvp, prod), installe les outils, vérifie lecture/écriture des MCP |
 | ui-vocabulary | Nom exact, variantes, équivalents web/iOS/Android et alternatives de 152 composants et patterns |
 | frontend-content | Choisit le contenu visible, à explorer et à détailler ; livre le produit et sa spec, sans perdre le contexte |
-| frontend-direction | Suit le design system, sinon propose 3 directions ; intègre Frontend Design d'Anthropic et les catalogues UI UX Pro Max, dont le choix de graphiques |
+| frontend-direction | Suit le design system, sinon propose 3 directions ; intègre Frontend Design d'Anthropic et les catalogues UI UX Pro Max, dont le choix de graphiques ; socle anti-rendu générique (Hallmark, Taste Skill) |
 | distill | Adaptation Impeccable : retire les redondances et le bruit, conserve les usages et reporte le contexte dans la spec |
 | clarify | Adaptation Impeccable : libellés, actions, erreurs et aides courts, cohérents et compréhensibles |
 | critique | Adaptation Impeccable : évalue hiérarchie, charge cognitive et clarté ; priorise les défauts avec preuves |
@@ -22,11 +22,11 @@ Développement avec BMAD (cadrage, stories, `bmad-build`, `bmad-code-review`) + 
 | asset-brief | Icônes open source ou prompt Codex prêt à coller, puis intégration (favicon, icônes d'app) |
 | frontend-qa | QA web/mobile en 8 niveaux, rapport de bugs normé |
 | backend-standards | Couche fine au-dessus des skills officielles FastAPI, Supabase, Neon |
-| diagrams | Schémas en code versionnés : Mermaid par défaut (rendu natif GitHub), D2 pour les livrables soignés, LikeC4 pour un modèle C4 interrogeable ; validation avant commit |
+| diagrams | Schémas en code versionnés : Mermaid par défaut (rendu natif GitHub), Diagram Design pour les livrables soignés (Archify si chaque élément doit être tracé au code), LikeC4 pour un modèle C4 interrogeable ; validation avant commit |
 | tdd | Tests dimensionnés au stade du projet (POC : quelques tests locaux, pas de CI), puis ciblés selon le risque, tranches verticales à l'interface publique, mocks limités aux dépendances externes |
 | systematic-debugging | Cause racine avant correctif : boucle de reproduction rapide, 3–5 hypothèses classées, logs de debug balisés puis retirés ; voie rapide pour les bugs évidents |
 | verification-before-completion | Preuve avant de dire « fini » |
-| security | Plan et audit sécurité FastAPI/Supabase/Vercel/LLM |
+| security | Plan et audit sécurité FastAPI/Supabase/Vercel/LLM ; qualification des trouvailles (frontière, certitude, gravité) reprise de Cloudflare, sa skill complète pour les gros audits |
 | wizard | Script bash interactif qui te guide dans les étapes manuelles (clés API, `.env`, secrets GitHub, migration ponctuelle) |
 | infra-deploy | Checklist de déploiement et incidents (Vercel, Railway, Supabase, Neon) |
 | video-remotion | Montage et rendu vidéo en code avec Remotion (reels 9:16, démos, sous-titres animés) ; rendu fiable des vidéos longues (effets interdits, réparation des images corrompues, assemblage des scènes par ré-encodage) ; B-roll libre de droits Pexels/Pixabay avec suivi des crédits ; plans IA par lot via l'abonnement Grok (robot local au rythme humain) |

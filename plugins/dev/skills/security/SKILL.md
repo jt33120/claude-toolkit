@@ -40,6 +40,18 @@ au cas, et brancher la question auth selon `references/auth.md`.
 
 ---
 
+## 1b. Qualifier une trouvaille (les deux modes)
+
+<!-- Critères adaptés de cloudflare/security-audit-skill (MIT, Copyright (c) 2025-2026 Cloudflare, Inc.). -->
+
+- **Frontière et résultat** : une trouvaille nomme l'acteur moins privilégié, l'entrée ou l'action, le contrôle censé l'arrêter, la frontière franchie, la ressource touchée et le résultat concret. Sans cela, c'est une bonne pratique manquante, à classer en recommandation, pas en faille.
+- **Certitude séparée de la gravité** : `confirmée` (chemin dans le code et preuve locale) reçoit une gravité ; `à valider` nomme le fait manquant (réglage du fournisseur, proxy, politique d'identité absente du repo) et n'a pas de gravité. Ne jamais supposer un réglage de déploiement qu'on ne voit pas.
+- **Gravité** : critique = un anonyme obtient exécution de code, accès complet aux données ou prise de compte ; haute = un contrôle explicite est entièrement contourné (auth, lecture/écriture inter-tenant, script stocké touchant d'autres utilisateurs) ; moyenne = violation réelle à portée limitée ; faible = fuite d'informations non sensibles.
+- **Preuve locale uniquement** : test unitaire, petit harnais ou fixture avec des comptes et secrets factices. Jamais de test contre la prod, un service partagé ou les données d'autres utilisateurs.
+- **Plus petit correctif** : l'invariant à faire respecter, au dernier point de décision fiable, avec son test de régression.
+
+Audit complet d'une base de code importante ou critique (avant une levée, un client grand compte, une certification) : installer la skill de Cloudflare, `npx skills add cloudflare/security-audit-skill`, qui orchestre reconnaissance, chasse par sous-agents et vérification indépendante.
+
 ## 2. Mode NOUVEAU PROJET — plan d'architecture sécurisé
 
 Produire un plan structuré dans cet ordre exact. Garder chaque section concrète et
