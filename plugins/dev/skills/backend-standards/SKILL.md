@@ -1,6 +1,6 @@
 ---
 name: backend-standards
-description: 'Senior-level, opinionated backend standards for FastAPI, Node/TypeScript, Postgres, and API design — principles and a review checklist, pointing to vendor skills for stack-specific depth. Use when writing or reviewing backend/API/database code ("backend standards", "API design review", "is this endpoint well-designed", "revue backend", "bonnes pratiques API", "standards base de données"). Distinct from `security` (stack-specific security audit) and `tdd` (test discipline) — this is architecture and API/data conventions.'
+description: "Backend architecture and API/data conventions (FastAPI, Node/TypeScript, Postgres) with a review checklist. Use when writing or reviewing backend, API or database code. FR : « revue backend », « bonnes pratiques API », « standards base de données »."
 ---
 
 <!--

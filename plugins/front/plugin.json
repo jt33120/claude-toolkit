@@ -1,0 +1,10 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "front",
+  "version": "1.0.0",
+  "description": "Interfaces web et mobile : contenu et spec, direction visuelle, passes distill/clarify/layout/critique, vocabulaire UI, assets, QA. MCP Playwright, Chrome DevTools et shadcn inclus.",
+  "author": {
+    "name": "jt33120"
+  },
+  "repository": "https://github.com/jt33120/claude-toolkit"
+}

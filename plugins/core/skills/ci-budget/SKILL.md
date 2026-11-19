@@ -1,6 +1,6 @@
 ---
 name: ci-budget
-description: "Audit and reduce GitHub Actions minutes on private repos without dropping real tests: measure minutes per workflow, align CI triggers with the BMAD rhythm (story / epic / review / merge), tune triggers, concurrency and caching. Use when Actions minutes run high, before adding a workflow, or when setting up CI on a new repo. FR : « optimise mes github actions », « trop de minutes CI », « quota actions », « revoir ci.yml », « stratégie CI »."
+description: "Cut GitHub Actions minutes without dropping real tests: measure per workflow, align triggers with the BMAD rhythm, tune concurrency and caching. Use when CI minutes run high or before adding a workflow. FR : « trop de minutes CI », « optimise mes github actions »."
 ---
 
 # CI budget (GitHub Actions)

@@ -1,6 +1,6 @@
 ---
 name: silent-failure-hunter
-description: 'Use this agent on explicit request, or from a review workflow (e.g. bmad-code-review, a pre-merge review), when reviewing a pull request or code changes to identify silent failures, inadequate error handling, and inappropriate fallback behavior — catch blocks, fallback logic, or anything that could suppress an error. English triggers: "find silent failures", "audit error handling", "check for swallowed errors". French triggers: "cherche les erreurs silencieuses", "audite la gestion des erreurs", "verifie que les erreurs ne sont pas avalees".'
+description: "Find silent failures, swallowed errors and unsafe fallbacks in a change. Use on request or from a review step (bmad-code-review, pre-merge). FR : « cherche les erreurs silencieuses », « audite la gestion des erreurs »."
 ---
 
 <!-- Adapted from anthropics/claude-code pr-review-toolkit (MIT, per the plugin's own README) — https://github.com/anthropics/claude-code — modified for jt33120/claude-toolkit -->

@@ -1,18 +1,6 @@
 ---
 name: infra-deploy
-description: >
-  Two-mode operations skill for a Vercel (Next.js frontends) + Railway (backends/workers)
-  + Supabase/Neon (Postgres) + GitHub Actions stack: a pre-deploy checklist before shipping,
-  and an incident-response workflow when production is down. Uses the Vercel, Railway,
-  Supabase, and Neon MCP connectors when available for deploy status, logs, env vars, and
-  DB branches — falls back to their CLIs otherwise. English triggers: "ready to deploy",
-  "deploy checklist", "ship this release", "we have an incident", "production is down",
-  "rollback", "write a postmortem", "post-mortem". French triggers: "prêt à déployer",
-  "checklist de déploiement", "on livre cette release", "on a un incident", "la prod est
-  down", "rollback", "écris un post-mortem". Not for the root-cause investigation itself
-  once things are stable (systematic-debugging), for unit/e2e test verification before
-  shipping (tdd, frontend-qa, verification-before-completion), or for infrastructure
-  security hardening and audits (security).
+description: "Pre-deploy checklist and production incident response for Vercel + Railway + Supabase/Neon + GitHub Actions, via MCP or CLI. Use for « ready to deploy », « rollback », « post-mortem ». FR : « prêt à déployer », « la prod est down », « on a un incident »."
 ---
 
 <!-- Adapted from anthropics/knowledge-work-plugins engineering/skills/deploy-checklist and

@@ -1,10 +1,6 @@
 ---
 name: verification-before-completion
-description: >
-  Check evidence before claiming a change works, tests pass, or a release is ready.
-  Choose checks that match the claim and change risk, read their output, and report
-  what was and was not verified. Use before a completion claim, PR, release, or deploy.
-  FR : « c'est terminé », « les tests passent », « prêt à committer », « on peut merger ».
+description: "Check evidence before claiming a change works, tests pass or a release is ready; report what was and was not verified. Use before any completion claim, PR, release or deploy. FR : « c'est terminé », « les tests passent », « on peut merger »."
 ---
 
 <!-- Adapted from obra/superpowers (MIT) — https://github.com/obra/superpowers — modified for jt33120/claude-toolkit -->

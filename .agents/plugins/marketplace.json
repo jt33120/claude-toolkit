@@ -3,18 +3,58 @@
   "plugins": [
     {
       "name": "core",
-      "source": { "source": "local", "path": "./plugins/core" },
-      "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" }
+      "source": {
+        "source": "local",
+        "path": "./plugins/core"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      }
     },
     {
       "name": "dev",
-      "source": { "source": "local", "path": "./plugins/dev" },
-      "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" }
+      "source": {
+        "source": "local",
+        "path": "./plugins/dev"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      }
+    },
+    {
+      "name": "front",
+      "source": {
+        "source": "local",
+        "path": "./plugins/front"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      }
+    },
+    {
+      "name": "media",
+      "source": {
+        "source": "local",
+        "path": "./plugins/media"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      }
     },
     {
       "name": "business",
-      "source": { "source": "local", "path": "./plugins/business" },
-      "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" }
+      "source": {
+        "source": "local",
+        "path": "./plugins/business"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      }
     }
   ]
 }

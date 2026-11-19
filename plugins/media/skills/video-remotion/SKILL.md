@@ -1,6 +1,6 @@
 ---
 name: video-remotion
-description: "Edit and render videos as code with Remotion (React): reels and shorts 9:16, product demos, motion design, animated captions, intros/outros, montage of existing clips, free stock B-roll (Pexels, Pixabay), AI shots batched through the user's Grok subscription, reliable rendering of long multi-scene videos (corrupted frames repaired, scenes joined without duration errors). Installs the official Remotion agent skills, scaffolds the project, previews in Remotion Studio and renders MP4. Use when the user wants to cut, assemble, animate or subtitle a video. FR : « montage vidéo », « fais un reel », « monte ces rushes », « sous-titres animés », « vidéo de démo », « B-roll », « vidéos libres de droits », « plans IA », « génère avec Grok », « images corrompues », « Remotion »."
+description: "Edit and render videos as code with Remotion: 9:16 reels, demos, animated captions, montage, free B-roll, Grok AI shots, reliable long renders. Use to cut, assemble, animate or subtitle a video. FR : « montage vidéo », « fais un reel », « sous-titres animés »."
 ---
 
 # Video with Remotion

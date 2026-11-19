@@ -1,17 +1,6 @@
 ---
 name: systematic-debugging
-description: >
-  Runs a 4-phase root-cause investigation (evidence gathering, pattern analysis,
-  hypothesis testing, fix) before any fix is proposed for a bug, crash, test failure,
-  or unexpected behavior. Use whenever something is broken and the temptation is to
-  guess at a fix. English triggers: "why is this failing", "debug this", "root cause",
-  "this is broken", "this test is flaky", "investigate this error", "it worked before
-  and now it doesn't". French triggers: "pourquoi ça plante", "débogue ça", "cause
-  racine", "c'est cassé", "ce test est instable", "investigue cette erreur", "ça
-  marchait avant". Complements tdd (writing the reproducing test once the cause is
-  known) and verification-before-completion (proving the fix actually works before
-  claiming it does). Not for reviewing already-working code (code-reviewer) or for
-  deploy-time incidents with users affected in production (infra-deploy).
+description: "Four-phase root-cause investigation before any fix for a bug, crash, failing or flaky test. Use whenever something is broken and a guessed fix is tempting. FR : « pourquoi ça plante », « débogue ça », « cause racine », « ça marchait avant »."
 ---
 
 <!-- Adapted from obra/superpowers (MIT) — https://github.com/obra/superpowers — and mattpocock/skills, diagnosing-bugs (MIT) — https://github.com/mattpocock/skills — modified for jt33120/claude-toolkit -->

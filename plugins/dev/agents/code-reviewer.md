@@ -1,6 +1,6 @@
 ---
 name: code-reviewer
-description: 'Use this agent on explicit request, or from a review workflow (e.g. bmad-code-review, a pre-merge review step), to review code for adherence to project guidelines, style guides, and best practices — style violations, potential issues, and CLAUDE.md pattern compliance. Needs to know which files to focus on: defaults to recently completed work unstaged in git (git diff), or specify a different scope as agent input when calling it. English triggers: "review this code", "code review", "check this against our guidelines". French triggers: "relis ce code", "revue de code", "verifie ce code par rapport a nos standards".'
+description: "Review code against project guidelines, CLAUDE.md and best practices; defaults to the current git diff. Use on request or from a review step (bmad-code-review, pre-merge). FR : « relis ce code », « revue de code »."
 ---
 
 <!-- Adapted from anthropics/claude-code pr-review-toolkit (MIT, per the plugin's own README) — https://github.com/anthropics/claude-code — modified for jt33120/claude-toolkit -->

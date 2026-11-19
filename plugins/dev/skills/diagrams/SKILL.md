@@ -1,6 +1,6 @@
 ---
 name: diagrams
-description: "Draw architecture, workflow, sequence, ER and state diagrams as code (Mermaid by default, Diagram Design for polished deliverables, LikeC4 for a queryable C4 model), versioned next to the code and validated before commit. Use when a doc, PRD, architecture, PR or README needs a diagram, or when an existing diagram must follow a code change. FR : « fais un schéma », « diagramme d'architecture », « diagramme de séquence », « schéma du workflow », « modèle de données », « mets à jour le schéma »."
+description: "Architecture, sequence, ER, workflow and state diagrams as code (Mermaid, Diagram Design, LikeC4), versioned and validated with the code. Use when a doc, PR or README needs a diagram or one must follow a code change. FR : « fais un schéma », « diagramme d'architecture »."
 ---
 
 # Diagrams as code

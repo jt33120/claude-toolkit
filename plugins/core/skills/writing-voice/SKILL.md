@@ -1,6 +1,6 @@
 ---
 name: writing-voice
-description: "Write or rewrite any text (email, LinkedIn post, landing page, UI microcopy, client report, README, message) in the project's own voice and without AI tells: builds a per-project voice profile interactively, adapts the format to the medium, checks the draft with a deterministic script, and learns from the user's edits. Use for any text meant for humans. FR : « écris un mail », « rédige un post », « réécris ce texte », « ça fait trop IA », « quel ton », « texte de la landing », « microcopy »."
+description: "Write or rewrite any human-facing text (email, post, landing page, microcopy, report, README) in the project's voice without AI tells, checked by a script. FR : « écris un mail », « rédige un post », « ça fait trop IA », « quel ton »."
 ---
 
 # Writing voice

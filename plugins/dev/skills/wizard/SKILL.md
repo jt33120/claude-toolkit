@@ -1,6 +1,6 @@
 ---
 name: wizard
-description: "Generate an interactive bash wizard that walks the user through steps only a human can do: creating API keys in a third-party dashboard, setting .env values and GitHub secrets, a one-off migration or cutover. Use when setup needs clicks in a web console or values only the user can copy. Not for steps the agent can run itself. FR : « crée-moi un assistant de configuration », « guide-moi pour récupérer les clés », « configure les secrets », « procédure manuelle pas à pas »."
+description: "Generate an interactive bash wizard for steps only a human can do: API keys in a dashboard, .env values, GitHub secrets, a one-off cutover. Not for steps the agent can run. FR : « guide-moi pour récupérer les clés », « configure les secrets »."
 ---
 
 <!-- Adapted from mattpocock/skills (MIT) — https://github.com/mattpocock/skills — modified for jt33120/claude-toolkit -->

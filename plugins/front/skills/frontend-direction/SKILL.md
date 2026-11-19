@@ -1,6 +1,6 @@
 ---
 name: frontend-direction
-description: "Frame the visual and interaction direction of a UI (web or mobile) without imposing a style: follow the project design system if one exists, otherwise propose 3 contrasting directions and record the choice. Use when starting a screen, app or site, when a UI looks generic or AI-made, or when choosing style, palette, typography, density or motion. FR : « direction artistique », « le front fait générique », « propose des styles », « quelle palette », « design de cet écran »."
+description: "Set a UI's visual and interaction direction: follow the design system, or propose 3 contrasting directions and record the choice. Use when starting a screen or when a UI looks generic. FR : « direction artistique », « quelle palette », « le front fait générique »."
 ---
 
 # Frontend direction

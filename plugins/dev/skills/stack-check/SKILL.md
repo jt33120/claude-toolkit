@@ -1,17 +1,6 @@
 ---
 name: stack-check
-description: >
-  Confirms every component of this project's declared stack (database, backend,
-  frontend, repo, and anything else declared) is actually connected via MCP with
-  read and write access, and reports a matrix. On first run (no `.claude/stack.yaml`
-  yet) it also asks for the stack, wires `.claude/settings.json`, installs matching
-  vendor skills, and inits Graft/BMAD. Run this at the start of a dev session, or
-  explicitly. English triggers: "check my stack", "is everything connected", "stack
-  check", "verify my connections", "start of a dev session". French triggers:
-  "vérifie la stack", "vérifie ma stack", "est-ce que tout est branché",
-  "stack-check", "vérifie mes connexions". Distinct from `infra-deploy` (deploy
-  checklist / incident response) and `security` (security audit) — this is
-  connectivity and read/write permission verification only.
+description: "Check that every declared stack component is connected via MCP with read/write access; on first run, set up .claude/stack.yaml, settings, vendor skills, Graft and BMAD. Use at the start of a dev session. FR : « vérifie la stack », « est-ce que tout est branché »."
 ---
 
 <!-- claude-toolkit: jt33120/claude-toolkit — dev plugin -->
@@ -48,7 +37,9 @@ Then, in order:
    keep everything already there, never overwrite a value the user set. The
    `trailofbits` marketplace + `modern-python@trailofbits` entries are
    conditional: merge them only when the declared backend is Python
-   (FastAPI or otherwise); skip them for every other stack.
+   (FastAPI or otherwise); skip them for every other stack. Likewise
+   `front@claude-toolkit` only when the project has a web or mobile UI, and
+   `media@claude-toolkit` only when it produces videos.
 
 2. **Install vendor skills matching the declared stack**, via the `skills`
    CLI (project scope, targeting Claude Code — `-a claude-code -y`), only
