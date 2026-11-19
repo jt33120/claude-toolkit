@@ -1,0 +1,21 @@
+{
+  "description": "dev : CLAUDE.md mis à jour après chaque compaction, bootstrap suggéré sur un repo sans CLAUDE.md, /dev:audit diff exigé avant gh pr create / glab mr create",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "compact",
+        "hooks": [{ "type": "command", "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/run.sh\" session compact", "timeout": 10 }]
+      },
+      {
+        "matcher": "startup",
+        "hooks": [{ "type": "command", "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/run.sh\" session startup", "timeout": 10 }]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [{ "type": "command", "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/run.sh\" pre_pr", "timeout": 10 }]
+      }
+    ]
+  }
+}
