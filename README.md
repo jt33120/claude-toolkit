@@ -110,6 +110,10 @@ Les sessions cloud se mettent à jour par le script de setup ci-dessus, à chaqu
 
 ## 2. Configurer chaque projet une fois
 
+**Le plus court : `/dev:bootstrap`.** À l'ouverture d'un repo sans `CLAUDE.md`, Claude le propose. En une passe : `CLAUDE.md` de 80 lignes au plus, plugins déclarés dans `.claude/settings.json` (proposés à l'installation sur chaque poste qui ouvre le repo), `stack-check`, `agent-bridge` si Codex sert aussi, puis un premier `/dev:audit`. Committer ensuite `CLAUDE.md`, `.claude/settings.json` et `.claude/stack.yaml`.
+
+Le détail de chaque étape, pour la faire à la main :
+
 Dans le projet, demander à l'IA :
 
 > Utilise agent-bridge pour configurer les instructions communes à Claude Code et Codex. Conserve les fichiers existants. Inscris dans AGENTS.md l'obligation d'utiliser frontend-content avant de construire ou modifier un front, de livrer le produit et sa spec, puis de vérifier le résultat avec les skills frontend adaptées. Vérifie que les skills demandées sont disponibles dans cet environnement.
@@ -176,6 +180,17 @@ et le contexte dans sa spec.
 ```
 
 Lors d'un changement d'agent en cours de travail, `agent-bridge` prévoit une courte passation dans `.agents/HANDOFF.md` : objectif, travail terminé, prochaine étape et questions ouvertes.
+
+## 4. Habitudes qui gardent le code propre
+
+| Moment | Ce qui se passe | Ce que tu fais |
+|---|---|---|
+| Tu corriges Claude | La correction vit dans la conversation | Dis-le franchement (« non, on fait X parce que Y ») : à la compaction suivante, `claude-md` la reporte dans `CLAUDE.md` |
+| Compaction | Hook `dev` : `CLAUDE.md` mis à jour, résumé en une ligne | Relire `git diff CLAUDE.md` avant de committer |
+| Avant une PR | `gh pr create` / `glab mr create` bloqué jusqu'à `/dev:audit diff` | Trancher les points que l'audit te renvoie |
+| De temps en temps | — | `/dev:audit` sur tout le repo (avant une recette, ou chaque semaine) ; `/context` pour voir ce qui consomme des tokens |
+
+Une tâche par session (`/clear` entre deux sujets), un plan avant tout changement non trivial, une branche par fonctionnalité.
 
 ## Parcours frontend : produit et spec
 

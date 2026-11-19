@@ -12,7 +12,7 @@
     {
       "name": "dev",
       "source": "./plugins/dev",
-      "description": "Sessions de code : standards backend et architecture, TDD, débogage, vérification, sécurité, déploiement, schémas, stack-check, agents de revue. Sans frontend ni vidéo (voir front et media)."
+      "description": "Sessions de code : CLAUDE.md tenu à jour après chaque compaction, /dev:audit (architecture, lisibilité, sécurité) exigé avant chaque PR, /dev:bootstrap, standards backend, TDD, débogage, sécurité, déploiement, schémas, stack-check, agents de revue."
     },
     {
       "name": "front",
