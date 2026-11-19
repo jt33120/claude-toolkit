@@ -1,6 +1,6 @@
 ---
 name: critique
-description: "Review a concrete interface's information hierarchy, cognitive load, visual coherence and discoverability; return prioritized issues with evidence and proposed fixes. Use for design review, an AI-looking UI or assessing clarity before revision. FR : « critique le design », « évalue cette interface », « pourquoi ce front est chargé ». Own design assessment; use frontend-qa for functional/accessibility testing and distill, clarify or layout for edits."
+description: "Assess an interface's hierarchy, cognitive load, coherence and discoverability; return prioritized issues with fixes. Use for a design review or an AI-looking UI. FR : « critique le design », « évalue cette interface ». Functional tests: frontend-qa."
 ---
 
 <!-- Adapted and modified from pbakaus/impeccable, .agents/skills/impeccable/reference/critique.md, commit 919dbeba520df760a157fe635be62faae88d58da. Apache-2.0; Copyright 2025 Paul Bakaus. Portable adaptation: scoped evidence-based review; omit upstream detector, persistence, grading and orchestration requirements. License: ../../../../licenses/APACHE-2.0.txt. -->

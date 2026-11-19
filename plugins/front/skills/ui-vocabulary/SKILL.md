@@ -1,20 +1,6 @@
 ---
 name: ui-vocabulary
-description: >
-  EN: Reference for finding the exact technical name of a UI component or
-  pattern, its variants/states, cross-platform equivalents (web, iOS,
-  Android), and alternatives — so you stop defaulting to the same solution.
-  Use for "what is this component called", "what's the right component
-  for...", "alternatives to a modal", "exhaustive list of options for...",
-  "UI vocabulary", naming things precisely in a design or dev spec, or
-  picking between several valid UI patterns.
-  FR: Référence pour trouver le nom technique exact d'un composant ou motif
-  d'interface, ses variantes/états, ses équivalents multi-plateformes (web,
-  iOS, Android), et des alternatives — pour éviter de toujours proposer la
-  même solution. Utiliser pour "comment s'appelle ce composant", "quel
-  composant pour...", "alternatives à une modale", "vocabulaire UI", "liste
-  exhaustive des options pour...", ou pour nommer précisément un élément
-  d'interface dans un brief ou une spec.
+description: "Find the exact name of a UI component or pattern, its states, web/iOS/Android equivalents and alternatives. Use to name things precisely in a spec or to choose between patterns. FR : « comment s'appelle ce composant », « alternatives à une modale »."
 ---
 
 # UI Vocabulary

@@ -1,6 +1,6 @@
 ---
 name: layout
-description: "Restructure an existing interface's reading order, grouping, spacing, density and responsive behavior within its current visual identity. Use for weak hierarchy, repetitive card grids, poor spacing or a layout that breaks on mobile. FR : « revois la mise en page », « organise cet écran », « trop de cartes », « hiérarchie visuelle ». Own spatial structure; use frontend-direction for identity and frontend-content for information priority."
+description: "Restructure an existing interface's reading order, grouping, spacing, density and responsive behavior within its current identity. FR : « revois la mise en page », « hiérarchie visuelle », « ça casse sur mobile »."
 ---
 
 <!-- Adapted and modified from pbakaus/impeccable, .agents/skills/impeccable/reference/layout.md, commit 919dbeba520df760a157fe635be62faae88d58da. Apache-2.0; Copyright 2025 Paul Bakaus. Portable adaptation: project tokens and rendered checks without upstream detector/live-mode dependencies. License: ../../../../licenses/APACHE-2.0.txt. -->

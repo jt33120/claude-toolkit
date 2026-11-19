@@ -1,6 +1,6 @@
 ---
 name: distill
-description: "Simplify an existing UI by removing redundant content, decoration and competing structure while preserving tasks and access to useful detail. Use when asked to simplify, declutter or strip a screen to its essence. FR : « simplifie cet écran », « allège le front », « retire le superflu », « trop de cartes ». For initial content allocation use frontend-content; for wording alone use clarify."
+description: "Simplify an existing UI by removing redundant content, decoration and competing structure while keeping tasks and useful detail. FR : « simplifie cet écran », « allège le front », « trop de cartes ». First allocation: frontend-content."
 ---
 
 <!-- Adapted and modified from pbakaus/impeccable, .agents/skills/impeccable/reference/distill.md, commit 919dbeba520df760a157fe635be62faae88d58da. Apache-2.0; Copyright 2025 Paul Bakaus. Portable adaptation: preserve functionality, project identity and companion spec; omit upstream CLI dependencies. License: ../../../../licenses/APACHE-2.0.txt. -->

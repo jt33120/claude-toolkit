@@ -1,6 +1,6 @@
 ---
 name: language-strategy
-description: "Juggle French and English efficiently: English as the working language for prompts, specs, code and AI-to-AI briefs (models perform best in English), the audience's language for deliverables, with a per-project glossary and native rewriting instead of literal translation. Use when a task mixes FR and EN, when writing specs or prompts for other AIs, when translating or producing bilingual content, or when setting up BMAD languages. FR : « en anglais ou en français », « traduis », « version anglaise », « bilingue », « quelle langue pour la spec »."
+description: "Choose FR or EN per artifact: English for prompts, specs, code and AI briefs, the audience's language for deliverables, a per-project glossary. Use for mixed FR/EN work, translation or BMAD language setup. FR : « en anglais ou en français », « traduis », « bilingue »."
 ---
 
 # Language strategy

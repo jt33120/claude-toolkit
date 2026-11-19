@@ -17,7 +17,9 @@ L'IA découvre les noms et descriptions des skills, puis charge les instructions
 | Plugin | Usage | Choix de départ |
 |---|---|---|
 | [`core`](plugins/core/README.md) | Instructions communes, maintenance du toolkit, partage Claude/Codex | Installer pour les sessions de code |
-| [`dev`](plugins/dev/README.md) | Développement, frontend, QA, sécurité, infrastructure, vidéo | Installer avec `core` pour coder |
+| [`dev`](plugins/dev/README.md) | Code : architecture backend, tests, débogage, sécurité, déploiement, revue | Installer avec `core` pour coder |
+| [`front`](plugins/front/README.md) | Interfaces web et mobile : contenu, direction visuelle, passes, QA ; MCP Playwright, Chrome DevTools, shadcn | Activer dans les projets avec une interface |
+| [`media`](plugins/media/README.md) | Vidéo Remotion, vidéo pédagogique avec voix off | Activer dans les projets vidéo |
 | [`business`](plugins/business/README.md) | Produit, vente, marketing, finance, RH, contrats | Ajouter pour les usages de gestion et Cowork |
 
 ## 1. Installer une fois
@@ -31,6 +33,8 @@ claude plugin marketplace add jt33120/claude-toolkit
 claude plugin install core@claude-toolkit --scope user
 claude plugin install dev@claude-toolkit --scope user
 ```
+
+Installer `front` et `media` de la même façon, puis les activer seulement dans les projets concernés (`enabledPlugins` du `.claude/settings.json` du projet, préparé par `/dev:stack-check`) : leurs descriptions et leurs serveurs MCP ne pèsent alors pas sur les autres sessions.
 
 Le scope `user` rend les plugins disponibles dans les projets de cet utilisateur sur cet ordinateur. Ouvrir ensuite une nouvelle session Claude Code, ou utiliser `/reload-plugins` dans une session déjà ouverte.
 
@@ -51,7 +55,7 @@ $CLAUDE plugin install core@claude-toolkit --scope user
 $CLAUDE plugin install dev@claude-toolkit --scope user
 ```
 
-Puis recharger la fenêtre VS Code. Vérifier avec `claude plugin list` dans le terminal, ou `/plugin` dans la session. Taper `/` doit faire apparaître les skills avec leur préfixe, par exemple `/dev:frontend-content`.
+Puis recharger la fenêtre VS Code. Vérifier avec `claude plugin list` dans le terminal, ou `/plugin` dans la session. Taper `/` doit faire apparaître les skills avec leur préfixe, par exemple `/front:frontend-content`.
 
 ### Codex local et application de bureau
 
@@ -61,7 +65,7 @@ Dans le **terminal**, ajouter le catalogue :
 codex plugin marketplace add jt33120/claude-toolkit
 ```
 
-Dans le catalogue **Plugins de l'application de bureau**, sélectionner la source `claude-toolkit`, puis installer et activer `core` et `dev`. Ouvrir une nouvelle discussion. Dans Codex CLI ou l'extension IDE, `/skills` ou `$` permet de retrouver les skills disponibles.
+Dans le catalogue **Plugins de l'application de bureau**, sélectionner la source `claude-toolkit`, puis installer et activer `core` et `dev`, puis `front` ou `media` selon le projet. Ouvrir une nouvelle discussion. Dans Codex CLI ou l'extension IDE, `/skills` ou `$` permet de retrouver les skills disponibles.
 
 Si le client utilisé ne propose pas cette installation, suivre le [guide agent-bridge](plugins/core/skills/agent-bridge/SKILL.md) : un clone local du toolkit peut exposer les mêmes skills à Codex, avec des liens ou des copies gérées.
 
@@ -75,15 +79,15 @@ L'installation locale reste propre à l'environnement utilisé. Une session clou
 
 ```bash
 claude plugin marketplace add jt33120/claude-toolkit >/dev/null 2>&1 || claude plugin marketplace update claude-toolkit
-for p in core dev business; do
+for p in core dev front media business; do
   claude plugin install "$p@claude-toolkit" --scope user || true
   claude plugin update "$p@claude-toolkit" || true
 done
 ```
 
-Retirer `business` de la boucle si l'environnement ne sert qu'au code. Vérifier dans une nouvelle session : `/` doit lister `/dev:…` et `/core:…`.
+Retirer de la boucle les plugins inutiles à l'environnement (`business` pour du code, `media` sans vidéo). Vérifier dans une nouvelle session : `/` doit lister `/dev:…` et `/core:…`.
 
-Le plugin `dev` fournit Playwright MCP, Chrome DevTools MCP et shadcn MCP. Leur exécution locale demande `npx`, les dépendances nécessaires et l'accès réseau. Si un serveur Playwright MCP est déjà configuré sur le poste (navigateur précis, profil), les deux coexistent ; désactiver celui du plugin avec `/mcp` s'il ouvre le mauvais navigateur. Derrière un proxy d'entreprise qui bloque `npx`, ces serveurs ne démarrent pas, sans effet sur les skills. Configurer les comptes et autorisations des autres connecteurs dans chaque environnement.
+Le plugin `front` fournit Playwright MCP, Chrome DevTools MCP et shadcn MCP, à versions fixées. Leur exécution locale demande `npx`, les dépendances nécessaires et l'accès réseau. Si un serveur Playwright MCP est déjà configuré sur le poste (navigateur précis, profil), les deux coexistent ; désactiver celui du plugin avec `/mcp` s'il ouvre le mauvais navigateur. Derrière un proxy d'entreprise qui bloque `npx`, ces serveurs ne démarrent pas, sans effet sur les skills. Configurer les comptes et autorisations des autres connecteurs dans chaque environnement.
 
 ### Recevoir les mises à jour automatiquement
 
@@ -143,13 +147,13 @@ Pour demander explicitement une passe :
 |---|---|---|
 | Partager les instructions Claude/Codex | `/core:agent-bridge` | `$agent-bridge` |
 | Vérifier la stack | `/dev:stack-check` | `$stack-check` |
-| Concevoir le contenu du front et sa spec | `/dev:frontend-content` | `$frontend-content` |
-| Choisir une direction visuelle | `/dev:frontend-direction` | `$frontend-direction` |
-| Alléger un écran | `/dev:distill` | `$distill` |
-| Clarifier les libellés et messages | `/dev:clarify` | `$clarify` |
-| Évaluer le design | `/dev:critique` | `$critique` |
-| Revoir la mise en page | `/dev:layout` | `$layout` |
-| Vérifier le frontend | `/dev:frontend-qa` | `$frontend-qa` |
+| Concevoir le contenu du front et sa spec | `/front:frontend-content` | `$frontend-content` |
+| Choisir une direction visuelle | `/front:frontend-direction` | `$frontend-direction` |
+| Alléger un écran | `/front:distill` | `$distill` |
+| Clarifier les libellés et messages | `/front:clarify` | `$clarify` |
+| Évaluer le design | `/front:critique` | `$critique` |
+| Revoir la mise en page | `/front:layout` | `$layout` |
+| Vérifier le frontend | `/front:frontend-qa` | `$frontend-qa` |
 | Chercher la cause d'un bug | `/dev:systematic-debugging` | `$systematic-debugging` |
 | Faire ou mettre à jour un schéma | `/dev:diagrams` | `$diagrams` |
 | Mettre un plan à l'épreuve | `/core:grilling` | `$grilling` |
@@ -160,7 +164,7 @@ Dans Codex, choisir la skill dans `/skills` ou le sélecteur `$` si son nom est 
 Exemple dans Claude Code :
 
 ```text
-/dev:frontend-content Construis l'écran de comparaison des offres.
+/front:frontend-content Construis l'écran de comparaison des offres.
 Conserve les hypothèses dans la spec et rends les calculs accessibles au clic.
 ```
 
@@ -181,7 +185,7 @@ Livrer **le produit utilisable et sa documentation/spec**. Trois niveaux : **syn
 
 Les passes `distill`, `clarify`, `critique` et `layout` sont adaptées d'Impeccable. Frontend Design d'Anthropic et les références UI UX Pro Max, dont le choix des graphiques, sont intégrés à `frontend-direction`.
 
-Voir le [modèle de spec](plugins/dev/skills/frontend-content/references/content-spec-template.md), les [exemples de répartition du contenu](plugins/dev/skills/frontend-content/references/examples.md) et le [flux frontend détaillé](plugins/dev/README.md#flux-frontend).
+Voir le [modèle de spec](plugins/front/skills/frontend-content/references/content-spec-template.md), les [exemples de répartition du contenu](plugins/front/skills/frontend-content/references/examples.md) et le [flux frontend détaillé](plugins/dev/README.md#flux-frontend).
 
 ## Mettre à jour
 
@@ -222,6 +226,7 @@ Exemple à **fusionner** dans `.claude/settings.json` en conservant les réglage
   "enabledPlugins": {
     "core@claude-toolkit": true,
     "dev@claude-toolkit": true,
+    "front@claude-toolkit": true,
     "bmad-method@bmad": true,
     "bmad-toolbox@bmad": true,
     "security-guidance@claude-code-plugins": true
@@ -233,7 +238,7 @@ Le plugin BMAD donne accès à ses agents et skills. Le projet doit aussi être 
 
 </details>
 
-Les catalogues de ce dépôt sont `.claude-plugin/marketplace.json` pour Claude et `.agents/plugins/marketplace.json` pour les hôtes compatibles. Les manifests portables `plugins/*/plugin.json` et le `mcp.json` de `dev` complètent les fichiers Claude.
+Les catalogues de ce dépôt sont `.claude-plugin/marketplace.json` pour Claude et `.agents/plugins/marketplace.json` pour les hôtes compatibles. Les manifests portables `plugins/*/plugin.json` et le `mcp.json` de `front` complètent les fichiers Claude ; le validateur exige les mêmes versions et descriptions des deux côtés.
 
 Pour importer une configuration Claude dans Codex local, voir `agent-bridge` et la commande `/import` lorsque le client la propose. L'import reprend la configuration choisie ; appeler Claude Code depuis Codex reste une opération distincte.
 
@@ -246,7 +251,7 @@ python3 scripts/validate_toolkit.py
 python3 -m unittest discover -s tests
 ```
 
-Le contrôle valide les manifests, noms et descriptions de skills, chemins de référence et CSV de styles. Il s'exécute aussi sur les PR via GitHub Actions. La table `styles.csv` contient les identifiants 1–58 et 71–89 ; les identifiants 59–70 sont absents de la source et ne sont pas inventés.
+Le contrôle valide les manifests, noms et descriptions de skills (300 caractères au plus, 1024 pour `business`), chemins de référence, appels `/plugin:skill`, versions MCP fixées et CSV de styles. Il s'exécute aussi sur les PR via GitHub Actions. La table `styles.csv` contient les identifiants 1–58 et 71–89 ; les identifiants 59–70 sont absents de la source et ne sont pas inventés.
 
 ## Outils externes
 

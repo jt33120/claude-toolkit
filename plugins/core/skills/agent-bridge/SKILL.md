@@ -1,11 +1,6 @@
 ---
 name: agent-bridge
-description: >
-  Share project instructions and skills between Claude Code and Codex using AGENTS.md,
-  a CLAUDE.md import and compatible skill directories. Assist with reversible local
-  migration, MCP configuration and handoffs. Use when switching between Claude Code
-  and Codex or when project instructions drift. FR : « partage avec codex »,
-  « AGENTS.md », « synchronise claude et codex », « mêmes skills dans codex ».
+description: "Share project instructions and skills between Claude Code and Codex (AGENTS.md, @AGENTS.md import, skill folders, MCP, handoff). Use when switching agents or when instructions drift. FR : « partage avec codex », « AGENTS.md », « synchronise claude et codex »."
 ---
 
 # Agent bridge (Claude Code ↔ Codex)

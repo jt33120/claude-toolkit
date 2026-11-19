@@ -8,7 +8,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-SCRIPT = Path(__file__).resolve().parents[1] / "plugins/dev/skills/video-remotion/scripts/broll.py"
+SCRIPT = Path(__file__).resolve().parents[1] / "plugins/media/skills/video-remotion/scripts/broll.py"
 spec = importlib.util.spec_from_file_location("broll", SCRIPT)
 broll = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(broll)

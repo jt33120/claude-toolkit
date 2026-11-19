@@ -1,0 +1,10 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "media",
+  "version": "1.0.0",
+  "description": "Vidéo : montage et rendu Remotion, vidéo pédagogique en motion design avec voix off.",
+  "author": {
+    "name": "jt33120"
+  },
+  "repository": "https://github.com/jt33120/claude-toolkit"
+}

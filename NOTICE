@@ -23,8 +23,8 @@ l'indique dans un commentaire de provenance. Textes de licence : dossier license
 - nextlevelbuilder/ui-ux-pro-max-skill — MIT, Copyright (c) 2024 Next Level Builder
   https://github.com/nextlevelbuilder/ui-ux-pro-max-skill
   → dev : catalogues de frontend-direction, dont charts.csv ajouté sans modification.
-  Sources et commits : plugins/dev/skills/frontend-direction/references/ATTRIBUTION.md
-  Licence : plugins/dev/skills/frontend-direction/references/LICENSE-ui-ux-pro-max-skill
+  Sources et commits : plugins/front/skills/frontend-direction/references/ATTRIBUTION.md
+  Licence : plugins/front/skills/frontend-direction/references/LICENSE-ui-ux-pro-max-skill
 
 - obra/superpowers — MIT, Copyright (c) 2025 Jesse Vincent
   https://github.com/obra/superpowers

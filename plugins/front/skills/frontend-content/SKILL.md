@@ -1,6 +1,6 @@
 ---
 name: frontend-content
-description: "Decide what belongs in a product interface versus its companion spec; design three levels of progressive disclosure before building or reshaping UI. Use for a new screen, feature, dashboard, simulator or site, or when a brief contains too much explanatory material. FR : « front trop verbeux », « interface trop chargée », « moins de texte », « quoi afficher », « progressive disclosure », « produit et spec ». Own information priority; leave visual identity to frontend-direction and existing-UI reduction to distill."
+description: "Decide what goes in the interface versus its spec, with three levels of progressive disclosure, before building or reshaping UI. Use for a new screen, dashboard or site. FR : « interface trop chargée », « quoi afficher », « produit et spec »."
 ---
 
 # Frontend content

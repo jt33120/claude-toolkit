@@ -1,6 +1,6 @@
 ---
 name: video-pedagogique
-description: "Vidéo en motion design avec voix off (Remotion + ElevenLabs) : news ou reel explicatif, veille narrée (plusieurs incidents racontés par des personnages, 3 min), cours long, démo produit, pub. Socle commun à toutes les vidéos (message d'abord : tableau de séquences et maquette validés avant la voix, tout calé au mot sur la voix, lisibilité avant effets, musique et bruitages sous la voix, planches et images corrompues contrôlées) + paramètres par type de vidéo et checklist. Use for any explainer, course or tutorial video, product demo, ad, reel or short with voice-over, or to improve a video's rhythm, music or visual quality. FR : « vidéo pédagogique », « vidéo explicative », « vidéo de cours », « motion design », « vidéo de la veille », « démo produit », « pub vidéo », « reel », « musique de fond », « rends la vidéo plus dynamique », « effet waouh »."
+description: "Motion-design video with voice-over (Remotion + ElevenLabs): explainer, course, narrated watch, product demo, ad, reel; message first, cued to the voice, music under it. FR : « vidéo pédagogique », « vidéo explicative », « motion design », « reel »."
 ---
 
 # Vidéo en motion design avec voix off

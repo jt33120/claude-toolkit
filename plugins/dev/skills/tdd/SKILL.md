@@ -1,12 +1,6 @@
 ---
 name: tdd
-description: >
-  Choose tests in proportion to the behavior and risk of a change. Use a failing test
-  first for a reproducible bug or consequential new behavior; run focused checks while
-  implementing, and broaden verification at the review or release gate. Mechanical,
-  reversible edits may need only direct inspection. Use for features, bug fixes and
-  refactors, or when asked for TDD. FR : « écris le test d'abord », « corrige ce bug »,
-  « implémente », « développe cette fonctionnalité », « quels tests lancer ».
+description: "Pick tests in proportion to a change's risk: failing test first for a reproducible bug or consequential behavior, focused checks while coding, broader checks at review. Use for features, bug fixes and refactors. FR : « écris le test d'abord », « quels tests lancer »."
 ---
 
 <!-- Adapted from obra/superpowers (MIT) — https://github.com/obra/superpowers — and mattpocock/skills (MIT) — https://github.com/mattpocock/skills — modified for jt33120/claude-toolkit -->

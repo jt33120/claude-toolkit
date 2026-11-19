@@ -7,7 +7,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import MagicMock
 
-SCRIPT = Path(__file__).resolve().parents[1] / "plugins/dev/skills/video-remotion/scripts/grok_batch.py"
+SCRIPT = Path(__file__).resolve().parents[1] / "plugins/media/skills/video-remotion/scripts/grok_batch.py"
 spec = importlib.util.spec_from_file_location("grok_batch", SCRIPT)
 grok = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(grok)

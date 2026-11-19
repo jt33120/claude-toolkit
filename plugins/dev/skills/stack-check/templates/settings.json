@@ -17,6 +17,8 @@
   "enabledPlugins": {
     "core@claude-toolkit": true,
     "dev@claude-toolkit": true,
+    "front@claude-toolkit": true,
+    "media@claude-toolkit": true,
     "bmad-method@bmad": true,
     "bmad-toolbox@bmad": true,
     "security-guidance@claude-code-plugins": true,

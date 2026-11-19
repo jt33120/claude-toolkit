@@ -1,6 +1,6 @@
 # dev
 
-Développement avec BMAD (cadrage, stories, `bmad-build`, `bmad-code-review`) + qualité senior.
+Sessions de code avec BMAD (cadrage, stories, `bmad-build`, `bmad-code-review`) + qualité senior. Les interfaces sont dans [`front`](../front/README.md), la vidéo dans [`media`](../media/README.md).
 
 ## Démarrage
 
@@ -12,15 +12,6 @@ Développement avec BMAD (cadrage, stories, `bmad-build`, `bmad-code-review`) + 
 | Skill | Rôle |
 |---|---|
 | stack-check | Déclare la stack et le stade du projet (poc, mvp, prod), installe les outils, vérifie lecture/écriture des MCP |
-| ui-vocabulary | Nom exact, variantes, équivalents web/iOS/Android et alternatives de 152 composants et patterns |
-| frontend-content | Choisit le contenu visible, à explorer et à détailler ; livre le produit et sa spec, sans perdre le contexte |
-| frontend-direction | Suit le design system, sinon propose 3 directions ; intègre Frontend Design d'Anthropic et les catalogues UI UX Pro Max, dont le choix de graphiques ; socle anti-rendu générique (Hallmark, Taste Skill) |
-| distill | Adaptation Impeccable : retire les redondances et le bruit, conserve les usages et reporte le contexte dans la spec |
-| clarify | Adaptation Impeccable : libellés, actions, erreurs et aides courts, cohérents et compréhensibles |
-| critique | Adaptation Impeccable : évalue hiérarchie, charge cognitive et clarté ; priorise les défauts avec preuves |
-| layout | Adaptation Impeccable : ordre de lecture, regroupement, densité et comportement responsive |
-| asset-brief | Icônes open source ou prompt Codex prêt à coller, puis intégration (favicon, icônes d'app) |
-| frontend-qa | QA web/mobile en 8 niveaux, rapport de bugs normé |
 | backend-standards | Couche fine au-dessus des skills officielles FastAPI, Supabase, Neon |
 | diagrams | Schémas en code versionnés : Mermaid par défaut (rendu natif GitHub), Diagram Design pour les livrables soignés (Archify si chaque élément doit être tracé au code), LikeC4 pour un modèle C4 interrogeable ; validation avant commit |
 | tdd | Tests dimensionnés au stade du projet (POC : quelques tests locaux, pas de CI), puis ciblés selon le risque, tranches verticales à l'interface publique, mocks limités aux dépendances externes |
@@ -29,27 +20,11 @@ Développement avec BMAD (cadrage, stories, `bmad-build`, `bmad-code-review`) + 
 | security | Plan et audit sécurité FastAPI/Supabase/Vercel/LLM ; qualification des trouvailles (frontière, certitude, gravité) reprise de Cloudflare, sa skill complète pour les gros audits |
 | wizard | Script bash interactif qui te guide dans les étapes manuelles (clés API, `.env`, secrets GitHub, migration ponctuelle) |
 | infra-deploy | Checklist de déploiement et incidents (Vercel, Railway, Supabase, Neon) |
-| video-remotion | Montage et rendu vidéo en code avec Remotion (reels 9:16, démos, sous-titres animés) ; rendu fiable des vidéos longues (effets interdits, réparation des images corrompues, assemblage des scènes par ré-encodage) ; B-roll libre de droits Pexels/Pixabay avec suivi des crédits ; plans IA par lot via l'abonnement Grok (robot local au rythme humain) |
-| video-pedagogique | Vidéo en motion design avec voix off : méthode « message d'abord » (tableau de séquences, maquette avec voix provisoire), socle commun (9 règles, déroulé avec validation avant la voix, checklist) + fiche de paramètres par type (news-reel et cours validés, démo produit et pub à valider) ; voix ElevenLabs, typographie cinétique calée au mot, bruitages et musique de fond synthétisés, texture CRT après rendu, contrôle qualité (mots déclencheurs, planches), carton d'offre muet |
 
 ## Agents de revue (sur demande ou via un workflow de revue)
 
 code-reviewer · code-simplifier · silent-failure-hunter · type-design-analyzer · pr-test-analyzer
 
-## MCP livrés avec le plugin
-
-Playwright MCP, Chrome DevTools MCP, shadcn MCP (`.mcp.json` Claude et `mcp.json` portable, sans clé). L'hôte doit avoir `npx` et les dépendances nécessaires ; les connexions cloud se configurent dans leur environnement.
-
 ## Installés par stack-check selon la stack
 
-BMAD, security-guidance, skills Supabase / Neon / Vercel / FastAPI, modern-python, Graft ; frontend et mobile : voir `skills/stack-check/references/frontend-mobile.md`. Outils gratuits et open source uniquement.
-
-## Flux frontend
-
-`frontend-content` → design (Claude Design → `/design-sync`, ou `frontend-direction`) → build (BMAD + composants shadcn / natifs, `ui-vocabulary`) → assets (`asset-brief`) → passes ciblées (`distill`, `clarify`, `layout`, `critique`) → QA (`frontend-qa`).
-
-Livrer **le produit et sa documentation/spec**. L'agent choisit ce qui sert l'utilisateur et garde le reste dans la spec : niveau 1, synthèse visible ; niveau 2, exploration au clic ; niveau 3, détail, calculs et preuves. Les informations nécessaires à la décision restent visibles. Choisir un chiffre, tableau, graphe ou schéma selon la question ; éviter les titres, sous-titres et paragraphes qui répètent le même message.
-
-Les mêmes fichiers de skills sont livrés à Claude Code et Codex. Les quatre passes Impeccable sont des adaptations autonomes, sans dépendance à son CLI. Frontend Design et UI UX Pro Max complètent `frontend-direction`, sans seconde skill qui ferait doublon.
-
-Exemples d'invocation : Claude Code `/dev:frontend-content` ou `/dev:distill` ; Codex `$frontend-content` ou `$distill` selon la découverte du plugin dans le client.
+BMAD, security-guidance, skills Supabase / Neon / Vercel / FastAPI, modern-python, Graft ; frontend et mobile : voir `skills/stack-check/references/frontend-mobile.md` (avec le plugin `front`). Outils gratuits et open source uniquement.

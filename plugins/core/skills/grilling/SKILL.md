@@ -1,6 +1,6 @@
 ---
 name: grilling
-description: "Stress-test a plan, design, decision or idea through rounds of numbered questions, each with a recommended answer, until no branch is left assumed. Use only when the user asks to be challenged or questioned on a plan (grill me, stress-test this, poke holes). FR : « grille-moi », « challenge mon plan », « questionne-moi », « mets mon idée à l'épreuve », « trouve les failles »."
+description: "Stress-test a plan or decision with rounds of numbered questions, each with a recommended answer. Use only when the user asks to be challenged. FR : « grille-moi », « challenge mon plan », « trouve les failles »."
 ---
 
 <!-- Adapted from mattpocock/skills (MIT) — https://github.com/mattpocock/skills — modified for jt33120/claude-toolkit -->

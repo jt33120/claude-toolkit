@@ -1,8 +1,10 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "core",
-  "version": "0.10.0",
-  "description": "Instructions communes, maintenance des skills, style rédactionnel, budget CI, pont entre Claude Code et Codex, réponses lues à voix haute.",
-  "author": { "name": "jt33120" },
+  "version": "0.10.1",
+  "description": "Skills transverses : maintenance du toolkit, voix des textes, stratégie FR/EN, budget GitHub Actions, pont Claude Code ↔ Codex, réponses lues à voix haute. À installer partout.",
+  "author": {
+    "name": "jt33120"
+  },
   "repository": "https://github.com/jt33120/claude-toolkit"
 }

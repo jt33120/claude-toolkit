@@ -1,6 +1,6 @@
 ---
 name: clarify
-description: "Rewrite ambiguous interface labels, actions, helper text, errors and empty states into concise, consistent microcopy. Use for confusing UI text, unclear buttons or a copy pass. FR : « clarifie les libellés », « réécris les textes UI », « bouton incompréhensible », « messages d erreur ». Own wording and meaning; use frontend-content for information allocation and distill for structural reduction."
+description: "Rewrite unclear UI labels, buttons, helper text, errors and empty states into concise, consistent microcopy. FR : « clarifie les libellés », « messages d'erreur », « bouton incompréhensible ». Allocation: frontend-content; reduction: distill."
 ---
 
 <!-- Adapted and modified from pbakaus/impeccable, .agents/skills/impeccable/reference/clarify.md, commit 919dbeba520df760a157fe635be62faae88d58da. Apache-2.0; Copyright 2025 Paul Bakaus. Portable adaptation: concise microcopy pass with shared content/spec contract. License: ../../../../licenses/APACHE-2.0.txt. -->

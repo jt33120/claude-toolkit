@@ -4,7 +4,7 @@ import importlib.util
 import unittest
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1] / "plugins/dev/skills"
+ROOT = Path(__file__).resolve().parents[1] / "plugins/media/skills"
 
 try:
     import numpy as np

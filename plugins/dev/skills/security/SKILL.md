@@ -1,17 +1,6 @@
 ---
 name: security
-description: >
-  Security-hardens and audits AI projects on FastAPI + Supabase + Vercel + LLM stacks,
-  producing either a secure architecture plan for a new project or a prioritized
-  remediation checklist for existing code — backed by a deterministic audit script and
-  ready-to-use hardened code snippets. Use this skill whenever the user says "secure",
-  "security audit", "harden", "OWASP", "prompt injection", "RGPD/GDPR", "RLS", "JWT auth",
-  "CORS", "pentest", or starts/reviews a FastAPI backend or LLM agent — even without the
-  word "security". Also trigger for reviewing the security of an API, a RAG pipeline, or
-  a multi-tenant agent. Distinct from `infra-deploy`: this skill hardens/audits code and
-  architecture; `infra-deploy` runs deploy checklists and live incidents. Déclencheurs
-  français : "sécuriser", "audit sécurité", "cyber", "durcir", "faille", "injection",
-  "RGPD", "conformité", "isolation tenant", "auth JWT", "CORS".
+description: "Security hardening and audit of FastAPI + Supabase + Vercel + LLM projects (OWASP, prompt injection, RLS, JWT, CORS, RGPD) with an audit script and fixes. Use for any security review or a new backend or agent. FR : « audit sécurité », « sécuriser », « faille »."
 ---
 
 <!-- Original skill by the repo owner, migrated from a personal Claude skill into jt33120/claude-toolkit. -->
