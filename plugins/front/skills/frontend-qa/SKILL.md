@@ -18,7 +18,7 @@ Pick the levels the change needs (a small UI fix: 1 + 4; a release: all). Start 
 | 7 | Durable tests | Playwright Test Agents (`npx playwright init-agents --loop=claude`): planner → generator → healer | TS specs in `tests/e2e/`, run with `npx playwright test` |
 | 8 | Mobile | XcodeBuildMCP (iOS simulator build/run/screenshots), Maestro MCP (iOS/Android flows in YAML) | Same flows on device sizes, safe areas, gestures, dark mode |
 
-Missing tool → `stack-check` installs it (see [`frontend-mobile.md`](../../../dev/skills/stack-check/references/frontend-mobile.md)).
+Missing tool → `dev:stack-check` installs it (see its `frontend-mobile.md` reference; plugins are installed in separate folders, so no relative link).
 
 ## Information and disclosure checks
 

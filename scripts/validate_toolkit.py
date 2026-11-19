@@ -67,8 +67,14 @@ def references(path, content):
             continue
         if any(c in target for c in "*{}<> ") or target.startswith(".") and target == ".":
             continue
-        if not (path.parent / target).is_file():
+        resolved = (path.parent / target).resolve()
+        if not resolved.is_file():
             check(False, f"{path.relative_to(ROOT)}: missing reference {target}")
+        # Each plugin is installed in its own folder, so links into another plugin break at runtime.
+        plugin_root = ROOT / "plugins" / path.relative_to(ROOT).parts[1]
+        if path.is_relative_to(ROOT / "plugins") and not resolved.is_relative_to(plugin_root) \
+                and not resolved.is_relative_to(ROOT / "licenses"):
+            check(False, f"{path.relative_to(ROOT)}: reference {target} leaves its plugin")
 
 
 def validate():
