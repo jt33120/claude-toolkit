@@ -44,6 +44,15 @@ repo:
   owner: my-org
   name: my-repo
 
+# BMAD install settings, read by stack-check (non-interactive install).
+# Delete this section if the project does not use BMAD.
+bmad:
+  user_name: Operator
+  communication_language: French
+  document_output_language: French   # English if documents go to other AIs
+  modules: [bmm]                      # bmm = BMad Method
+  tools: [claude-code]                # add github-copilot only if used
+
 # Optional — any other MCP-connected tool this project relies on and wants
 # tracked. `stack-check` reports it as connected/not, with no dedicated
 # read/write probe unless one gets added to the skill later.

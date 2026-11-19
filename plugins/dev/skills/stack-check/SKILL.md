@@ -60,18 +60,27 @@ Then, in order:
    Gives every skill in this plugin a code graph to query instead of blind
    grep, once `graft/` exists at the repo root.
 
-4. **Init BMAD — check before acting, don't double-install.** BMAD's
-   Claude Code *plugin* (`bmad-method`/`bmad-toolbox` from the
-   `bmad-code-org/bmad-plugins` marketplace) only gives the tool access to
-   BMAD's agents and skills — it does not by itself configure a project.
-   Current upstream guidance (bmad-code-org/BMAD-METHOD README) is to open
-   the coding tool in the project and **ask the bundled `bmad` skill to run
-   `bmad setup`** — not to shell out to `npx bmad-method install` directly.
-   So: look for a sign the project is already initialized (a `bmad/` or
-   `_bmad/` folder, or a BMAD config file such as `core-config.yaml`, at the
-   repo root). If none exists, invoke BMAD's own setup (`bmad setup`, via the
-   `bmad-method` plugin) rather than running an install command by hand, and
-   do it once — never re-run it just because this skill runs again later.
+4. **Init BMAD — once, without prompts.** Skip if `_bmad/` (or `bmad/`)
+   already exists at the repo root; to upgrade an existing install, add
+   `--action update`. Otherwise run the pinned, non-interactive installer —
+   values come from the `bmad:` section of `.claude/stack.yaml` (ask only
+   for what is missing there, defaults below):
+
+   ```bash
+   npx -y bmad-method@6.12.4 install --directory . --modules bmm \
+     --tools claude-code --user-name "<user_name>" \
+     --communication-language <lang> --document-output-language <doc_lang> \
+     --output-folder _bmad-output --no-shims --yes
+   ```
+
+   Defaults: modules `bmm` (BMad Method only), tools `claude-code` (add
+   `github-copilot` only if the team uses it — it duplicates every skill),
+   languages French. Bump the pinned version on purpose, in this file.
+
+**Any install that fails (steps 2–4): stop and ask.** Show the error, say
+what it blocks, and offer: retry, run it yourself (give the exact command),
+or skip. Never continue silently. End INIT with a short list of what was
+installed, skipped or failed, and why.
 
 5. **Append the `CLAUDE.md` snippet — idempotent.** Read `CLAUDE.md` at the
    repo root (create it if missing). If the markers
