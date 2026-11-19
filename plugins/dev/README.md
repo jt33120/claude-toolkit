@@ -11,6 +11,9 @@ Sessions de code avec BMAD (cadrage, stories, `bmad-build`, `bmad-code-review`) 
 
 | Skill | Rôle |
 |---|---|
+| bootstrap | `/dev:bootstrap` : prépare un repo en une passe (CLAUDE.md court, plugins dans `.claude/settings.json`, stack-check, agent-bridge si Codex, audit de départ) |
+| claude-md | Tient `CLAUDE.md` court et juste (80 lignes max) : ce qu'un nouvel arrivant raterait, rien d'autre ; lancé après chaque compaction |
+| audit | Revue approfondie : architecture, lisibilité, erreurs silencieuses, tests, sécurité, règles du projet. `/dev:audit` (repo) ou `/dev:audit diff` (branche, avant PR) |
 | stack-check | Déclare la stack et le stade du projet (poc, mvp, prod), installe les outils, vérifie lecture/écriture des MCP |
 | backend-standards | Couche fine au-dessus des skills officielles FastAPI, Supabase, Neon |
 | diagrams | Schémas en code versionnés : Mermaid par défaut (rendu natif GitHub), Diagram Design pour les livrables soignés (Archify si chaque élément doit être tracé au code), LikeC4 pour un modèle C4 interrogeable ; validation avant commit |
@@ -28,3 +31,13 @@ code-reviewer · code-simplifier · silent-failure-hunter · type-design-analyze
 ## Installés par stack-check selon la stack
 
 BMAD, security-guidance, skills Supabase / Neon / Vercel / FastAPI, modern-python, Graft ; frontend et mobile : voir `skills/stack-check/references/frontend-mobile.md` (avec le plugin `front`). Outils gratuits et open source uniquement.
+
+## Hooks
+
+| Moment | Effet |
+|---|---|
+| Après une compaction | Claude applique `claude-md` et résume en une ligne ce qui a changé |
+| Ouverture d'un repo | Sans `CLAUDE.md` : propose `/dev:bootstrap`. Sans `core` activé : le signale |
+| `gh pr create` / `glab mr create` | Bloqué tant que `/dev:audit diff` n'a pas validé le commit courant (marqueur hors du repo, dans `.git/`) |
+
+Les hooks ne s'exécutent que dans un dépôt Git et ne bloquent jamais la session en cas d'erreur. Ils sont propres à Claude Code ; Codex utilise les skills sans eux.
