@@ -30,7 +30,7 @@ A single list ranked by severity — **bloquant**, **à corriger**, **suggestion
 
 Then:
 
-- Fix the obvious, local, behaviour-preserving items directly and run the relevant tests.
+- In `diff` mode, fix the obvious, local, behaviour-preserving items directly and run the relevant tests. In whole-repo mode (and always when called from `bootstrap`), report only: change nothing until the user picks what to fix. Never edit `.env` or environment files without an explicit request.
 - Leave design changes and anything ambiguous to the user, as a question.
 - If a recurring rule emerged (« on n'importe jamais X depuis Y »), apply `claude-md` to record it.
 - In `diff` mode, once no **bloquant** item remains, record the pass so the dev hook lets the PR through:

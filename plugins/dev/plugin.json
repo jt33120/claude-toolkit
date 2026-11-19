@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "dev",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "description": "Sessions de code : CLAUDE.md tenu à jour après chaque compaction, /dev:audit (architecture, lisibilité, sécurité) exigé avant chaque PR, /dev:bootstrap, standards backend, TDD, débogage, sécurité, déploiement, schémas, stack-check, agents de revue.",
   "author": {
     "name": "jt33120"
